@@ -1,0 +1,28 @@
+
+{
+    "region" : "us-east-1",
+    "profile" : "default",
+    "configuration" : "Release",
+    "image-tag"     : "boilerplateapi:latest",
+    "docker-build-working-dir" : "",
+    "cluster"                  : "BoilerplateApi",
+    "launch-type"              : "FARGATE",
+    "launch-subnets"           : "subnet-08b1a8c956f059754,subnet-0e7a09c78133e9697,subnet-039f2cc8ba755f3d7,subnet-0a9a6fdf693d9216a,subnet-0cf650f66d86d85f7,subnet-0943b9f373a4527ba",
+    "launch-security-groups"   : "sg-0a3e7bcff71a8927c",
+    "assign-public-ip"         : true,
+    "task-definition-name"     : "BoilerplateApiRecipeAppTaskDefinition2C4623A6",
+    "task-cpu"                 : "256",
+    "task-memory"              : "512",
+    "platform-version"         : "LATEST",
+    "task-definition-task-role" : "arn:aws:iam::202976488728:role/BoilerplateApi-RecipeAppIAMTaskRole35276CAE-1I8NJMHSOG6RZ",
+    "task-execution-role"       : "BoilerplateApi-RecipeAppIAMTaskRole35276CAE-1I8NJMHSOG6RZ",
+    "container-name"            : "AppContainerDefinition",
+    "container-port-mapping"    : "80:80",
+    "container-environment-variables" : "",
+    "skip-image-push"                 : false,
+    "cluster-service"                 : "BoilerplateApi/BoilerplateApi-service",
+    "desired-count"                   : 3,
+    "deployment-minimum-healthy-percent" : 50,
+    "deployment-maximum-percent"         : 200,
+    "vstoolkit-deployment-mode"          : "DeployService"
+}

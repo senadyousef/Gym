@@ -1,0 +1,30 @@
+﻿using Boilerplate.Domain.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Boilerplate.Domain.Entities
+{
+    public class Items : Entity
+    {
+        #region Parameters 
+        [Required]
+        [MaxLength(50)]
+        public string NameEn { get; set; } 
+        [Required]
+        [MaxLength(50)]
+        public string NameAr { get; set; } 
+        [Required]
+        public decimal Price { get; set; } 
+        public string Description { get; set; }  
+        #endregion
+
+        #region Relations 
+        public List<ItemPhotos> ItemPhotos { get; set; } 
+        #endregion
+    }
+}

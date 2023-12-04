@@ -1,0 +1,21 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Boilerplate.Application.DTOs.User
+{
+    public class CreateUserDto
+    {
+        public int Id { get; set; } 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        public string Email { get; set; } 
+        public string Password { get; set; } 
+        public string Role { get; set; }  
+        public string NameEn { get; set; } 
+        public string NameAr { get; set; } 
+        public string Gender { get; set; } 
+        public string MobilePhone { get; set; }   
+        public UploadRequest UploadRequests { get; set; } 
+        public string PhotoUri { get; set; } 
+    }
+}

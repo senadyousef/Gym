@@ -1,0 +1,20 @@
+
+{
+    "region" : "eu-west-1",
+    "configuration" : "Debug",
+    "framework"     : "net6.0",
+    "self-contained" : false,
+    "application"    : "BoilerplateApi",
+    "environment"    : "Saloon",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "",
+    "proxy-server"         : "nginx",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.4.3 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "saloon",
+    "instance-type"        : "t3a.nano",
+    "key-pair"             : "SaloonServer",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role"
+}

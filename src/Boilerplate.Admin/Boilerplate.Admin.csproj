@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Images\fav.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\UserView\Create.cshtml" />
+    <None Include="Views\UserView\Edit.cshtml" />
+    <None Include="Views\UserView\Index.cshtml" />
+    <None Include="wwwroot\CSS\devextreme\fonts\Roboto-300.woff2" />
+    <None Include="wwwroot\CSS\devextreme\fonts\Roboto-400.woff2" />
+    <None Include="wwwroot\CSS\devextreme\fonts\Roboto-500.woff2" />
+    <None Include="wwwroot\CSS\devextreme\fonts\Roboto-700.woff2" />
+    <None Include="wwwroot\CSS\devextreme\icons\dxicons.woff2" />
+    <None Include="wwwroot\CSS\devextreme\icons\dxiconsmaterial.woff2" />
+    <None Include="wwwroot\Images\fav.svg" />
+    <None Include="wwwroot\images\Logo.png" />
+    <None Include="wwwroot\images\notification.svg" />
+    <None Include="wwwroot\images\user.svg" />
+    <None Include="wwwroot\Rotativa\wkhtmltoimage.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Rotativa\wkhtmltopdf.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Boilerplate.Api\Boilerplate.Api.csproj" />
+    <ProjectReference Include="..\Boilerplate.Application\Boilerplate.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DevExtreme.AspNet.Core">
+      <HintPath>Libs\DevExtreme.AspNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExtreme.AspNet.Core, PublicKeyToken=null">
+      <HintPath>Libs\DevExtreme.AspNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExtreme.AspNet.Data">
+      <HintPath>Libs\DevExtreme.AspNet.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\Rotativa\help-wkhtmltoimage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Rotativa\help-wkhtmltopdf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers" />
+    <Folder Include="Models" />
+    <Folder Include="Views\Account" />
+    <Folder Include="Views\Discipline" />
+    <Folder Include="Views\Home" />
+    <Folder Include="Views\ObservationView" />
+    <Folder Include="Views\ObservationAnswer" />
+    <Folder Include="Views\ObservationQuestionView" />
+    <Folder Include="Views\ObservationTypeView" />
+    <Folder Include="Views\ProjectView" />
+    <Folder Include="Views\Shared" />
+    <Folder Include="Views\SiteView" />
+    <Folder Include="Views\SubSiteView" />
+    <Folder Include="Views\UserView" />
+  </ItemGroup>
+</Project>

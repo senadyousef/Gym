@@ -1,0 +1,134 @@
+﻿@model Boilerplate.Application.DTOs.User.GetUserExtendedDto
+
+
+<div class="top-bar d-flex justify-content-between align-items-center pt-4 px-2">
+    <div class="text-start ps-4">
+        <p>Profile</p>
+        <div>
+            <a href="/">Home</a> <span> &rarr; </span>
+            <a href="#">Profile</a>
+        </div>
+    </div>
+</div>
+<div class="px-3 my-5 container">
+   
+       <div id="form"></div>
+    
+</div>
+
+<script>
+
+    $(() => {
+
+const formData = {
+  Email: '@Model.Email',
+  Role:'@Model.Role',
+  Password: '',
+  DisplayName: '@Model.NameEn',
+  MobilePhone: '@Model.MobilePhone',
+  Id: '@Model.Id',
+};
+
+
+  const formWidget = $('#form').dxForm({
+    formData,
+    readOnly: false,
+      colCount: 2,
+    showColonAfterLabel: true,
+    showValidationSummary: true,
+    validationGroup: 'customerData',
+    items: [
+         {
+      itemType: 'group',
+      items: [
+          {
+        dataField: 'DisplayName',
+        validationRules: [{
+          type: 'required',
+          message: 'Name is required',
+        }, {
+          type: 'pattern',
+          pattern: '^[^0-9]+$',
+          message: 'Do not use digits in the Name',
+        }],
+
+      },
+     {
+        dataField: 'Password',
+        editorOptions: {
+          mode: 'password',
+        },
+      }]},
+        {
+      itemType: 'group',
+      items: [
+          {
+        dataField: 'Email',
+         disabled:true,
+        validationRules: [{
+          type: 'required',
+          message: 'Email is required',
+        }, {
+          type: 'email',
+          message: 'Email is invalid',
+        }],
+      },{
+        dataField: 'MobilePhone',
+//         helpText: 'Mobile Number Format 05X XXX XXX',
+//         editorOptions: {
+//           mask: '000 000 0000',
+//           maskRules: {
+// //            X: /[02-9]/,
+//           },
+//           maskInvalidMessage: 'Mobile Number Format 05X XXX XXX',
+//         },
+//         validationRules: [{
+//           type: 'pattern',
+//           pattern: /\d{10}$/,
+//           message: 'Mobile Number Format 05X XXX XXX',
+//         }],
+      }],
+    }, {
+      itemType: 'button',
+      horizontalAlignment: 'left',
+      buttonOptions: {
+            text: 'submit',
+            type: 'success',
+            onClick: function (e) {
+            var dxFormInstance = $("#form").dxForm("instance");
+            var validationResult = dxFormInstance.validate();
+
+            if (validationResult.isValid){
+                 $.ajax({
+            url: "/user/edit",
+            type: "POST",
+            data: dxFormInstance.option("formData"),
+            success: function (data) {
+             DevExpress.ui.notify({
+                message: 'Profile Edited Successfully',
+                position: {
+                my: 'center top',
+                at: 'center top',
+                },
+             }, 'success',2000);
+
+            setTimeout(function () {
+                    window.location = "/";
+            }, 2000);
+
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+            }
+            });
+
+            }
+          }
+          },
+        }],
+      }).dxForm('instance');
+
+
+});
+
+</script>

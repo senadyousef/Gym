@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    var user = Context.Session.GetString("Token");
+    if (user == null && Context.Request.Path.HasValue)
+    {
+         if(!Context.Request.Path.Value.Contains("login"))
+            Context.Response.Redirect(Url.Content("~/account/login"));
+    }
+
+    Layout = "_Layout";
+}

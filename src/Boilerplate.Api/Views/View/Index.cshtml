@@ -1,0 +1,125 @@
+﻿@*
+<div class="top-bar d-flex justify-content-between align-items-center pt-4 px-2">
+    <div class="text-start ps-4">
+        <p>Categories</p>
+        <div>
+            <a href="/">Categories</a> <span> &rarr; </span>
+            <a href="/Categories">Categories</a>
+        </div>
+    </div>
+    <a href="/Categories/create" class="btn px-3 rounded-pill btn-defult">
+        + Add new
+    </a>
+</div>
+<div class="px-3 my-5 container">
+    <div id="grid"></div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+
+        function isNotEmpty(value) {
+            return value !== undefined && value !== null && value !== '';
+        }
+        const store = new DevExpress.data.CustomStore({
+            key: 'id',
+            load(loadOptions) {
+                const deferred = $.Deferred();
+                const args = {};
+                [
+                    'skip',
+                    'take',
+                    'requireTotalCount',
+                    'requireGroupCount',
+                    'sort',
+                    'filter',
+                    'totalSummary',
+                    'group',
+                    'groupSummary',
+                ].forEach((i) => {
+                    if (i in loadOptions && isNotEmpty(loadOptions[i])) {
+                        args[i] = JSON.stringify(loadOptions[i]);
+                    }
+                });
+                $.ajax({
+                    url: '/Categories/Get/',
+                    dataType: 'json',
+                    data: args,
+                    success(result) {
+                        debugger;
+                        deferred.resolve(result.result, {
+                            totalCount: result.totalItems
+                        });
+                    },
+                    error() {
+                        deferred.reject('Data Loading Error');
+                    },
+                    timeout: 5000,
+                });
+
+                return deferred.promise();
+            },
+            remove: function(key) {
+
+                var deferred = $.Deferred();
+                $.ajax({
+                    url: "/Categories/Delete?key=" + encodeURIComponent(key),
+                    method: "DELETE"
+                })
+                    .done(deferred.resolve)
+                    .fail(function(e) {
+                        deferred.reject("Deletion failed");
+                    });
+                return deferred.promise();
+            }
+        });
+
+        $('#grid').dxDataGrid({
+            dataSource: store,
+            rowAlternationEnabled: true,
+            filterRow: { visible: true },
+            remoteOperations: true,
+            editing: {
+                allowUpdating: false,
+                allowAdding: false,
+                allowDeleting: false,
+            },
+            keyExpr: 'id',
+            paging: {
+                pageSize: 10,
+            },
+            pager: {
+                visible: true,
+                showPageSizeSelector: false,
+                showInfo: true,
+                showNavigationButtons: true,
+            },
+            columns: [
+                { dataField: "nameEn", caption: "Name" }, 
+
+                {
+                    width: 300,
+                    alignment: 'center',
+                    cellTemplate: function(container, options) {
+                        $('<a/>').addClass('fa-solid fa-pen').css("padding-right", "5px")
+
+                            .on('dxclick', function() {
+                                debugger;
+                                window.location.href = "/Categories/edit/" + options.row.data.id;
+                            })
+                            .appendTo(container);
+
+                        $('<a/>').addClass('fa-solid fa-trash-can')
+                            .on('dxclick', function() {
+                                debugger;
+                                options.component.deleteRow(options.row.rowIndex);
+                            })
+                            .appendTo(container);
+                    }
+                }],
+            showBorders: true
+        });
+    });
+
+</script> *@
