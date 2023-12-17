@@ -7,11 +7,13 @@ namespace Boilerplate.Infrastructure.Context
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { } 
-
-          
+         
         public DbSet<Items> Items { get; set; }
         public DbSet<ItemPhotos> ItemPhotos { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<TopOfTop> TopOfTop { get; set; }
+        public DbSet<Events> Events { get; set; }
+        public DbSet<UserEvents> UserEvents { get; set; }
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

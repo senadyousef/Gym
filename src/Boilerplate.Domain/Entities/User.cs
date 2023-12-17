@@ -25,10 +25,12 @@ namespace Boilerplate.Domain.Entities
         public PushToken PushToken { get; set; } 
         public string RefreshToken { get; set; } 
         public DateTime RefreshTokenExpiryTime { get; set; } 
-        public string PhotoUri { get; set; }  
+        public string PhotoUri { get; set; }
         #endregion
 
         #region Relations 
+        public List<Events> Events { get; set; }
+        public List<UserEvents> UserEvents { get; set; }
         #endregion
     }
 }

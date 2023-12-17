@@ -4,6 +4,7 @@ using Boilerplate.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boilerplate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217101803_as")]
+    partial class @as
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -380,54 +382,10 @@ namespace Boilerplate.Infrastructure.Migrations
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "superadmin@ss.com",
                             IsDisabled = false,
-                            Password = "$2a$11$58lqL3RPIt8VHawfv2Zv..Ckon5xx/Wv6Hjt4str1l8d.Yx0Wpd.u",
+                            Password = "$2a$11$faJTh78P34V.njUiHKAbpuN.msL3d530PGcCx3wvmmqfY7GBzFCJO",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "SuperAdmin"
                         });
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.UserEvents", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisabledBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DisabledOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EventsId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDisabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventsId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserEvents");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
@@ -459,26 +417,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.UserEvents", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.Events", null)
-                        .WithMany("UserEvents")
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("UserEvents")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
-                {
-                    b.Navigation("UserEvents");
-                });
-
             modelBuilder.Entity("Boilerplate.Domain.Entities.Items", b =>
                 {
                     b.Navigation("ItemPhotos");
@@ -489,8 +427,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Navigation("Events");
 
                     b.Navigation("PushToken");
-
-                    b.Navigation("UserEvents");
                 });
 #pragma warning restore 612, 618
         }

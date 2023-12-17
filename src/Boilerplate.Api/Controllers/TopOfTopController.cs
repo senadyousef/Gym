@@ -27,7 +27,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpGet]
-        //[Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<PaginatedList<GetTopOfTopDto>>> GetTopOfTop([FromQuery] GetTopOfTopFilter filter)
         {
             return Ok(await _TopOfTopervice.GetAllTopOfTop(filter));

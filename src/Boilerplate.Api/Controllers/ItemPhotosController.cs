@@ -25,8 +25,8 @@ namespace Boilerplate.Api.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpGet]
-        //[Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner + "," + Roles.Customer)]
+        [HttpGet] 
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<PaginatedList<GetItemPhotosDto>>> GetItemPhotos([FromQuery] GetItemPhotosFilter filter)
         {
             return Ok(await _ItemPhotoservice.GetAllItemPhotos(filter));

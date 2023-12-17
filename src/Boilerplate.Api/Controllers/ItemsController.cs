@@ -26,7 +26,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpGet]
-        //[Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<PaginatedList<GetItemsDto>>> GetItems([FromQuery] GetItemsFilter filter)
         {
             return Ok(await _Itemservice.GetAllItemsWithPageSize(filter));
@@ -34,7 +34,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("getallItems")]
-        //[Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<AllList<GetItemsDto>>> GetAllItems([FromQuery] GetItemsFilter filter)
         {
             return Ok(await _Itemservice.GetAllItems(filter));

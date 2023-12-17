@@ -23,6 +23,12 @@ namespace Boilerplate.Application.MappingProfiles
 
             // Item Photos
             CreateMap<ItemPhotos, GetItemPhotosDto>().ReverseMap();
+            
+            // Events
+            CreateMap<Events, GetEventsDto>().ReverseMap();
+
+            // UserEvents
+            CreateMap<UserEvents, GetUserEventsDto>().ReverseMap();
         }
     }
 }

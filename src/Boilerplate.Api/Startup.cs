@@ -70,6 +70,14 @@ namespace Boilerplate.Api
             //Top Of Top
             services.AddScoped<ITopOfTopRepository, TopOfTopRepository>();
             services.AddScoped<ITopOfTopService, TopOfTopService>();
+            
+            //Events
+            services.AddScoped<IEventsRepository, EventsRepository>();
+            services.AddScoped<IEventsService, EventsService>();
+            
+            //User Events
+            services.AddScoped<IUserEventsRepository, UserEventsRepository>();
+            services.AddScoped<IUserEventsService, UserEventsService>();
               
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
