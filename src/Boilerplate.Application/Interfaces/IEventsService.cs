@@ -16,9 +16,16 @@ namespace Boilerplate.Application.Interfaces
         public Task<GetEventsDto> CreateEvents(CreateEventsDto Events);
         public Task<GetEventsDto> GetEventsById(int id); 
         public Task<GetEventsDto> UpdateEvents(int id, UpdateEventsDto updatedEvents); 
-        public Task<bool> DeleteEvents(int id); 
+        public Task<bool> DeleteEvents(int id);
+        public Task<List<GetEventsByDates>> GetDates(int id,int year, int month);
     }
 
+    public class GetEventsByDates
+    {
+        public DateTime Date { get; set; }
+        public bool IsDateHaveEvent { get; set; }
+        //public bool IsUserHasBooked { get; set; }
+    }
     public class GetEventsDto
     {
         public int Id {  get; set; }

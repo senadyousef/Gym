@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Amazon.S3.Model;
+using AutoMapper;
 using Boilerplate.Application.DTOs;
 using Boilerplate.Application.Extensions;
 using Boilerplate.Application.Interfaces;
@@ -31,7 +32,7 @@ namespace Boilerplate.Application.Services
             _uploadService = uploadService;
         }
         public async Task<GetEventsDto> CreateEvents(CreateEventsDto Events)
-        { 
+        {
             var newEvents = new Events
             {
                 UserId = Events.UserId,
@@ -49,7 +50,7 @@ namespace Boilerplate.Application.Services
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
-             
+
             var EventsDto = new GetEventsDto
             {
                 UserId = Events.UserId,
@@ -83,17 +84,17 @@ namespace Boilerplate.Application.Services
 
             return true;
         }
-         
+
         public async Task<GetEventsDto> GetEventsById(int id)
         {
-            var ids = _currentUserService.UserId; 
+            var ids = _currentUserService.UserId;
             var Events = await _EventsRepository.GetAll()
-                 
+
                 .FirstOrDefaultAsync(o => o.Id == id);
             if (Events == null)
                 return null;
             var EventsDto = new GetEventsDto
-            { 
+            {
                 Id = Events.Id,
                 UserId = Events.UserId,
                 NameAr = Events.NameAr,
@@ -115,7 +116,7 @@ namespace Boilerplate.Application.Services
         {
             var originalEvents = await _EventsRepository.GetById(id);
             if (originalEvents == null) return null;
-               
+
             originalEvents.NameAr = updatedEvents.NameAr;
             originalEvents.NameEn = updatedEvents.NameEn;
             originalEvents.UserId = updatedEvents.UserId;
@@ -128,9 +129,9 @@ namespace Boilerplate.Application.Services
             originalEvents.Booked = updatedEvents.Booked;
             originalEvents.Type = updatedEvents.Type;
             originalEvents.PhotoUri = _uploadService.UploadAsync(updatedEvents.UploadRequests);
-              
+
             var EventsDto = new GetEventsDto
-            { 
+            {
                 Id = originalEvents.Id,
                 UserId = originalEvents.UserId,
                 NameAr = originalEvents.NameAr,
@@ -180,6 +181,37 @@ namespace Boilerplate.Application.Services
                .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToAllListAsync(filter.CurrentPage);
+        }
+
+        public async Task<List<GetEventsByDates>> GetDates(int id, int year, int month)
+        {
+            var dates = new List<GetEventsByDates>();
+
+            Events Events = null;
+            for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+
+                Events = _EventsRepository
+              .GetAll()
+              .Where(o => o.IsDisabled == false)
+              .Where(o => o.Date.Date == date.Date).FirstOrDefault();
+                if (Events != null)
+                {
+                    GetEventsByDates getEventsByDates = new GetEventsByDates();
+                    getEventsByDates.Date = date;
+                    getEventsByDates.IsDateHaveEvent = true;
+                    dates.Add(getEventsByDates);
+                }
+                else
+                {
+                    GetEventsByDates getEventsByDates = new GetEventsByDates();
+                    getEventsByDates.Date = date;
+                    getEventsByDates.IsDateHaveEvent = false;
+                    dates.Add(getEventsByDates);
+                }
+            }
+
+            return dates;
         }
 
     }

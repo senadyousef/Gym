@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Boilerplate.Api.Controllers
 {
@@ -26,11 +28,18 @@ namespace Boilerplate.Api.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpGet] 
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)] 
+        [HttpGet]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<PaginatedList<GetEventsDto>>> GetEvents([FromQuery] GetEventsFilter filter)
         {
             return Ok(await _Eventservice.GetAllEvents(filter));
+        }
+
+        [HttpGet]
+        [Route("GetDates")]
+        public async Task<ActionResult<PaginatedList<GetEventsByDates>>> GetDates(int id, int year, int month)
+        {
+            return Ok(await _Eventservice.GetDates(id, year, month));
         }
 
         [HttpGet]
@@ -61,7 +70,7 @@ namespace Boilerplate.Api.Controllers
             return CreatedAtAction(nameof(GetEventsById), new { id = newEvents.Id }, newEvents);
 
         }
-         
+
         /// <summary>
         /// Update a Events from the database
         /// </summary>
@@ -96,6 +105,5 @@ namespace Boilerplate.Api.Controllers
             if (deleted) return NoContent();
             return NotFound();
         }
-    
     }
 }
