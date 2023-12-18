@@ -34,7 +34,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin +  "," + Roles.Customer)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetItemPhotosDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetItemPhotosDto>> GetItemPhotosById(int id)
@@ -51,7 +51,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner)]
+        [Authorize(Roles = Roles.SuperAdmin )]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetItemPhotosDto>> Create([FromBody] CreateItemPhotosDto dto)
@@ -68,7 +68,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner)]
+        [Authorize(Roles = Roles.SuperAdmin  )]
         public async Task<ActionResult<GetItemPhotosDto>> UpdateItemPhotos(int id, [FromBody] UpdateItemPhotosDto dto)
         {
 
@@ -85,7 +85,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The ItemPhotos's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner)]
+        [Authorize(Roles = Roles.SuperAdmin  )]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]

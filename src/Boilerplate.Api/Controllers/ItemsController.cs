@@ -42,7 +42,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetItemsDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetItemsDto>> GetItemsById(int id)
@@ -59,7 +59,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner)]
+        [Authorize(Roles = Roles.SuperAdmin)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetItemsDto>> Create([FromBody] CreateItemsDto dto)
@@ -68,7 +68,7 @@ namespace Boilerplate.Api.Controllers
             return CreatedAtAction(nameof(GetItemsById), new { id = newItems.Id }, newItems);
 
         }
-         
+
         /// <summary>
         /// Update a Items from the database
         /// </summary>
@@ -76,7 +76,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner)]
+        [Authorize(Roles = Roles.SuperAdmin)]
         public async Task<ActionResult<GetItemsDto>> UpdateItems(int id, [FromBody] UpdateItemsDto dto)
         {
 
@@ -93,7 +93,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The Items's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Owner)]
+        [Authorize(Roles = Roles.SuperAdmin)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]
@@ -103,6 +103,6 @@ namespace Boilerplate.Api.Controllers
             if (deleted) return NoContent();
             return NotFound();
         }
-    
+
     }
 }

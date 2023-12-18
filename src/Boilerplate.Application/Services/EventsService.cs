@@ -19,17 +19,19 @@ namespace Boilerplate.Application.Services
     {
         private IUploadService _uploadService;
         private IEventsRepository _EventsRepository;
+        private IUserEventsRepository _userEventsRepository;
         private IMapper _mapper;
         private ICurrentUserService _currentUserService;
 
         public EventsService(IEventsRepository EventsRepository, IMapper mapper,
-            ICurrentUserService currentUserService,
+            ICurrentUserService currentUserService, IUserEventsRepository userEventsRepository,
              IUploadService uploadService)
         {
             _EventsRepository = EventsRepository;
             _mapper = mapper;
             _currentUserService = currentUserService;
             _uploadService = uploadService;
+            _userEventsRepository = userEventsRepository;
         }
         public async Task<GetEventsDto> CreateEvents(CreateEventsDto Events)
         {
@@ -186,29 +188,44 @@ namespace Boilerplate.Application.Services
         public async Task<List<GetEventsByDates>> GetDates(int id, int year, int month)
         {
             var dates = new List<GetEventsByDates>();
-
-            Events Events = null;
+             
+            IQueryable<Events> Events = null;
             for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
             {
-
                 Events = _EventsRepository
-              .GetAll()
-              .Where(o => o.IsDisabled == false)
-              .Where(o => o.Date.Date == date.Date).FirstOrDefault();
+                  .GetAll()
+                  .Where(o => o.IsDisabled == false)
+                  .Where(o => o.Date.Year == date.Year)
+                  .Where(o => o.Date.Month == date.Month)
+                  .Where(o => o.Date.Day == date.Day);
                 if (Events != null)
                 {
-                    GetEventsByDates getEventsByDates = new GetEventsByDates();
-                    getEventsByDates.Date = date;
-                    getEventsByDates.IsDateHaveEvent = true;
-                    dates.Add(getEventsByDates);
+                    foreach (var _Events in Events)
+                    {
+                        GetEventsByDates getEventsByDates = new GetEventsByDates();
+                        getEventsByDates.Date = date;
+                        getEventsByDates.Event = true;
+                        getEventsByDates.Booking = false;
+                        UserEvents userEvents = null;
+                        userEvents = _userEventsRepository.GetAll()
+                            .Where(x => x.IsDisabled == false)
+                            .Where(x => x.UserId == id)
+                            .Where(x => x.EventsId == _Events.Id).FirstOrDefault();
+                        if (userEvents != null)
+                        {
+                            getEventsByDates.Booking = true;
+                        }
+                        dates.Add(getEventsByDates);
+                    }  
                 }
-                else
-                {
-                    GetEventsByDates getEventsByDates = new GetEventsByDates();
-                    getEventsByDates.Date = date;
-                    getEventsByDates.IsDateHaveEvent = false;
-                    dates.Add(getEventsByDates);
-                }
+                //else
+                //{
+                //    GetEventsByDates getEventsByDates = new GetEventsByDates();
+                //    getEventsByDates.Date = date;
+                //    getEventsByDates.Eevent = false;
+                //    getEventsByDates.Booking = false;
+                //    dates.Add(getEventsByDates);
+                //}
             }
 
             return dates;

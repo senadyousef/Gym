@@ -26,6 +26,7 @@ namespace Boilerplate.Api.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
+        ///  
         [HttpGet] 
         [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)] 
         public async Task<ActionResult<PaginatedList<GetUserEventsDto>>> GetUserEvents([FromQuery] GetUserEventsFilter filter)

@@ -22,19 +22,21 @@ namespace Boilerplate.Api.Controllers
         {
             _Eventservice = Eventservice;
         }
-
-        /// <summary>
-        /// Returns all Events in the database
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<PaginatedList<GetEventsDto>>> GetEvents([FromQuery] GetEventsFilter filter)
         {
-            return Ok(await _Eventservice.GetAllEvents(filter));
+            return Ok(await _Eventservice.GetAllEventsWithPageSize(filter));
         }
 
+        [HttpGet]
+        [Route("getallEvents")]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        public async Task<ActionResult<AllList<GetEventsDto>>> GetAllEvents([FromQuery] GetEventsFilter filter)
+        {
+            return Ok(await _Eventservice.GetAllEvents(filter));
+        }
+         
         [HttpGet]
         [Route("GetDates")]
         public async Task<ActionResult<PaginatedList<GetEventsByDates>>> GetDates(int id, int year, int month)
