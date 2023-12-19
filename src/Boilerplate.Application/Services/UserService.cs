@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Amazon.S3.Model;
 using AutoMapper;
 using Boilerplate.Application.DTOs;
 using Boilerplate.Application.DTOs.User;
@@ -12,6 +15,7 @@ using Boilerplate.Domain.Auth;
 using Boilerplate.Domain.Entities;
 using Boilerplate.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.Mime.MediaTypeNames;
 using BC = BCrypt.Net.BCrypt;
 
 
@@ -29,7 +33,7 @@ namespace Boilerplate.Application.Services
             _userRepository = userRepository;
             _currentUserService = currentUserService;
             _mapper = mapper;
-            _uploadService = uploadService; 
+            _uploadService = uploadService;
         }
 
         public void Dispose()
@@ -48,33 +52,100 @@ namespace Boilerplate.Application.Services
 
         public async Task<User> Authenticate(string email, string password)
         {
-            var user = await _userRepository
+            var user = new User();
+            bool IsMobileNumer = true;
+            foreach (char c in email)
+            {
+                if (c < '0' || c > '9')
+                {
+                    IsMobileNumer = false;
+                }
+            }
+            if (IsMobileNumer)
+            {
+                user = await _userRepository
+                .GetAll()
+                .Where(o => o.IsDisabled == false)
+                .FirstOrDefaultAsync(x => x.MobilePhone.ToLower() == email);
+            }
+            else if (Regex.Match(email, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").Success)
+            {
+                user = await _userRepository
                 .GetAll()
                 .Where(o => o.IsDisabled == false)
                 .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+            }
             if (user == null || !BC.Verify(password, user.Password))
             {
                 return null;
             }
-
+            if (user.MembershipExpDate.Date < DateTime.Now.Date)
+            {
+                var userUpdate = await _userRepository.GetById(user.Id); 
+                userUpdate.MembershipStatus = "Not Actice";
+                _userRepository.Update(userUpdate);
+                await _userRepository.SaveChangesAsync();
+            }
             return user;
         }
-
-
-        public async Task<bool> CheckEmail(string email)
+         
+        public async Task<CheckEmailAndMobieNumber> CheckEmailAndMobieNumber(string Text)
         {
-            var user = await _userRepository
-                .GetAll()
-                .Where(o => o.IsDisabled == false)
-                .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
-            if (user == null)
+            CheckEmailAndMobieNumber checkEmailAndMobieNumber = new CheckEmailAndMobieNumber();
+            var user = new User();
+            bool IsMobileNumer = true;
+            checkEmailAndMobieNumber.Message = "Enter Email Or Mobile Phone";
+            checkEmailAndMobieNumber.IsValid = false;
+            if (Text != null)
             {
-                return true;
+                foreach (char c in Text)
+                {
+                    if (c < '0' || c > '9')
+                    {
+                        IsMobileNumer = false;
+                    }
+                }
+                if (IsMobileNumer)
+                {
+                    user = await _userRepository
+                      .GetAll()
+                      .Where(o => o.IsDisabled == false)
+                      .FirstOrDefaultAsync(x => x.MobilePhone == Text);
+                    if (user != null)
+                    {
+                        checkEmailAndMobieNumber.Message = "Mobile Phone Is Used";
+                        checkEmailAndMobieNumber.IsValid = false;
+                    }
+                    else
+                    {
+                        checkEmailAndMobieNumber.Message = "Accepted Mobile Phone";
+                        checkEmailAndMobieNumber.IsValid = true;
+                    }
+                }
+                else if (Regex.Match(Text, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").Success)
+                {
+                    user = await _userRepository
+                      .GetAll()
+                      .Where(o => o.IsDisabled == false)
+                      .FirstOrDefaultAsync(x => x.Email.ToLower() == Text.ToLower());
+                    if (user != null)
+                    {
+                        checkEmailAndMobieNumber.Message = "Email Is Used";
+                        checkEmailAndMobieNumber.IsValid = false;
+                    }
+                    else
+                    {
+                        checkEmailAndMobieNumber.Message = "Accepted Email";
+                        checkEmailAndMobieNumber.IsValid = true;
+                    }
+                }
+                else
+                {
+                    checkEmailAndMobieNumber.Message = "Enter Valid Email Or Mobile Phone";
+                    checkEmailAndMobieNumber.IsValid = false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return checkEmailAndMobieNumber; 
         }
 
 
@@ -104,8 +175,6 @@ namespace Boilerplate.Application.Services
             _userRepository.Create(created);
             await _userRepository.SaveChangesAsync();
             return _mapper.Map<GetUserDto>(created);
-
-
         }
 
         public async Task<bool> DeleteUser(int id)
@@ -136,6 +205,9 @@ namespace Boilerplate.Application.Services
             user.NameAr = dto.NameAr;
             user.Gender = dto.Gender;
             user.Role = dto.Role;
+            user.BOD = dto.BOD;
+            user.MembershipStatus = dto.MembershipStatus;
+            user.MembershipExpDate = dto.MembershipExpDate;
             user.PhotoUri = _uploadService.UploadAsync(dto.UploadRequests);
 
             if (!string.IsNullOrEmpty(dto.Password))
@@ -180,7 +252,7 @@ namespace Boilerplate.Application.Services
                     .WhereIf(!string.IsNullOrEmpty(filter.Email), x => EF.Functions.Like(x.Email, $"%{filter.Email}%"))
                     .WhereIf(!string.IsNullOrEmpty(filter.Role), x => EF.Functions.Like(x.Role, $"%{filter.Role}%"))
                     .WhereIf(string.IsNullOrEmpty(filter.Email) && string.IsNullOrEmpty(filter.Role),
-                        u => u.Role == "Staff")
+                        u => u.Role == "Coach")
                     .Where(o => o.IsDisabled == false);
             }
             else
@@ -212,12 +284,14 @@ namespace Boilerplate.Application.Services
                 Role = user.Role,
                 NameEn = user.NameEn,
                 NameAr = user.NameAr,
-                MobilePhone = user.MobilePhone, 
+                MobilePhone = user.MobilePhone,
                 RefreshToken = user.RefreshToken,
                 RefreshTokenExpiryTime = user.RefreshTokenExpiryTime,
                 PhotoUri = user.PhotoUri,
                 Gender = user.Gender,
-
+                BOD = user.BOD,
+                MembershipStatus = user.MembershipStatus,
+                MembershipExpDate = user.MembershipExpDate,
             };
             return userDto;
         }

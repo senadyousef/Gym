@@ -15,6 +15,9 @@ namespace Boilerplate.Domain.Entities
         [Required]
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
+        
+        [ForeignKey(nameof(Branches))]
+        public int BranchesId { get; set; }
 
         public string NameAr { get; set; }
          

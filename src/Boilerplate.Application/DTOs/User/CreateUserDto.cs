@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Boilerplate.Application.DTOs.User
@@ -13,7 +14,10 @@ namespace Boilerplate.Application.DTOs.User
         public string Role { get; set; }  
         public string NameEn { get; set; } 
         public string NameAr { get; set; } 
-        public string Gender { get; set; } 
+        public string Gender { get; set; }
+        public DateTime BOD { get; set; }
+        public string MembershipStatus { get; set; }
+        public DateTime MembershipExpDate { get; set; }
         public string MobilePhone { get; set; }   
         public UploadRequest UploadRequests { get; set; } 
         public string PhotoUri { get; set; } 

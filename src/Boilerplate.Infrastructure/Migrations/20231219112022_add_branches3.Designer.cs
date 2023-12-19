@@ -4,6 +4,7 @@ using Boilerplate.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boilerplate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231219112022_add_branches3")]
+    partial class add_branches3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,59 +238,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.PersonalTrainersClasses", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisabledBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DisabledOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDisabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PersonalTrainer")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Trainee")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("PersonalTrainersClasses");
-                });
-
             modelBuilder.Entity("Boilerplate.Domain.Entities.PushToken", b =>
                 {
                     b.Property<int>("Id")
@@ -493,7 +442,7 @@ namespace Boilerplate.Infrastructure.Migrations
                             Email = "superadmin@ss.com",
                             IsDisabled = false,
                             MembershipExpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "$2a$11$Zs8NqgwrRBpRsg9pLQ1wh.PTfXJGviGONVDht6wUqpdP78GVUVSeS",
+                            Password = "$2a$11$8FefSnew3fy1Mxd7mnlQwuOQ7uzSzHXYywk4agbVGfO02qcYABD..",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "SuperAdmin"
                         });
@@ -567,17 +516,6 @@ namespace Boilerplate.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.PersonalTrainersClasses", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("PersonalTrainerList")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("TraineeLsit")
-                        .HasForeignKey("UserId1");
-                });
-
             modelBuilder.Entity("Boilerplate.Domain.Entities.PushToken", b =>
                 {
                     b.HasOne("Boilerplate.Domain.Entities.User", "User")
@@ -623,11 +561,7 @@ namespace Boilerplate.Infrastructure.Migrations
                 {
                     b.Navigation("Events");
 
-                    b.Navigation("PersonalTrainerList");
-
                     b.Navigation("PushToken");
-
-                    b.Navigation("TraineeLsit");
 
                     b.Navigation("UserEvents");
                 });

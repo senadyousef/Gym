@@ -38,6 +38,7 @@ namespace Boilerplate.Application.Services
             var newEvents = new Events
             {
                 UserId = Events.UserId,
+                BranchesId = Events.BranchesId,
                 NameAr = Events.NameAr,
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
@@ -56,6 +57,7 @@ namespace Boilerplate.Application.Services
             var EventsDto = new GetEventsDto
             {
                 UserId = Events.UserId,
+                BranchesId = Events.BranchesId,
                 NameAr = Events.NameAr,
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
@@ -99,6 +101,7 @@ namespace Boilerplate.Application.Services
             {
                 Id = Events.Id,
                 UserId = Events.UserId,
+                BranchesId = Events.BranchesId,
                 NameAr = Events.NameAr,
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
@@ -122,6 +125,7 @@ namespace Boilerplate.Application.Services
             originalEvents.NameAr = updatedEvents.NameAr;
             originalEvents.NameEn = updatedEvents.NameEn;
             originalEvents.UserId = updatedEvents.UserId;
+            originalEvents.BranchesId = updatedEvents.BranchesId;
             originalEvents.DescriptionEn = updatedEvents.DescriptionEn;
             originalEvents.DescriptionAr = updatedEvents.DescriptionAr;
             originalEvents.Date = updatedEvents.Date;
@@ -136,6 +140,7 @@ namespace Boilerplate.Application.Services
             {
                 Id = originalEvents.Id,
                 UserId = originalEvents.UserId,
+                BranchesId = originalEvents.BranchesId,
                 NameAr = originalEvents.NameAr,
                 NameEn = originalEvents.NameEn,
                 DescriptionEn = originalEvents.DescriptionEn,
@@ -217,15 +222,7 @@ namespace Boilerplate.Application.Services
                         }
                         dates.Add(getEventsByDates);
                     }  
-                }
-                //else
-                //{
-                //    GetEventsByDates getEventsByDates = new GetEventsByDates();
-                //    getEventsByDates.Date = date;
-                //    getEventsByDates.Eevent = false;
-                //    getEventsByDates.Booking = false;
-                //    dates.Add(getEventsByDates);
-                //}
+                } 
             }
 
             return dates;

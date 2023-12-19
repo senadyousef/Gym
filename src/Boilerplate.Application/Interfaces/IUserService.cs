@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Boilerplate.Application.DTOs;
 using Boilerplate.Application.DTOs.User;
 using Boilerplate.Application.Filters;
+using System.Collections.Generic;
 
 
 namespace Boilerplate.Application.Interfaces
@@ -11,7 +12,7 @@ namespace Boilerplate.Application.Interfaces
     public interface IUserService : IDisposable
     {
         Task<User> Authenticate(string email, string password); 
-        Task<bool> CheckEmail(string email); 
+        Task<CheckEmailAndMobieNumber> CheckEmailAndMobieNumber(string email); 
         Task<bool> CheckPassword(int id, string Password); 
         Task<GetUserDto> CreateUser(CreateUserDto dto); 
         Task<bool> DeleteUser(int id);
@@ -22,5 +23,11 @@ namespace Boilerplate.Application.Interfaces
         Task<GetUserDto> GetUserById(int id);
         Task<GetUserExtendedDto> GetExtendedUserById(int id);
         Task<bool> EditUser(CreateUserDto dto);
+    }
+
+    public class CheckEmailAndMobieNumber
+    {
+        public string Message { get; set; }
+        public bool IsValid { get; set; }  
     }
 }

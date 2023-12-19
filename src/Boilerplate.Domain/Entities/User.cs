@@ -20,17 +20,22 @@ namespace Boilerplate.Domain.Entities
         [Required]
         public string Role { get; set; } 
         public string Gender { get; set; } 
-        public int Age { get; set; }  
+        public int Age { get; set; }
+        public DateTime BOD { get; set; }
+        public string MembershipStatus { get; set; }
+        public DateTime MembershipExpDate { get; set; }
         public string MobilePhone { get; set; }  
         public PushToken PushToken { get; set; } 
         public string RefreshToken { get; set; } 
-        public DateTime RefreshTokenExpiryTime { get; set; } 
+        public DateTime RefreshTokenExpiryTime { get; set; }  
         public string PhotoUri { get; set; }
         #endregion
 
         #region Relations 
         public List<Events> Events { get; set; }
         public List<UserEvents> UserEvents { get; set; }
+        public List<PersonalTrainersClasses> PersonalTrainerList { get; set; }
+        public List<PersonalTrainersClasses> TraineeLsit { get; set; }
         #endregion
     }
 }

@@ -14,6 +14,8 @@ namespace Boilerplate.Infrastructure.Context
         public DbSet<TopOfTop> TopOfTop { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<UserEvents> UserEvents { get; set; }
+        public DbSet<Branches> Branches { get; set; }
+        public DbSet<PersonalTrainersClasses> PersonalTrainersClasses { get; set; }
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

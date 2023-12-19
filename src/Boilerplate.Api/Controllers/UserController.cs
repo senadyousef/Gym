@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Boilerplate.Application.DTOs;
 using Boilerplate.Application.DTOs.Auth;
@@ -47,10 +48,17 @@ namespace Boilerplate.Api.Controllers
         [ProducesResponseType(typeof(JwtDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> Authenticate([FromBody] LoginDto loginInfo)
         {
-            var user = await _userService.Authenticate(loginInfo.Email, loginInfo.Password);
+            var user = await _userService.Authenticate(loginInfo.EmailOrMobilePhone, loginInfo.Password);
             if (user == null)
             {
                 return BadRequest(new { message = "Username or password is incorrect" });
+            }
+            else
+            {
+                if (user.MembershipStatus == "Not Active" || user.MembershipExpDate.Date < DateTime.Now.Date)
+                {
+                    return BadRequest(new { message = "Your Membership Expired" });
+                }
             }
             return Ok(await _authService.GenerateTokenAsync(user));
         }
@@ -83,7 +91,6 @@ namespace Boilerplate.Api.Controllers
         {
             return Ok(await _userService.GetAllUser(filter));
         }
-
 
         /// <summary>
         /// Get one user by id from the database
@@ -121,22 +128,16 @@ namespace Boilerplate.Api.Controllers
         }
 
         [HttpPost]
-        [Route("checkemail")]
+        [Route("checkEmailAndMobieNumber")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<bool> checkemailAsync(string loginInfo)
+        public async Task<CheckEmailAndMobieNumber> CheckEmailAndMobieNumberAsync(string loginInfo)
         {
-            var user = await _userService.CheckEmail(loginInfo);
-            if (user == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            } 
+            CheckEmailAndMobieNumber checkEmailAndMobieNumber = new CheckEmailAndMobieNumber();
+            checkEmailAndMobieNumber = await _userService.CheckEmailAndMobieNumber(loginInfo);
+            return checkEmailAndMobieNumber;
         }
-         
+
         [HttpPost]
         [Route("checkpassword")]
         [AllowAnonymous]
@@ -153,7 +154,7 @@ namespace Boilerplate.Api.Controllers
                 return false;
             }
         }
-          
+
         [HttpPut("updateuser")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> UpdateUser([FromBody] CreateUserDto dto)

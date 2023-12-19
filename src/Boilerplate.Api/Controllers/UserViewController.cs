@@ -84,7 +84,7 @@ namespace Boilerplate.Api.Controllers
             }
             else if (_currentCustomer.Role == "Owner")
             {
-                ViewBag.Roles = new List<string>() { "Staff" };
+                ViewBag.Roles = new List<string>() { "Coach" };
 
             }
            
@@ -236,7 +236,7 @@ namespace Boilerplate.Api.Controllers
                 string role = null;
 
                 if (_currentCustomer.Role == "Owner")
-                    role = "Staff";
+                    role = "Coach";
                 
                 //senad subcontractor.. this feature is not used any more?
 

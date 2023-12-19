@@ -78,6 +78,14 @@ namespace Boilerplate.Api
             //User Events
             services.AddScoped<IUserEventsRepository, UserEventsRepository>();
             services.AddScoped<IUserEventsService, UserEventsService>();
+
+            //Branches
+            services.AddScoped<IBranchesRepository, BranchesRepository>();
+            services.AddScoped<IBranchesService, BranchesService>();
+
+            //Personal Trainers Classes
+            services.AddScoped<IPersonalTrainersClassesRepository, PersonalTrainersClassesRepository>();
+            services.AddScoped<IPersonalTrainersClassesService, PersonalTrainersClassesService>();
               
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 

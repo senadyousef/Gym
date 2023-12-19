@@ -26,10 +26,12 @@ namespace Boilerplate.Application.Interfaces
         public bool Event { get; set; }
         public bool Booking { get; set; }
     }
+
     public class GetEventsDto
     {
         public int Id {  get; set; }
-        public int UserId { get; set; } 
+        public int UserId { get; set; }
+        public int BranchesId { get; set; }
         public string NameAr { get; set; } 
         public string NameEn { get; set; } 
         public string DescriptionEn { get; set; }  
@@ -40,12 +42,13 @@ namespace Boilerplate.Application.Interfaces
         public string To { get; set; } 
         public int Capacity { get; set; } 
         public int Booked { get; set; } 
-        public string Type { get; set; }
-
+        public string Type { get; set; } 
     }
+
     public class CreateEventsDto
     {
         public int UserId { get; set; }
+        public int BranchesId { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string DescriptionEn { get; set; }
@@ -64,6 +67,7 @@ namespace Boilerplate.Application.Interfaces
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int BranchesId { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string DescriptionEn { get; set; }
@@ -81,6 +85,7 @@ namespace Boilerplate.Application.Interfaces
     public class GetEventsFilter : PaginationInfoFilter
     {
         public int UserId { get; set; }
+        public int BranchesId { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
         public string DescriptionEn { get; set; }
@@ -92,6 +97,5 @@ namespace Boilerplate.Application.Interfaces
         public int Capacity { get; set; }
         public int Booked { get; set; }
         public string Type { get; set; }
-    }
-
+    } 
 }

@@ -47,24 +47,20 @@ namespace Boilerplate.Api.Controllers
 
                 Httpclient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", result.Token);
                 client = new Client(_configuration.GetValue<string>("HostUrl"), Httpclient);
-                var UserData = await client.UserGETAsync(login.Email, null, 1, 1);
+                var UserData = await client.UserGETAsync(login.EmailOrMobilePhone, null, 1, 1);
 
                 _HttpContextAccessor.HttpContext.Session.SetString("Id", UserData.Result.FirstOrDefault().Id.ToString());
                 _HttpContextAccessor.HttpContext.Session.SetString("Email", UserData.Result.FirstOrDefault().Email.ToString());
                 _HttpContextAccessor.HttpContext.Session.SetString("Token", result.Token);
                 _HttpContextAccessor.HttpContext.Session.SetString("ExpDate", result.ExpDate.ToString());
                 _HttpContextAccessor.HttpContext.Session.SetString("Role", UserData.Result.FirstOrDefault().Role);
-               
-
-
-                return RedirectToAction("Index", "HomeView");
-
+                
+                return RedirectToAction("Index", "HomeView"); 
             }
             catch (Exception ex)
             {
                 return View("Login", "Error");
-            }
-
+            } 
         }
     }
 }
