@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Boilerplate.Domain.Core.Entities;
 using Boilerplate.Domain.Entities.Enums;
 
 namespace Boilerplate.Domain.Entities
 {
-    public class User : Entity
+    public class Children : Entity
     {
         #region Parameters
+        [Required]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
         [MaxLength(50)]
         public string NameEn { get; set; } 
         [MaxLength(50)]
         public string NameAr { get; set; } 
         [Required]
-        public string Email { get; set; } 
-        [Required]
-        public string Password { get; set; } 
-        [Required]
+        public string? Email { get; set; }  
+        public string? Password { get; set; }  
         public string Role { get; set; } 
         public string Gender { get; set; } 
         public int Age { get; set; }
@@ -32,11 +34,10 @@ namespace Boilerplate.Domain.Entities
         #endregion
 
         #region Relations 
-        public List<Events> Events { get; set; }
-        public List<UserEvents> UserEvents { get; set; }
-        public List<PersonalTrainersClasses> PersonalTrainerList { get; set; }
-        public List<PersonalTrainersClasses> TraineeLsit { get; set; }
-        public List<Children> Children { get; set; }
+        //public List<Events> Events { get; set; }
+        //public List<UserEvents> UserEvents { get; set; }
+        //public List<PersonalTrainersClasses> PersonalTrainerList { get; set; }
+        //public List<PersonalTrainersClasses> TraineeLsit { get; set; }
         #endregion
     }
 }

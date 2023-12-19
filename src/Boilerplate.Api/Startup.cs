@@ -86,6 +86,10 @@ namespace Boilerplate.Api
             //Personal Trainers Classes
             services.AddScoped<IPersonalTrainersClassesRepository, PersonalTrainersClassesRepository>();
             services.AddScoped<IPersonalTrainersClassesService, PersonalTrainersClassesService>();
+
+            //Children
+            services.AddScoped<IChildrenRepository, ChildrenRepository>();
+            services.AddScoped<IChildrenService, ChildrenService>();
               
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 

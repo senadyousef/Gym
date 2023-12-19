@@ -35,6 +35,9 @@ namespace Boilerplate.Application.MappingProfiles
 
             // Personal Trainers Classes
             CreateMap<PersonalTrainersClasses, GetPersonalTrainersClassesDto>().ReverseMap();
+            
+            // Personal Trainers Classes
+            CreateMap<Children, GetChildrenDto>().ReverseMap();
         }
     }
 }
