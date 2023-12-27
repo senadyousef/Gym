@@ -109,10 +109,10 @@ namespace Boilerplate.Application.Services
             if (originalItems == null) return null;
 
             originalItems.NameAr = updatedItems.NameAr;
-            originalItems.NameEn = updatedItems.NameEn; 
+            originalItems.NameEn = updatedItems.NameEn;
             originalItems.Price = updatedItems.Price;
-            originalItems.Description = updatedItems.Description; 
-             
+            originalItems.Description = updatedItems.Description;
+
             originalItems.ItemPhotos = new List<ItemPhotos>();
             foreach (var item in updatedItems.UploadRequests)
             {
@@ -128,11 +128,11 @@ namespace Boilerplate.Application.Services
             var ItemsDto = new GetItemsDto
             {
 
-                Id = originalItems.Id, 
+                Id = originalItems.Id,
                 NameEn = originalItems.NameEn,
                 NameAr = originalItems.NameAr,
                 Price = originalItems.Price,
-                Description = originalItems.Description, 
+                Description = originalItems.Description,
             };
             _ItemsRepository.Update(originalItems);
             await _ItemsRepository.SaveChangesAsync();
@@ -147,7 +147,7 @@ namespace Boilerplate.Application.Services
             filter ??= new GetItemsFilter();
             IQueryable<Items> Items = null;
 
-             
+
             Items = _ItemsRepository
                .GetAll()
                .Where(o => o.IsDisabled == false);
@@ -161,12 +161,13 @@ namespace Boilerplate.Application.Services
 
             filter ??= new GetItemsFilter();
             IQueryable<Items> Items = null;
-             
+
             Items = _ItemsRepository
                .GetAll()
-               .Where(o => o.IsDisabled == false) 
+               .Where(o => o.IsDisabled == false)
                .Where(o => o.NameEn.Contains(filter.NameEn) || filter.NameEn == null)
-               .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null); 
+               .Where(o => o.Price == filter.Price)
+               .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null);
 
             return await _mapper.ProjectTo<GetItemsDto>(Items).ToAllListAsync(filter.CurrentPage);
         }

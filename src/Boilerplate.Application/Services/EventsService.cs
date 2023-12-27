@@ -189,7 +189,12 @@ namespace Boilerplate.Application.Services
                .GetAll()
                .Where(o => o.IsDisabled == false)
                .Where(o => o.NameEn.Contains(filter.NameEn) || filter.NameEn == null)
-               .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null);
+               .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null)
+               .Where(o => o.Date == filter.Date)
+               .Where(o => o.From == filter.From)
+               .Where(o => o.To == filter.To)
+               .Where(o => o.BranchesId == filter.BranchesId)
+               .Where(o => o.Type == filter.Type);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToAllListAsync(filter.CurrentPage);
         }

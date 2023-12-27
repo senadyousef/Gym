@@ -126,6 +126,7 @@ namespace Boilerplate.Application.Services
             UserEvents = _UserEventsRepository
                .GetAll()
                .Where(o => o.IsDisabled == false)
+               .Where(o => o.EventsId == filter.EventsId)
                .Where(o => o.UserId == filter.UserId);
 
             return await _mapper.ProjectTo<GetUserEventsDto>(UserEvents).ToAllListAsync(filter.CurrentPage);
