@@ -190,11 +190,11 @@ namespace Boilerplate.Application.Services
                .Where(o => o.IsDisabled == false)
                .Where(o => o.NameEn.Contains(filter.NameEn) || filter.NameEn == null)
                .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null)
-               .Where(o => o.Date == filter.Date)
-               .Where(o => o.From == filter.From)
-               .Where(o => o.To == filter.To)
-               .Where(o => o.BranchesId == filter.BranchesId)
-               .Where(o => o.Type == filter.Type);
+               .Where(o => o.Date.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date)
+               .Where(o => o.From == filter.From|| filter.From == null)
+               .Where(o => o.To == filter.To || filter.To == null)
+               .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
+               .Where(o => o.Type == filter.Type || filter.Type == null);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToAllListAsync(filter.CurrentPage);
         }

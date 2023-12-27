@@ -166,7 +166,7 @@ namespace Boilerplate.Application.Services
                .GetAll()
                .Where(o => o.IsDisabled == false)
                .Where(o => o.NameEn.Contains(filter.NameEn) || filter.NameEn == null)
-               .Where(o => o.Price == filter.Price)
+               .Where(o => o.Price == filter.Price || filter.Price == 0)
                .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null);
 
             return await _mapper.ProjectTo<GetItemsDto>(Items).ToAllListAsync(filter.CurrentPage);
