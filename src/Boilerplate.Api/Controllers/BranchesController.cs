@@ -56,7 +56,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetBranchesDto>> Create([FromBody] CreateBranchesDto dto)
@@ -72,7 +72,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<GetBranchesDto>> UpdateBranches(int id, [FromBody] UpdateBranchesDto dto)
         {
 
@@ -89,7 +89,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The Branches's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]
