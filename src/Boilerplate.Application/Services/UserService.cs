@@ -169,10 +169,8 @@ namespace Boilerplate.Application.Services
         public async Task<GetUserDto> CreateUser(CreateUserDto dto)
         {
             var created = _userRepository.Create(_mapper.Map<User>(dto));
-            if (dto.UploadRequests != null)
-            {
-                created.PhotoUri = _uploadService.UploadAsync(dto.UploadRequests);
-            }
+             
+                created.PhotoUri = _uploadService.UploadPhoto(dto.PhotoUri); 
             created.Password = BC.HashPassword(dto.Password);
 
             _userRepository.Create(created);

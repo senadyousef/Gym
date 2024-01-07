@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Boilerplate.Application.Interfaces
     public interface IUploadService
     {
         string UploadAsync(UploadRequest request);
+        string UploadPhoto(string base64Data);
     }
 }
 
@@ -35,7 +37,7 @@ public enum UploadType : byte
 
     [Description(@"Images\Product")]
     Product,
-     
+
     [Description(@"Images\Packege")]
     Packege,
 

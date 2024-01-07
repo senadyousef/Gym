@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
@@ -96,16 +96,16 @@
   <ItemGroup>
     <Folder Include="Libs" />
     <Folder Include="Models" />
+    <Folder Include="wwwroot\WebImages\" />
     <Folder Include="Views\Account" />
     <Folder Include="Views\HomeView" /> 
     <Folder Include="Views\Shared" /> 
     <Folder Include="Views\UserView" />
   </ItemGroup>
-  <ItemGroup> 
-  </ItemGroup>
-  <ItemGroup>
-<!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
+  <ItemGroup><!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
 <!--    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />-->
+  
+    <None Include="wwwroot\WebImages\v.png" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema" /></VisualStudio></ProjectExtensions>
 </Project>

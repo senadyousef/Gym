@@ -43,7 +43,7 @@ namespace Boilerplate.Application.Services
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
                 DescriptionAr = Events.DescriptionAr,
-                
+
                 Date = Events.Date,
                 From = Events.From,
                 To = Events.To,
@@ -53,7 +53,7 @@ namespace Boilerplate.Application.Services
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
-             
+
             if (Events.UploadRequests != null)
             {
                 newEvents.PhotoUri = _uploadService.UploadAsync(Events.UploadRequests);
@@ -172,8 +172,15 @@ namespace Boilerplate.Application.Services
 
 
             Events = _EventsRepository
-               .GetAll()
-               .Where(o => o.IsDisabled == false);
+                .GetAll()
+               .Where(o => o.IsDisabled == false)
+               .Where(o => o.NameEn.Contains(filter.NameEn) || filter.NameEn == null)
+               .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null)
+               .Where(o => o.Date.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date)
+               .Where(o => o.From == filter.From || filter.From == null)
+               .Where(o => o.To == filter.To || filter.To == null)
+               .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
+               .Where(o => o.Type == filter.Type || filter.Type == null);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
         }
@@ -191,7 +198,7 @@ namespace Boilerplate.Application.Services
                .Where(o => o.NameEn.Contains(filter.NameEn) || filter.NameEn == null)
                .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null)
                .Where(o => o.Date.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date)
-               .Where(o => o.From == filter.From|| filter.From == null)
+               .Where(o => o.From == filter.From || filter.From == null)
                .Where(o => o.To == filter.To || filter.To == null)
                .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
                .Where(o => o.Type == filter.Type || filter.Type == null);
@@ -202,7 +209,7 @@ namespace Boilerplate.Application.Services
         public async Task<List<GetEventsByDates>> GetDates(int id, int year, int month)
         {
             var dates = new List<GetEventsByDates>();
-             
+
             IQueryable<Events> Events = null;
             for (var date = new DateTime(year, month, 1); date.Month == month; date = date.AddDays(1))
             {
@@ -230,8 +237,8 @@ namespace Boilerplate.Application.Services
                             getEventsByDates.Booking = true;
                         }
                         dates.Add(getEventsByDates);
-                    }  
-                } 
+                    }
+                }
             }
 
             return dates;

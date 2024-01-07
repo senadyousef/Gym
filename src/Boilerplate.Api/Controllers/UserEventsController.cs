@@ -60,7 +60,6 @@ namespace Boilerplate.Api.Controllers
         {
             var newUserEvents = await _UserEventservice.CreateUserEvents(dto);
             return CreatedAtAction(nameof(GetUserEventsById), new { id = newUserEvents.Id }, newUserEvents);
-
         }
 
         /// <summary>
