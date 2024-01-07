@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Web; 
 using System.Drawing; 
 using System.Net;
-using System.Net.Http; 
+using System.Net.Http;
 
 namespace Boilerplate.Application.Services
 {
@@ -32,23 +32,108 @@ namespace Boilerplate.Application.Services
         {
             _config = config.Value;
         }
+         
+        public async Task<string>  UploadImageAsync(string Image)
+        {
+            string message = null;
+            string domain = "http://gym.useitsmart.com";
+            string username = "78281734";
+            string password = "Senad1979";
+            string folderPath = "webimages";
+            string imageUrl = Image; // Replace with your base64 image data
 
-        //static void Main()
-        //{
-        //    // Replace these values with your actual GoDaddy FTP credentials and details
-           
+            using (var webClient = new WebClient())
+            {
+                //webClient.Credentials = new NetworkCredential(username, password);
 
-        //    Console.WriteLine("File uploaded successfully.");
-        //}
+                // Convert base64 string to byte array
+                byte[] imageBytes = Convert.FromBase64String(imageUrl);
 
-        //static void UploadFileToFtp(string ftpServer, string ftpUsername, string ftpPassword, string localFilePath, string remoteFolder, string remoteFileName)
-        //{
-        //    using (WebClient client = new WebClient())
-        //    {
-        //        client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-        //        client.UploadFile($"ftp://{ftpServer}/{remoteFolder}/{remoteFileName}", WebRequestMethods.Ftp.UploadFile, localFilePath);
-        //    }
-        //}
+                // Upload the image to the server
+
+                try
+                {
+                    string ftpServerIp = "160.153.155.203"; // Replace with the actual IP address
+                    //string uploadUrl = $"ftp://{domain}/{folderPath}/image.png";
+                    string uploadUrl = $"ftp://{ftpServerIp}/{folderPath}/{"image.png"}";
+                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uploadUrl);
+                    request.Method = WebRequestMethods.Ftp.UploadFile;
+                    request.Credentials = new NetworkCredential(username, password);
+
+                    // Set passive mode
+                    request.EnableSsl = true;
+
+                    request.UsePassive = true;
+
+                    using (Stream ftpStream = request.GetRequestStream())
+                    {
+                        ftpStream.Write(imageBytes, 0, imageBytes.Length);
+                    }
+
+                    //string uploadUrl = $"ftp://{domain}/{folderPath}/{"image.png"}";
+
+                   
+                    //webClient.UsePassive = true;
+
+                    // Upload the file
+                    webClient.UploadData(uploadUrl, "STOR", imageBytes);
+                    Console.WriteLine("Image uploaded successfully.");
+                    message = "Image uploaded successfully.";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error uploading image: {ex.Message}");
+                    message = $"Error uploading image: {ex.Message}";
+                }
+            }
+
+            //// Create a HttpClient with basic authentication
+            //using (var httpClient = new HttpClient())
+            //{
+            //    var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
+            //    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", credentials);
+
+            //    // Convert base64 string to byte array
+            //    byte[] imageBytes = Convert.FromBase64String(imageUrl);
+
+            //    // Upload the image to the server
+            //    try
+            //    {
+            //        // Construct the URL for uploading
+            //        //string uploadUrl = $"https://ftp.{domain}/{folderPath}/{"image.png"}";
+
+            //        string uploadUrl = $"ftp://{domain}/{folderPath}/{"image.png"}";
+
+            //        // Upload the file
+            //        webClient.UploadData(uploadUrl, "STOR", imageBytes);
+            //        Console.WriteLine("Image uploaded successfully.");
+            //        message = "Image uploaded successfully.";
+            //        // Create a MemoryStream from the byte array
+            //        //using (var stream = new MemoryStream(imageBytes))
+            //        //{
+            //        //    // Create a stream content for the file
+            //        //    using (var fileContent = new StreamContent(stream))
+            //        //    {
+            //        //        // Send a PUT request to the server
+            //        //        using (var response = await httpClient.PutAsync(uploadUrl, fileContent))
+            //        //        {
+            //        //            response.EnsureSuccessStatusCode();
+            //        //            Console.WriteLine("Image uploaded successfully.");
+            //        //            message = "Image uploaded successfully.";
+            //        //        }
+            //        //    }
+            //        //}
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine($"Error uploading image: {ex.Message}");
+            //        message = $"Error uploading image: {ex.Message}";
+            //    }
+            //}
+            return message;
+
+
+        }
 
         public string UploadPhoto(string base64Data)
         {

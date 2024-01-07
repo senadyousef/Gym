@@ -170,7 +170,7 @@ namespace Boilerplate.Application.Services
         {
             var created = _userRepository.Create(_mapper.Map<User>(dto));
              
-                created.PhotoUri = _uploadService.UploadPhoto(dto.PhotoUri); 
+                created.PhotoUri = await _uploadService.UploadImageAsync(dto.PhotoUri); 
             created.Password = BC.HashPassword(dto.Password);
 
             _userRepository.Create(created);

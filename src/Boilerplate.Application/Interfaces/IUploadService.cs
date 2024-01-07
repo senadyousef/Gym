@@ -12,6 +12,7 @@ namespace Boilerplate.Application.Interfaces
     {
         string UploadAsync(UploadRequest request);
         string UploadPhoto(string base64Data);
+        Task<string> UploadImageAsync(string Image);
     }
 }
 

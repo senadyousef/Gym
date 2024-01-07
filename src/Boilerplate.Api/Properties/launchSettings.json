@@ -24,7 +24,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://192.168.1.20:5000;"
+      "applicationUrl": "http://192.168.100.40:5000;"
       //"applicationUrl": "http://Gym.useitsmart.com;"
     },
     "Docker": {
