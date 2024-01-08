@@ -81,14 +81,14 @@ namespace Boilerplate.Application.Services
             }
             if (user.MembershipExpDate.Date < DateTime.Now.Date)
             {
-                var userUpdate = await _userRepository.GetById(user.Id); 
+                var userUpdate = await _userRepository.GetById(user.Id);
                 userUpdate.MembershipStatus = "Not Actice";
                 _userRepository.Update(userUpdate);
                 await _userRepository.SaveChangesAsync();
             }
             return user;
         }
-         
+
         public async Task<CheckEmailAndMobieNumber> CheckEmailAndMobieNumber(string Text)
         {
             CheckEmailAndMobieNumber checkEmailAndMobieNumber = new CheckEmailAndMobieNumber();
@@ -145,7 +145,7 @@ namespace Boilerplate.Application.Services
                     checkEmailAndMobieNumber.IsValid = false;
                 }
             }
-            return checkEmailAndMobieNumber; 
+            return checkEmailAndMobieNumber;
         }
 
 
@@ -169,10 +169,9 @@ namespace Boilerplate.Application.Services
         public async Task<GetUserDto> CreateUser(CreateUserDto dto)
         {
             var created = _userRepository.Create(_mapper.Map<User>(dto));
-             
-                created.PhotoUri = await _uploadService.UploadImageAsync(dto.PhotoUri); 
-            created.Password = BC.HashPassword(dto.Password);
 
+            created.PhotoUri = await _uploadService.UploadImageAsync(dto.PhotoUri);
+            created.Password = BC.HashPassword(dto.Password);
             _userRepository.Create(created);
             await _userRepository.SaveChangesAsync();
             return _mapper.Map<GetUserDto>(created);

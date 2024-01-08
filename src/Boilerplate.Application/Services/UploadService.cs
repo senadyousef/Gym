@@ -11,8 +11,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web; 
-using System.Drawing; 
+using System.Web;
+using System.Drawing;
 using System.Net;
 using System.Net.Http;
 
@@ -28,184 +28,52 @@ namespace Boilerplate.Application.Services
             public bool IsTestEnviroment { get; set; }
 
         }
+
         public UploadService(IOptions<UploadOptions> config)
         {
             _config = config.Value;
         }
-         
-        public async Task<string>  UploadImageAsync(string Image)
+        public async Task<string> UploadImageAsync(string Image)
         {
-            string message = null;
-            string domain = "http://gym.useitsmart.com";
-            string username = "78281734";
-            string password = "Senad1979";
-            string folderPath = "webimages";
-            string imageUrl = Image; // Replace with your base64 image data
-
-            using (var webClient = new WebClient())
+            string result = string.Empty;
+            string imageName = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.TimeOfDay.ToString();
+            imageName = imageName.Replace(" ", "");
+            imageName = imageName.Replace(":", "");
+            imageName = imageName.Replace(".", "");
+            imageName = imageName + ".png";
+            try
             {
-                //webClient.Credentials = new NetworkCredential(username, password);
-
-                // Convert base64 string to byte array
-                byte[] imageBytes = Convert.FromBase64String(imageUrl);
-
-                // Upload the image to the server
-
-                try
+                // Remove the "data:image/png;base64," prefix if present
+                if (Image.StartsWith("data:image/png;base64,"))
                 {
-                    string ftpServerIp = "160.153.155.203"; // Replace with the actual IP address
-                    //string uploadUrl = $"ftp://{domain}/{folderPath}/image.png";
-                    string uploadUrl = $"ftp://{ftpServerIp}/{folderPath}/{"image.png"}";
-                    FtpWebRequest request = (FtpWebRequest)WebRequest.Create(uploadUrl);
-                    request.Method = WebRequestMethods.Ftp.UploadFile;
-                    request.Credentials = new NetworkCredential(username, password);
-
-                    // Set passive mode
-                    request.EnableSsl = true;
-
-                    request.UsePassive = true;
-
-                    using (Stream ftpStream = request.GetRequestStream())
-                    {
-                        ftpStream.Write(imageBytes, 0, imageBytes.Length);
-                    }
-
-                    //string uploadUrl = $"ftp://{domain}/{folderPath}/{"image.png"}";
-
-                   
-                    //webClient.UsePassive = true;
-
-                    // Upload the file
-                    webClient.UploadData(uploadUrl, "STOR", imageBytes);
-                    Console.WriteLine("Image uploaded successfully.");
-                    message = "Image uploaded successfully.";
+                    Image = Image.Substring("data:image/png;base64,".Length);
                 }
-                catch (Exception ex)
+
+                // Decode the base64 string to a byte array
+                byte[] imageBytes = Convert.FromBase64String(Image);
+
+                // Save the image file to the wwwroot directory
+                string wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages");
+                string imagePath = Path.Combine(wwwRootPath, imageName);
+
+                // Check if the wwwroot directory exists, create it if not
+                if (!Directory.Exists(wwwRootPath))
                 {
-                    Console.WriteLine($"Error uploading image: {ex.Message}");
-                    message = $"Error uploading image: {ex.Message}";
+                    Directory.CreateDirectory(wwwRootPath);
                 }
+
+                // Write the image bytes to the file
+                System.IO.File.WriteAllBytes(imagePath, imageBytes);
+
+                result = "http://gym.useitsmart.com/webimages/" + imageName;
+            }
+            catch (Exception ex)
+            {
+                result =  "Error";
             }
 
-            //// Create a HttpClient with basic authentication
-            //using (var httpClient = new HttpClient())
-            //{
-            //    var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
-            //    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", credentials);
-
-            //    // Convert base64 string to byte array
-            //    byte[] imageBytes = Convert.FromBase64String(imageUrl);
-
-            //    // Upload the image to the server
-            //    try
-            //    {
-            //        // Construct the URL for uploading
-            //        //string uploadUrl = $"https://ftp.{domain}/{folderPath}/{"image.png"}";
-
-            //        string uploadUrl = $"ftp://{domain}/{folderPath}/{"image.png"}";
-
-            //        // Upload the file
-            //        webClient.UploadData(uploadUrl, "STOR", imageBytes);
-            //        Console.WriteLine("Image uploaded successfully.");
-            //        message = "Image uploaded successfully.";
-            //        // Create a MemoryStream from the byte array
-            //        //using (var stream = new MemoryStream(imageBytes))
-            //        //{
-            //        //    // Create a stream content for the file
-            //        //    using (var fileContent = new StreamContent(stream))
-            //        //    {
-            //        //        // Send a PUT request to the server
-            //        //        using (var response = await httpClient.PutAsync(uploadUrl, fileContent))
-            //        //        {
-            //        //            response.EnsureSuccessStatusCode();
-            //        //            Console.WriteLine("Image uploaded successfully.");
-            //        //            message = "Image uploaded successfully.";
-            //        //        }
-            //        //    }
-            //        //}
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine($"Error uploading image: {ex.Message}");
-            //        message = $"Error uploading image: {ex.Message}";
-            //    }
-            //}
-            return message;
-
-
+            return result;
         }
-
-        public string UploadPhoto(string base64Data)
-        {
-            //string apiKey = "YourApiKey";
-            //string apiSecret = "YourApiSecret";
-            //string apiUrl = "https://api.godaddy.com/v1/your/endpoint";
-
-            //using (HttpClient client = new HttpClient())
-            //{
-            //    // Set up headers with API key and secret
-            //    client.DefaultRequestHeaders.Add("Authorization", $"sso-key {apiKey}:{apiSecret}");
-
-            //    // Make a sample GET request (adjust for your specific API endpoint)
-            //    HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        string result = await response.Content.ReadAsStringAsync();
-            //        Console.WriteLine(result);
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
-            //    }
-            //}
-            return "";
-
-            //string message = string.Empty;
-            //string ftpServer = "http://gym.useitsmart.com/";
-            //string ftpUsername = "78281734";
-            //string ftpPassword = "Senad1979";
-            //string targetFolder = "webimages/";
-            //string base64Image = base64Data;
-
-            //// Step 1: Convert Base64 string to byte array
-            //byte[] imageBytes = Convert.FromBase64String(base64Image);
-
-            //// Step 2: Save the byte array to a file
-            //string fileName = "image.png"; // You can change the file name as needed
-            //string filePath = Path.Combine(targetFolder, fileName);
-            //File.WriteAllBytes(ftpServer + filePath, imageBytes);
-
-            //// Step 3: Upload the file to GoDaddy server using FTP 
-            //using (WebClient client = new WebClient())
-            //{
-            //    client.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
-            //    client.UploadFile($"ftp://{ftpServer}/{targetFolder}/{fileName}", WebRequestMethods.Ftp.UploadFile, filePath);
-            //}
-            //return message;
-        }
-
-        //public bool SaveImage(string ImgStr, string ImgName)
-        //{ 
-        //   String path = HttpContext.Current.Server.MapPath(@"wwwroot\WebImages"); //Path
-
-        //    //Check if directory exist
-        //    if (!System.IO.Directory.Exists(path))
-        //    {
-        //        System.IO.Directory.CreateDirectory(path); //Create directory if it doesn't exist
-        //    }
-
-        //    string imageName = ImgName + ".jpg";
-
-        //    //set the image path
-        //    string imgPath = Path.Combine(path, imageName);
-
-        //    byte[] imageBytes = Convert.FromBase64String(ImgStr);
-
-        //    File.WriteAllBytes(imgPath, imageBytes);
-
-        //    return true;
-        //}
 
         public string UploadAsync(UploadRequest request)
         {
@@ -246,7 +114,7 @@ namespace Boilerplate.Application.Services
                     fullPath = NormalizePath(Path.Combine("https://elasticbeanstalk-eu-west-1-827454755467.s3.eu-west-1.amazonaws.com/Files", folder));
                     dbPath = NormalizePath(Path.Combine(fullPath, fileName));
                     using (var client = new AmazonS3Client("AKIA4BKBFSKFUIWAN2VM", "DLV1jFPtyHBxSo74k0sa24wlgKNUy5cW0pcUbjqg", RegionEndpoint.EUWest1))
-                    { 
+                    {
                         var uploadRequest = new TransferUtilityUploadRequest
                         {
                             InputStream = streamData,
@@ -272,23 +140,20 @@ namespace Boilerplate.Application.Services
         private static string numberPattern = " ({0})";
         private UploadOptions _config;
 
-
-
-
         public string NormalizePath(string path)
         {
-
             // If on Windows...
             //if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                if (false)
+            if (false)
 
-                    // Replace any / with \
-                    return path?.Replace('/', '\\').Trim();
+                // Replace any / with \
+                return path?.Replace('/', '\\').Trim();
             // If on Linux/Mac
             else
                 // Replace any \ with /
                 return path?.Replace('\\', '/').Trim();
         }
+
         public static string NextAvailableFilename(string path)
         {
             // Short-cut if already available

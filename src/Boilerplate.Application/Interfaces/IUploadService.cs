@@ -10,8 +10,7 @@ namespace Boilerplate.Application.Interfaces
 {
     public interface IUploadService
     {
-        string UploadAsync(UploadRequest request);
-        string UploadPhoto(string base64Data);
+        string UploadAsync(UploadRequest request); 
         Task<string> UploadImageAsync(string Image);
     }
 }
