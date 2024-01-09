@@ -26,23 +26,20 @@ namespace Boilerplate.Application.Services
             _currentUserService = currentUserService;
         }
         public async Task<GetItemPhotosDto> CreateItemPhotos(CreateItemPhotosDto ItemPhotos)
-        {
-
+        { 
             var newItemPhotos = new ItemPhotos
             {
                 ItemsId = ItemPhotos.ItemsId,
                 PhotoUri = ItemPhotos.PhotoUri,
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
-            };
-
+            }; 
             var ItemPhotosDto = new GetItemPhotosDto
             { 
                 Id = newItemPhotos.Id,
                 ItemsId = ItemPhotos.ItemsId,
                 PhotoUri = ItemPhotos.PhotoUri,
-            };
-
+            }; 
             _ItemPhotosRepository.Create(newItemPhotos);
             await _ItemPhotosRepository.SaveChangesAsync();
             return ItemPhotosDto;
@@ -60,8 +57,7 @@ namespace Boilerplate.Application.Services
 
             return true;
         }
-
-
+         
         public async Task<GetItemPhotosDto> GetItemPhotosById(int id)
         {
             var ids = _currentUserService.UserId;
@@ -76,7 +72,7 @@ namespace Boilerplate.Application.Services
                 PhotoUri = subCategories.PhotoUri,
             };
             return subCategoriesDto;
-        }
+        } 
 
         public async Task<GetItemPhotosDto> UpdateItemPhotos(int id, UpdateItemPhotosDto updatedItemPhotos)
         {
@@ -87,34 +83,28 @@ namespace Boilerplate.Application.Services
             originalItemPhotos.PhotoUri = updatedItemPhotos.PhotoUri;
 
             var ItemPhotosDto = new GetItemPhotosDto
-            {
-
+            { 
                 Id = originalItemPhotos.Id,
                 ItemsId = originalItemPhotos.ItemsId,
                 PhotoUri = originalItemPhotos.PhotoUri,
             };
             _ItemPhotosRepository.Update(originalItemPhotos);
-            await _ItemPhotosRepository.SaveChangesAsync();
-
+            await _ItemPhotosRepository.SaveChangesAsync(); 
             return ItemPhotosDto;
         }
 
         public async Task<PaginatedList<GetItemPhotosDto>> GetAllItemPhotos(GetItemPhotosFilter filter)
         {
-            var id = _currentUserService.UserId;
-
+            var id = _currentUserService.UserId; 
             filter ??= new GetItemPhotosFilter();
-            IQueryable<ItemPhotos> ItemPhotos = null;
-
+            IQueryable<ItemPhotos> ItemPhotos = null; 
             if (_currentUserService.Role == "SuperAdmin")
             {
                 ItemPhotos = _ItemPhotosRepository
                    .GetAll()
                    .Where(o => o.IsDisabled == false);
-            }
-
+            } 
             return await _mapper.ProjectTo<GetItemPhotosDto>(ItemPhotos).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
-        }
-
+        } 
     }
 }

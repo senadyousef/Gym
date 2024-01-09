@@ -11,7 +11,7 @@ namespace Boilerplate.Application.Interfaces
     public interface IUploadService
     {
         string UploadAsync(UploadRequest request); 
-        Task<string> UploadImageAsync(string Image);
+        Task<string> UploadImageAsync(UploadPhotoRequest photoRequest);
     }
 }
 
@@ -26,6 +26,13 @@ public class UploadRequest
     public string Extension { get; set; }
     public UploadType UploadType { get; set; }
     public byte[] Data { get; set; }
+}
+
+public class UploadPhotoRequest
+{ 
+    public string Extension { get; set; }
+    public string UploadType { get; set; }
+    public string Data { get; set; }
 }
 public enum UploadType : byte
 {

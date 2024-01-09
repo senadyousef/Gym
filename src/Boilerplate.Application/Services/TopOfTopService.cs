@@ -29,13 +29,7 @@ namespace Boilerplate.Application.Services
             _uploadService = uploadService;  
         }
         public async Task<GetTopOfTopDto> CreateTopOfTop(CreateTopOfTopDto TopOfTop)
-        {
-            foreach (var item in TopOfTop.UploadRequests)
-            {
-                TopOfTop.PhotoUri = _uploadService.UploadAsync(item);
-
-            }
-
+        { 
             var newTopOfTop = new TopOfTop
             { 
                 ItemId = TopOfTop.ItemId, 
@@ -49,21 +43,22 @@ namespace Boilerplate.Application.Services
                 PhotoUri = TopOfTop.PhotoUri,
                 IsDisabled = false,
             };
-          
- 
-            var TopOfTopDto = new GetTopOfTopDto
+
+            if (TopOfTop.UploadRequests != null)
             {
-
+                newTopOfTop.PhotoUri = await _uploadService.UploadImageAsync(TopOfTop.UploadRequests);
+            }
+            var TopOfTopDto = new GetTopOfTopDto
+            { 
                 Id = newTopOfTop.Id, 
-                ItemId = TopOfTop.ItemId,
-                ItemType = TopOfTop.ItemType,
-                DescriptionEn = TopOfTop.DescriptionEn,
-                NameAr = TopOfTop.NameAr,
-                DescriptionAr = TopOfTop.DescriptionAr,
-                NameEn = TopOfTop.NameEn,
-                Highlight = TopOfTop.Highlight,
-                PhotoUri = TopOfTop.PhotoUri,
-
+                ItemId = newTopOfTop.ItemId,
+                ItemType = newTopOfTop.ItemType,
+                DescriptionEn = newTopOfTop.DescriptionEn,
+                NameAr = newTopOfTop.NameAr,
+                DescriptionAr = newTopOfTop.DescriptionAr,
+                NameEn = newTopOfTop.NameEn,
+                Highlight = newTopOfTop.Highlight,
+                PhotoUri = newTopOfTop.PhotoUri, 
             };
 
             _TopOfTopRepository.Create(newTopOfTop);
@@ -92,8 +87,7 @@ namespace Boilerplate.Application.Services
             if (TopOfTop == null)
                 return null;
             var TopOfTopDto = new GetTopOfTopDto
-            {
-
+            { 
                 Id = TopOfTop.Id, 
                 ItemId = TopOfTop.ItemId,
                 ItemType = TopOfTop.ItemType,
@@ -119,7 +113,11 @@ namespace Boilerplate.Application.Services
             originalTopOfTop.DescriptionAr = updatedTopOfTop.DescriptionAr;  
             originalTopOfTop.DescriptionEn= updatedTopOfTop.DescriptionEn;  
             originalTopOfTop.Highlight= updatedTopOfTop.Highlight;  
-            originalTopOfTop.PhotoUri= updatedTopOfTop.PhotoUri;  
+            originalTopOfTop.PhotoUri= originalTopOfTop.PhotoUri;
+            if (updatedTopOfTop.UploadRequests != null)
+            {
+                originalTopOfTop.PhotoUri = await _uploadService.UploadImageAsync(updatedTopOfTop.UploadRequests);
+            }
 
             var TopOfTopDto = new GetTopOfTopDto
             {
@@ -140,22 +138,26 @@ namespace Boilerplate.Application.Services
             return TopOfTopDto;
         }
 
-        public async Task<PaginatedList<GetTopOfTopDto>> GetAllTopOfTop(GetTopOfTopFilter filter)
+        public async Task<PaginatedList<GetTopOfTopDto>> GetAllTopOfTopWithPageSize(GetTopOfTopFilter filter)
         {
             var id = _currentUserService.UserId;
-
             filter ??= new GetTopOfTopFilter();
             IQueryable<TopOfTop> TopOfTop = null;
-
-            //if (_currentUserService.Role == "SuperAdmin" || _currentUserService.Role == "Customer")
-            //{
-                TopOfTop = _TopOfTopRepository
-                   .GetAll()
-                   .Where(o => o.IsDisabled == false) 
-              .WhereIf(!string.IsNullOrEmpty(filter.ItemType), x => EF.Functions.Like(x.ItemType, $"%{filter.ItemType}%"));
-            //}
-              
+            TopOfTop = _TopOfTopRepository
+               .GetAll()
+               .Where(o => o.IsDisabled == false);
             return await _mapper.ProjectTo<GetTopOfTopDto>(TopOfTop).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
+        }
+
+        public async Task<AllList<GetTopOfTopDto>> GetAllTopOfTop(GetTopOfTopFilter filter)
+        {
+            var id = _currentUserService.UserId;
+            filter ??= new GetTopOfTopFilter();
+            IQueryable<TopOfTop> TopOfTop = null;
+            TopOfTop = _TopOfTopRepository
+               .GetAll()
+               .Where(o => o.IsDisabled == false);
+            return await _mapper.ProjectTo<GetTopOfTopDto>(TopOfTop).ToAllListAsync(filter.CurrentPage);
         }
 
     }

@@ -61,7 +61,8 @@ namespace Boilerplate.Application.Interfaces
         public PushToken PushToken { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
-        public UploadRequest UploadRequests { get; set; }
+        public string PhotoUri { get; set; }
+        public UploadPhotoRequest UploadRequests { get; set; }
     }
 
     public class UpdateChildrenDto
@@ -82,7 +83,8 @@ namespace Boilerplate.Application.Interfaces
         public PushToken PushToken { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
-        public UploadRequest UploadRequests { get; set; }
+        public string PhotoUri { get; set; }
+        public UploadPhotoRequest UploadRequests { get; set; }
     }
 
     public class GetChildrenFilter : PaginationInfoFilter

@@ -1,6 +1,7 @@
 ﻿
 using Boilerplate.Application.DTOs;
 using Boilerplate.Application.Interfaces;
+using Boilerplate.Application.Services;
 using Boilerplate.Domain.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +30,14 @@ namespace Boilerplate.Api.Controllers
         [HttpGet]
         [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
         public async Task<ActionResult<PaginatedList<GetTopOfTopDto>>> GetTopOfTop([FromQuery] GetTopOfTopFilter filter)
+        {
+            return Ok(await _TopOfTopervice.GetAllTopOfTopWithPageSize(filter));
+        }
+
+        [HttpGet]
+        [Route("getallTopOfTop")]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        public async Task<ActionResult<AllList<GetTopOfTopDto>>> GetAllTopOfTop([FromQuery] GetTopOfTopFilter filter)
         {
             return Ok(await _TopOfTopervice.GetAllTopOfTop(filter));
         }

@@ -48,12 +48,14 @@ namespace Boilerplate.Application.Services
                 MembershipStatus = Children.MembershipStatus,
                 MembershipExpDate = Children.MembershipExpDate,
                 MobilePhone = Children.MobilePhone,
-                PhotoUri = _uploadService.UploadAsync(Children.UploadRequests),
+                PhotoUri = Children.PhotoUri,
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
-
-
+            if (Children.UploadRequests != null)
+            {
+                newChildren.PhotoUri = await _uploadService.UploadImageAsync(Children.UploadRequests);
+            } 
             var ChildrenDto = new GetChildrenDto
             {
                 Id = newChildren.Id,
@@ -136,8 +138,12 @@ namespace Boilerplate.Application.Services
             originalChildren. MembershipStatus = updatedChildren.MembershipStatus;
             originalChildren. MembershipExpDate = updatedChildren.MembershipExpDate;
             originalChildren. MobilePhone = updatedChildren.MobilePhone;
-            originalChildren. PhotoUri = _uploadService.UploadAsync(updatedChildren.UploadRequests);
-  
+            originalChildren.PhotoUri = originalChildren.PhotoUri;
+            if (updatedChildren.UploadRequests != null)
+            {
+                originalChildren.PhotoUri = await _uploadService.UploadImageAsync(updatedChildren.UploadRequests);
+            }
+             
             var ChildrenDto = new GetChildrenDto
             {
 

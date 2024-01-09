@@ -64,6 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
+    <Folder Include="wwwroot\WebImages\Items\" />
+    <Folder Include="wwwroot\WebImages\Events\" />
+    <Folder Include="wwwroot\WebImages\News\" />
+    <Folder Include="wwwroot\WebImages\User\" />
     <!-- <Folder Include="wwwroot\**" /> -->
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +100,6 @@
   <ItemGroup>
     <Folder Include="Libs" />
     <Folder Include="Models" />
-    <Folder Include="wwwroot\WebImages\" />
     <Folder Include="Views\Account" />
     <Folder Include="Views\HomeView" /> 
     <Folder Include="Views\Shared" /> 

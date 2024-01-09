@@ -43,7 +43,7 @@ namespace Boilerplate.Application.Services
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
                 DescriptionAr = Events.DescriptionAr,
-
+                PhotoUri = Events.PhotoUri, 
                 Date = Events.Date,
                 From = Events.From,
                 To = Events.To,
@@ -56,7 +56,7 @@ namespace Boilerplate.Application.Services
 
             if (Events.UploadRequests != null)
             {
-                newEvents.PhotoUri = _uploadService.UploadAsync(Events.UploadRequests);
+                newEvents.PhotoUri = await _uploadService.UploadImageAsync(Events.UploadRequests);
             }
             var EventsDto = new GetEventsDto
             {
@@ -138,7 +138,11 @@ namespace Boilerplate.Application.Services
             originalEvents.Capacity = updatedEvents.Capacity;
             originalEvents.Booked = updatedEvents.Booked;
             originalEvents.Type = updatedEvents.Type;
-            originalEvents.PhotoUri = _uploadService.UploadAsync(updatedEvents.UploadRequests);
+            originalEvents.PhotoUri = updatedEvents.PhotoUri;
+            if (updatedEvents.UploadRequests != null)
+            {
+                originalEvents.PhotoUri = await _uploadService.UploadImageAsync(updatedEvents.UploadRequests);
+            } 
 
             var EventsDto = new GetEventsDto
             {

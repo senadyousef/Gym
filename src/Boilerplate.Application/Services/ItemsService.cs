@@ -18,21 +18,22 @@ namespace Boilerplate.Application.Services
     {
         private IUploadService _uploadService;
         private IItemsRepository _ItemsRepository;
+        private IItemPhotosRepository _itemPhotosRepository;
         private IMapper _mapper;
         private ICurrentUserService _currentUserService;
 
         public ItemsService(IItemsRepository ItemsRepository, IMapper mapper,
-            ICurrentUserService currentUserService,
+            ICurrentUserService currentUserService, IItemPhotosRepository itemPhotosRepository,
              IUploadService uploadService)
         {
             _ItemsRepository = ItemsRepository;
             _mapper = mapper;
             _currentUserService = currentUserService;
             _uploadService = uploadService;
+            _itemPhotosRepository = itemPhotosRepository;
         }
         public async Task<GetItemsDto> CreateItems(CreateItemsDto Items)
-        {
-
+        { 
             var newItems = new Items
             {
                 NameEn = Items.NameEn,
@@ -42,14 +43,18 @@ namespace Boilerplate.Application.Services
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
-            newItems.ItemPhotos = new List<ItemPhotos>();
-
-            foreach (var item in Items.UploadRequests)
+            if (Items.UploadRequests != null)
             {
-                newItems.ItemPhotos.Add(new ItemPhotos()
+                foreach (var item in Items.UploadRequests)
                 {
-                    PhotoUri = _uploadService.UploadAsync(item),
-                });
+                    newItems.ItemPhotos.Add(new ItemPhotos()
+                    {
+                        PhotoUri = await _uploadService.UploadImageAsync(item),
+                        ItemsId = newItems.Id, 
+                        CreatedOn = DateTime.Now,
+                        IsDisabled = false
+                    });
+                }
             }
 
             var ItemsDto = new GetItemsDto
@@ -63,6 +68,22 @@ namespace Boilerplate.Application.Services
 
             _ItemsRepository.Create(newItems);
             await _ItemsRepository.SaveChangesAsync();
+            if (newItems.ItemPhotos.Count > 0)
+            {
+                for (int i = 0; i < newItems.ItemPhotos.Count; i++)
+                {
+                    var itemPhotos = new ItemPhotos
+                    {
+                        ItemsId = newItems.Id,
+                        PhotoUri = newItems.ItemPhotos[i].PhotoUri, 
+                        CreatedOn = DateTime.Now,
+                        IsDisabled = false
+                    };
+                    _itemPhotosRepository.Create(itemPhotos);
+                    await _itemPhotosRepository.SaveChangesAsync(); 
+                }
+            }
+
             return ItemsDto;
         }
         public async Task<bool> DeleteItems(int id)
@@ -113,21 +134,22 @@ namespace Boilerplate.Application.Services
             originalItems.Price = updatedItems.Price;
             originalItems.Description = updatedItems.Description;
 
-            originalItems.ItemPhotos = new List<ItemPhotos>();
-            foreach (var item in updatedItems.UploadRequests)
+            if (updatedItems.UploadRequests != null)
             {
-                if (item.Data != null)
+                foreach (var item in updatedItems.UploadRequests)
                 {
                     originalItems.ItemPhotos.Add(new ItemPhotos()
                     {
-                        PhotoUri = _uploadService.UploadAsync(item),
+                        PhotoUri = await _uploadService.UploadImageAsync(item),
+                        ItemsId = originalItems.Id,
+                        CreatedOn = DateTime.Now,
+                        IsDisabled = false
                     });
                 }
             }
 
             var ItemsDto = new GetItemsDto
-            {
-
+            { 
                 Id = originalItems.Id,
                 NameEn = originalItems.NameEn,
                 NameAr = originalItems.NameAr,

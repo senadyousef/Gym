@@ -17,6 +17,7 @@ namespace Boilerplate.Infrastructure.Context
         public DbSet<Branches> Branches { get; set; }
         public DbSet<PersonalTrainersClasses> PersonalTrainersClasses { get; set; }
         public DbSet<Children> Children { get; set; }
+        public DbSet<News> News { get; set; }
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -53,7 +53,7 @@ namespace Boilerplate.Application.Interfaces
         public string NameEn { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionAr { get; set; }
-        public UploadRequest UploadRequests { get; set; }
+        public UploadPhotoRequest UploadRequests { get; set; }
         public string PhotoUri { get; set; }
         public DateTime Date { get; set; }
         public string From { get; set; }
@@ -72,7 +72,7 @@ namespace Boilerplate.Application.Interfaces
         public string NameEn { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionAr { get; set; }
-        public UploadRequest UploadRequests { get; set; }
+        public UploadPhotoRequest UploadRequests { get; set; }
         public string PhotoUri { get; set; }
         public DateTime Date { get; set; }
         public string From { get; set; }

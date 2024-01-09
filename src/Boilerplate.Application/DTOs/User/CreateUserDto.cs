@@ -19,7 +19,7 @@ namespace Boilerplate.Application.DTOs.User
         public string MembershipStatus { get; set; }
         public DateTime MembershipExpDate { get; set; }
         public string MobilePhone { get; set; }   
-        public UploadRequest UploadRequests { get; set; } 
+        public UploadPhotoRequest UploadRequests { get; set; } 
         public string PhotoUri { get; set; } 
     }
 }

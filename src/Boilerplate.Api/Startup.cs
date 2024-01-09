@@ -90,6 +90,10 @@ namespace Boilerplate.Api
             //Children
             services.AddScoped<IChildrenRepository, ChildrenRepository>();
             services.AddScoped<IChildrenService, ChildrenService>();
+            
+            //News
+            services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<INewsService, NewsService>();
               
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 

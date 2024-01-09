@@ -39,8 +39,8 @@ namespace Boilerplate.Application.Interfaces
         public string NameAr { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public List<ItemPhotos> ItemPhotos { get; set; } 
-        public List<UploadRequest> UploadRequests { get; set; }
+        public List<ItemPhotos> ItemPhotos { get; set; }
+        public List<UploadPhotoRequest> UploadRequests { get; set; }
     }
 
     public class UpdateItemsDto
@@ -51,7 +51,7 @@ namespace Boilerplate.Application.Interfaces
         public decimal Price { get; set; }
         public string Description { get; set; }
         public List<ItemPhotos> ItemPhotos { get; set; }
-        public List<UploadRequest> UploadRequests { get; set; }
+        public List<UploadPhotoRequest> UploadRequests { get; set; }
     }
 
     public class GetItemsFilter : PaginationInfoFilter

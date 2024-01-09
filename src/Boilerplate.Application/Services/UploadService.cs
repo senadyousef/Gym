@@ -33,43 +33,67 @@ namespace Boilerplate.Application.Services
         {
             _config = config.Value;
         }
-        public async Task<string> UploadImageAsync(string Image)
+        public async Task<string> UploadImageAsync(UploadPhotoRequest photoRequest)
         {
             string result = string.Empty;
+            string wwwRootPath = string.Empty;
             string imageName = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.TimeOfDay.ToString();
             imageName = imageName.Replace(" ", "");
             imageName = imageName.Replace(":", "");
             imageName = imageName.Replace(".", "");
-            imageName = imageName + ".png";
+            string image = string.Empty;
             try
             {
-                // Remove the "data:image/png;base64," prefix if present
-                if (Image.StartsWith("data:image/png;base64,"))
+                if (photoRequest.Data.StartsWith("data:image/png;base64,"))
                 {
-                    Image = Image.Substring("data:image/png;base64,".Length);
+                    image = photoRequest.Data.Substring("data:image/png;base64,".Length);
+                }
+                else if (photoRequest.Data.StartsWith("data:image/jpeg;base64,"))
+                {
+                    image = photoRequest.Data.Substring("data:image/jpeg;base64,".Length);
+                }
+                else if (photoRequest.Data.StartsWith("data:image/jpg;base64,"))
+                {
+                    image = photoRequest.Data.Substring("data:image/jpg;base64,".Length);
+                }
+                else
+                {
+                    image = photoRequest.Data;
+                }
+                imageName = photoRequest.UploadType + "_" + imageName + "." + photoRequest.Extension;
+                if (photoRequest.UploadType == "User")
+                {
+                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/User");
+                    result = "http://gym.useitsmart.com/webimages/User/" + imageName;
+                }
+                if (photoRequest.UploadType == "Events")
+                {
+                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/Events");
+                    result = "http://gym.useitsmart.com/webimages/Events/" + imageName;
+                }
+                if (photoRequest.UploadType == "Items")
+                {
+                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/Items");
+                    result = "http://gym.useitsmart.com/webimages/Items/" + imageName;
+                }
+                if (photoRequest.UploadType == "News")
+                {
+                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/News");
+                    result = "http://gym.useitsmart.com/webimages/News/" + imageName;
                 }
 
-                // Decode the base64 string to a byte array
-                byte[] imageBytes = Convert.FromBase64String(Image);
-
-                // Save the image file to the wwwroot directory
-                string wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages");
+                byte[] imageBytes = Convert.FromBase64String(image);
                 string imagePath = Path.Combine(wwwRootPath, imageName);
-
-                // Check if the wwwroot directory exists, create it if not
                 if (!Directory.Exists(wwwRootPath))
                 {
                     Directory.CreateDirectory(wwwRootPath);
                 }
-
-                // Write the image bytes to the file
                 System.IO.File.WriteAllBytes(imagePath, imageBytes);
 
-                result = "http://gym.useitsmart.com/webimages/" + imageName;
             }
             catch (Exception ex)
             {
-                result =  "Error";
+                result = "Error";
             }
 
             return result;

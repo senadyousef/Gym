@@ -9,16 +9,9 @@ using System.Threading.Tasks;
 
 namespace Boilerplate.Domain.Entities
 {
-    public class TopOfTop : Entity
+    public class News : Entity
     {
-        #region Parameters  
-        [Required] 
-        public int ItemId { get; set; } 
-        [Required]
-        public string ItemType { get; set; } 
-        [Required]
-        public string NameEn { get; set; } 
-        public string NameAr { get; set; } 
+        #region Parameters   
         [Required]
         public string DescriptionEn { get; set; } 
         public string DescriptionAr { get; set; } 

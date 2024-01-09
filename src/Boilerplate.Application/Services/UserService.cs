@@ -170,7 +170,10 @@ namespace Boilerplate.Application.Services
         {
             var created = _userRepository.Create(_mapper.Map<User>(dto));
 
-            created.PhotoUri = await _uploadService.UploadImageAsync(dto.PhotoUri);
+            if (dto.UploadRequests != null)
+            {
+                created.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
+            } 
             created.Password = BC.HashPassword(dto.Password);
             _userRepository.Create(created);
             await _userRepository.SaveChangesAsync();
@@ -207,8 +210,12 @@ namespace Boilerplate.Application.Services
             user.Role = dto.Role;
             user.BOD = dto.BOD;
             user.MembershipStatus = dto.MembershipStatus;
-            user.MembershipExpDate = dto.MembershipExpDate;
-            user.PhotoUri = _uploadService.UploadAsync(dto.UploadRequests);
+            user.MembershipExpDate = dto.MembershipExpDate; 
+            user.PhotoUri = user.PhotoUri; 
+            if (dto.UploadRequests != null)
+            {
+                user.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
+            } 
 
             if (!string.IsNullOrEmpty(dto.Password))
                 user.Password = BC.HashPassword(dto.Password);
