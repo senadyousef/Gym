@@ -14,7 +14,8 @@ namespace Boilerplate.Domain.Entities
         #region Parameters   
         [Required]
         public string DescriptionEn { get; set; } 
-        public string DescriptionAr { get; set; } 
+        public string DescriptionAr { get; set; }
+        public DateTime NewsDate { get; set; }
         public string Highlight { get; set; } 
         public string PhotoUri { get; set; }
         #endregion

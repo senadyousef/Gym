@@ -48,9 +48,13 @@ namespace Boilerplate.Application.Services
             {
                 newTopOfTop.PhotoUri = await _uploadService.UploadImageAsync(TopOfTop.UploadRequests);
             }
+             
+            _TopOfTopRepository.Create(newTopOfTop);
+            await _TopOfTopRepository.SaveChangesAsync();
+
             var TopOfTopDto = new GetTopOfTopDto
-            { 
-                Id = newTopOfTop.Id, 
+            {
+                Id = newTopOfTop.Id,
                 ItemId = newTopOfTop.ItemId,
                 ItemType = newTopOfTop.ItemType,
                 DescriptionEn = newTopOfTop.DescriptionEn,
@@ -58,11 +62,9 @@ namespace Boilerplate.Application.Services
                 DescriptionAr = newTopOfTop.DescriptionAr,
                 NameEn = newTopOfTop.NameEn,
                 Highlight = newTopOfTop.Highlight,
-                PhotoUri = newTopOfTop.PhotoUri, 
+                PhotoUri = newTopOfTop.PhotoUri,
             };
 
-            _TopOfTopRepository.Create(newTopOfTop);
-            await _TopOfTopRepository.SaveChangesAsync();
             return TopOfTopDto;
         }
         public async Task<bool> DeleteTopOfTop(int id)

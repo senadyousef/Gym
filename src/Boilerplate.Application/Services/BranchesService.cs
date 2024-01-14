@@ -40,16 +40,16 @@ namespace Boilerplate.Application.Services
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             }; 
+             
+            _BranchesRepository.Create(newBranches);
+            await _BranchesRepository.SaveChangesAsync();
 
             var BranchesDto = new GetBranchesDto
             {
                 Id = newBranches.Id,
                 NameEn = Branches.NameEn,
-                NameAr = Branches.NameAr, 
+                NameAr = Branches.NameAr,
             };
-
-            _BranchesRepository.Create(newBranches);
-            await _BranchesRepository.SaveChangesAsync();
             return BranchesDto;
         }
         public async Task<bool> DeleteBranches(int id)

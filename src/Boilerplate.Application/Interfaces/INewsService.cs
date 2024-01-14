@@ -25,6 +25,7 @@ namespace Boilerplate.Application.Interfaces
         public int Id { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionAr { get; set; }
+        public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
     }
@@ -32,6 +33,7 @@ namespace Boilerplate.Application.Interfaces
     {
         public string DescriptionEn { get; set; }
         public string DescriptionAr { get; set; }
+        public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
         public UploadPhotoRequest UploadRequests { get; set; }
@@ -42,6 +44,7 @@ namespace Boilerplate.Application.Interfaces
         public int Id { get; set; }
         public string DescriptionEn { get; set; }
         public string DescriptionAr { get; set; }
+        public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
         public UploadPhotoRequest UploadRequests { get; set; }
@@ -51,6 +54,7 @@ namespace Boilerplate.Application.Interfaces
     {
         public string DescriptionEn { get; set; }
         public string DescriptionAr { get; set; }
+        public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
     } 

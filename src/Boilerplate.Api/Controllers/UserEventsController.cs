@@ -5,6 +5,7 @@ using Boilerplate.Domain.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using System;
 using System.Threading.Tasks;
 
@@ -59,6 +60,10 @@ namespace Boilerplate.Api.Controllers
         public async Task<ActionResult<GetUserEventsDto>> Create([FromBody] CreateUserEventsDto dto)
         {
             var newUserEvents = await _UserEventservice.CreateUserEvents(dto);
+            if (newUserEvents == null)
+            {
+                return BadRequest(new { message = "This class is already booked." });
+            }
             return CreatedAtAction(nameof(GetUserEventsById), new { id = newUserEvents.Id }, newUserEvents);
         }
 

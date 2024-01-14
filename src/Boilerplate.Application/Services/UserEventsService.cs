@@ -32,6 +32,16 @@ namespace Boilerplate.Application.Services
         }
         public async Task<GetUserEventsDto> CreateUserEvents(CreateUserEventsDto UserEvents)
         {
+            UserEvents _UserEvents = null;
+            _UserEvents = _UserEventsRepository
+              .GetAll()
+              .Where(o => o.UserId == UserEvents.UserId)
+              .Where(o => o.EventsId == UserEvents.EventsId)
+              .Where(o => o.IsDisabled == false).FirstOrDefault();
+            if (_UserEvents != null)
+            {
+                return null;
+            }
             var newUserEvents = new UserEvents
             {
                 UserId = UserEvents.UserId,
@@ -39,6 +49,9 @@ namespace Boilerplate.Application.Services
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
+              
+            _UserEventsRepository.Create(newUserEvents);
+            await _UserEventsRepository.SaveChangesAsync();
 
             var UserEventsDto = new GetUserEventsDto
             {
@@ -46,8 +59,6 @@ namespace Boilerplate.Application.Services
                 EventsId = UserEvents.EventsId,
             };
 
-            _UserEventsRepository.Create(newUserEvents);
-            await _UserEventsRepository.SaveChangesAsync();
             return UserEventsDto;
         }
         public async Task<bool> DeleteUserEvents(int id)

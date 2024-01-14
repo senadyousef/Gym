@@ -23,8 +23,9 @@ namespace Boilerplate.Application.Interfaces
     public class GetEventsByDates
     {
         public DateTime Date { get; set; }
-        public bool Event { get; set; }
+        public bool Event { get; set; } 
         public bool Booking { get; set; }
+        public int EventId { get; set; }
     }
 
     public class GetEventsDto

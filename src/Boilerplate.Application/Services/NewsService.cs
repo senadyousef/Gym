@@ -34,6 +34,7 @@ namespace Boilerplate.Application.Services
             {
                 DescriptionEn = News.DescriptionEn,
                 DescriptionAr = News.DescriptionAr,
+                NewsDate = News.NewsDate,
                 Highlight = News.Highlight,
                 CreatedOn = DateTime.Now,
                 PhotoUri = News.PhotoUri,
@@ -44,17 +45,20 @@ namespace Boilerplate.Application.Services
             {
                 newNews.PhotoUri = await _uploadService.UploadImageAsync(News.UploadRequests);
             }
+            
+            _NewsRepository.Create(newNews);
+            await _NewsRepository.SaveChangesAsync();
+
             var NewsDto = new GetNewsDto
             {
                 Id = newNews.Id,
                 DescriptionEn = newNews.DescriptionEn,
                 DescriptionAr = newNews.DescriptionAr,
+                NewsDate = newNews.NewsDate,
                 Highlight = newNews.Highlight,
                 PhotoUri = newNews.PhotoUri,
             };
 
-            _NewsRepository.Create(newNews);
-            await _NewsRepository.SaveChangesAsync();
             return NewsDto;
         }
         public async Task<bool> DeleteNews(int id)
@@ -83,6 +87,7 @@ namespace Boilerplate.Application.Services
                 Id = News.Id,
                 DescriptionEn = News.DescriptionEn,
                 DescriptionAr = News.DescriptionAr,
+                NewsDate = News.NewsDate,
                 Highlight = News.Highlight,
                 PhotoUri = News.PhotoUri,
             };
@@ -96,6 +101,7 @@ namespace Boilerplate.Application.Services
 
             originalNews.DescriptionAr = updatedNews.DescriptionAr;
             originalNews.DescriptionEn = updatedNews.DescriptionEn;
+            originalNews.NewsDate = updatedNews.NewsDate;
             originalNews.Highlight = updatedNews.Highlight;
             originalNews.PhotoUri = originalNews.PhotoUri;
             if (updatedNews.UploadRequests != null)
@@ -109,6 +115,7 @@ namespace Boilerplate.Application.Services
                 Id = originalNews.Id,
                 DescriptionEn = originalNews.DescriptionEn,
                 DescriptionAr = originalNews.DescriptionAr,
+                NewsDate = originalNews.NewsDate,
                 Highlight = originalNews.Highlight,
                 PhotoUri = originalNews.PhotoUri,
             };

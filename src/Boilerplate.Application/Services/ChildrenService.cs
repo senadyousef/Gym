@@ -56,6 +56,10 @@ namespace Boilerplate.Application.Services
             {
                 newChildren.PhotoUri = await _uploadService.UploadImageAsync(Children.UploadRequests);
             } 
+            
+            _ChildrenRepository.Create(newChildren);
+            await _ChildrenRepository.SaveChangesAsync();
+
             var ChildrenDto = new GetChildrenDto
             {
                 Id = newChildren.Id,
@@ -74,8 +78,6 @@ namespace Boilerplate.Application.Services
                 PhotoUri = newChildren.PhotoUri,
             };
 
-            _ChildrenRepository.Create(newChildren);
-            await _ChildrenRepository.SaveChangesAsync();
             return ChildrenDto;
         }
         public async Task<bool> DeleteChildren(int id)

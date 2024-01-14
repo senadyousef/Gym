@@ -42,20 +42,10 @@ namespace Boilerplate.Application.Services
                 Description = Items.Description,
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
-            };
-            if (Items.UploadRequests != null)
-            {
-                foreach (var item in Items.UploadRequests)
-                {
-                    newItems.ItemPhotos.Add(new ItemPhotos()
-                    {
-                        PhotoUri = await _uploadService.UploadImageAsync(item),
-                        ItemsId = newItems.Id, 
-                        CreatedOn = DateTime.Now,
-                        IsDisabled = false
-                    });
-                }
-            }
+            }; 
+             
+            _ItemsRepository.Create(newItems);
+            await _ItemsRepository.SaveChangesAsync();
 
             var ItemsDto = new GetItemsDto
             {
@@ -66,24 +56,22 @@ namespace Boilerplate.Application.Services
                 Description = Items.Description
             };
 
-            _ItemsRepository.Create(newItems);
-            await _ItemsRepository.SaveChangesAsync();
-            if (newItems.ItemPhotos.Count > 0)
+            if (Items.UploadRequests != null)
             {
-                for (int i = 0; i < newItems.ItemPhotos.Count; i++)
+                foreach (var item in Items.UploadRequests)
                 {
                     var itemPhotos = new ItemPhotos
                     {
+                        PhotoUri = await _uploadService.UploadImageAsync(item),
                         ItemsId = newItems.Id,
-                        PhotoUri = newItems.ItemPhotos[i].PhotoUri, 
                         CreatedOn = DateTime.Now,
                         IsDisabled = false
                     };
+                     
                     _itemPhotosRepository.Create(itemPhotos);
-                    await _itemPhotosRepository.SaveChangesAsync(); 
+                    await _itemPhotosRepository.SaveChangesAsync();
                 }
-            }
-
+            }  
             return ItemsDto;
         }
         public async Task<bool> DeleteItems(int id)

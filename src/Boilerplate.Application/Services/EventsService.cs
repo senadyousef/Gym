@@ -58,6 +58,10 @@ namespace Boilerplate.Application.Services
             {
                 newEvents.PhotoUri = await _uploadService.UploadImageAsync(Events.UploadRequests);
             }
+             
+            _EventsRepository.Create(newEvents);
+            await _EventsRepository.SaveChangesAsync();
+
             var EventsDto = new GetEventsDto
             {
                 UserId = Events.UserId,
@@ -75,8 +79,6 @@ namespace Boilerplate.Application.Services
                 Type = Events.Type,
             };
 
-            _EventsRepository.Create(newEvents);
-            await _EventsRepository.SaveChangesAsync();
             return EventsDto;
         }
         public async Task<bool> DeleteEvents(int id)
@@ -231,6 +233,7 @@ namespace Boilerplate.Application.Services
                         getEventsByDates.Date = date;
                         getEventsByDates.Event = true;
                         getEventsByDates.Booking = false;
+                        getEventsByDates.EventId = _Events.Id;
                         UserEvents userEvents = null;
                         userEvents = _userEventsRepository.GetAll()
                             .Where(x => x.IsDisabled == false)
