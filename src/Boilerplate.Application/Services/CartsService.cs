@@ -8,37 +8,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Amazon.S3.Model;
 
 
 namespace Boilerplate.Application.Services
 {
     public class CartsService : ICartsService
     {
-        private IUploadService _uploadService;
         private ICartsRepository _CartsRepository;
-        private IItemsRepository _itemsRepository;
         private IMapper _mapper;
         private ICurrentUserService _currentUserService;
+        private IBillRepository _billRepository;
 
         public CartsService(ICartsRepository CartsRepository, IMapper mapper,
-            ICurrentUserService currentUserService, IItemsRepository itemsRepository,
-             IUploadService uploadService)
+            ICurrentUserService currentUserService, IBillRepository billRepository)
         {
             _CartsRepository = CartsRepository;
             _mapper = mapper;
             _currentUserService = currentUserService;
-            _uploadService = uploadService;
-            _itemsRepository = itemsRepository;
+            _billRepository = billRepository;
         }
         public async Task<GetCartsDto> CreateCarts(CreateCartsDto Carts)
         {
+            IQueryable<Bill> Bill = null;
+
+            Bill = _billRepository
+               .GetAll()
+               .Where(o => o.IsDisabled == false)
+               .Where(o => o.UserId == Carts.UserId)
+               .Where(o => o.Status == "Open"); 
+
             var newCarts = new Carts
             {
                 UserId = Carts.UserId,
                 ItemsId = Carts.ItemsId,
+                BillId = Carts.BillId,
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
+
+            if (Bill.Count() > 0)
+            {
+                newCarts.BillId = Bill.First().Id;
+            }
+            else
+            {
+                var newBill = new Bill
+                {
+                    UserId = Carts.UserId,
+                    Amount = 0,
+                    Status = "Open",
+                    CreatedOn = DateTime.Now,
+                    IsDisabled = false
+                };
+
+                _billRepository.Create(newBill);
+                await _billRepository.SaveChangesAsync();
+
+                var BillDto = new GetBillDto
+                {
+                    Id = newBill.Id,
+                    UserId = newBill.UserId,
+                    Amount = newBill.Amount,
+                    Status = newBill.Status,
+                };
+                newCarts.BillId = BillDto.Id;
+            }
 
             _CartsRepository.Create(newCarts);
             await _CartsRepository.SaveChangesAsync();
@@ -48,6 +83,7 @@ namespace Boilerplate.Application.Services
                 Id = newCarts.Id,
                 UserId = Carts.UserId,
                 ItemsId = Carts.ItemsId,
+                BillId = newCarts.BillId,
             };
             return CartsDto;
         }
@@ -77,6 +113,7 @@ namespace Boilerplate.Application.Services
                 Id = Carts.Id,
                 UserId = Carts.UserId,
                 ItemsId = Carts.ItemsId,
+                BillId = Carts.BillId,
             };
             return CartsDto;
         }
@@ -88,12 +125,14 @@ namespace Boilerplate.Application.Services
 
             originalCarts.UserId = updatedCarts.UserId;
             originalCarts.ItemsId = updatedCarts.ItemsId;
+            originalCarts.BillId = updatedCarts.BillId;
 
             var CartsDto = new GetCartsDto
             {
                 Id = originalCarts.Id,
                 UserId = originalCarts.UserId,
                 ItemsId = originalCarts.ItemsId,
+                BillId = originalCarts.BillId,
             };
             _CartsRepository.Update(originalCarts);
             await _CartsRepository.SaveChangesAsync();
@@ -125,10 +164,10 @@ namespace Boilerplate.Application.Services
                .GetAll()
                .Where(o => o.IsDisabled == false)
                .Where(o => o.UserId == filter.UserId || filter.UserId == 0)
-               .Where(o => o.ItemsId == filter.ItemsId || filter.ItemsId == 0) ;
+               .Where(o => o.ItemsId == filter.ItemsId || filter.ItemsId == 0);
 
             return await _mapper.ProjectTo<GetCartsDto>(Carts).ToAllListAsync(filter.CurrentPage);
-        } 
+        }
 
         //public void De()
         //{

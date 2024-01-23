@@ -21,6 +21,7 @@ namespace Boilerplate.Infrastructure.Context
         public DbSet<Gallery> Gallery { get; set; }
         public DbSet<UserItems> UserItems { get; set; }
         public DbSet<Carts> Carts { get; set; }
+        public DbSet<Bill> Bill { get; set; }
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -19,6 +19,10 @@ namespace Boilerplate.Domain.Entities
         [Required]
         [ForeignKey(nameof(Items))]
         public int ItemsId { get; set; }
+        
+        [Required]
+        [ForeignKey(nameof(Bill))]
+        public int BillId { get; set; }
         #endregion
 
         #region Relations  

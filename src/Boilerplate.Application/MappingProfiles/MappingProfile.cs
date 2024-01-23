@@ -50,6 +50,9 @@ namespace Boilerplate.Application.MappingProfiles
             
             // Carts
             CreateMap<Carts, GetCartsDto>().ReverseMap();
+            
+            // Bill
+            CreateMap<Bill, GetBillDto>().ReverseMap();
         }
     }
 }

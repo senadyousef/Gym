@@ -106,6 +106,10 @@ namespace Boilerplate.Api
             //Carts 
             services.AddScoped<ICartsRepository, CartsRepository>();
             services.AddScoped<ICartsService, CartsService>();
+            
+            //Bill
+            services.AddScoped<IBillRepository, BillRepository>();
+            services.AddScoped<IBillService, BillService>();
               
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
