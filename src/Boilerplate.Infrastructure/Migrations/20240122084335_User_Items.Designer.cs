@@ -4,6 +4,7 @@ using Boilerplate.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boilerplate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240122084335_User_Items")]
+    partial class User_Items
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,48 +66,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Branches");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Carts", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisabledBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DisabledOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDisabled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ItemsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemsId");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Children", b =>
@@ -711,7 +671,7 @@ namespace Boilerplate.Infrastructure.Migrations
                             Email = "superadmin@ss.com",
                             IsDisabled = false,
                             MembershipExpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "$2a$11$6D4oziMzNN5EBcK5eBJed.1xR0P4CiaU9IWh48XVqcyIXMV.MO9bC",
+                            Password = "$2a$11$wpvRKIW4KCWnNEfXVrFc5eeJ/6Cdw73QDH80.63V/Iba3bBhUJO4W",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "SuperAdmin"
                         });
@@ -801,15 +761,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.HasIndex("ItemsId");
 
                     b.ToTable("UserItems");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Carts", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.Items", null)
-                        .WithMany("Carts")
-                        .HasForeignKey("ItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Children", b =>
@@ -909,8 +860,6 @@ namespace Boilerplate.Infrastructure.Migrations
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Items", b =>
                 {
-                    b.Navigation("Carts");
-
                     b.Navigation("ItemPhotos");
 
                     b.Navigation("UserItems");

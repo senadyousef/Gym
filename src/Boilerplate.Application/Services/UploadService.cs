@@ -61,26 +61,9 @@ namespace Boilerplate.Application.Services
                     image = photoRequest.Data;
                 }
                 imageName = photoRequest.UploadType + "_" + imageName + "." + photoRequest.Extension;
-                if (photoRequest.UploadType == "User")
-                {
-                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/User");
-                    result = "http://gym.useitsmart.com/webimages/User/" + imageName;
-                }
-                if (photoRequest.UploadType == "Events")
-                {
-                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/Events");
-                    result = "http://gym.useitsmart.com/webimages/Events/" + imageName;
-                }
-                if (photoRequest.UploadType == "Items")
-                {
-                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/Items");
-                    result = "http://gym.useitsmart.com/webimages/Items/" + imageName;
-                }
-                if (photoRequest.UploadType == "News")
-                {
-                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/News");
-                    result = "http://gym.useitsmart.com/webimages/News/" + imageName;
-                }
+
+                wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/" + photoRequest.UploadType);
+                result = "http://gym.useitsmart.com/webimages/" + photoRequest.UploadType + "/" + imageName; 
 
                 byte[] imageBytes = Convert.FromBase64String(image);
                 string imagePath = Path.Combine(wwwRootPath, imageName);

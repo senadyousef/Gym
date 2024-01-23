@@ -41,6 +41,15 @@ namespace Boilerplate.Application.MappingProfiles
 
             // News
             CreateMap<News, GetNewsDto>().ReverseMap();
+
+            // Gallery
+            CreateMap<Gallery, GetGalleryDto>().ReverseMap();
+
+            // User Items
+            CreateMap<UserItems, GetUserItemsDto>().ReverseMap();
+            
+            // Carts
+            CreateMap<Carts, GetCartsDto>().ReverseMap();
         }
     }
 }

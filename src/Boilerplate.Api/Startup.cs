@@ -94,6 +94,18 @@ namespace Boilerplate.Api
             //News
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<INewsService, NewsService>();
+
+            //Gallery
+            services.AddScoped<IGalleryRepository, GalleryRepository>();
+            services.AddScoped<IGalleryService, GalleryService>();
+
+            //User Items
+            services.AddScoped<IUserItemsRepository, UserItemsRepository>();
+            services.AddScoped<IUserItemsService, UserItemsService>();
+            
+            //Carts 
+            services.AddScoped<ICartsRepository, CartsRepository>();
+            services.AddScoped<ICartsService, CartsService>();
               
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 

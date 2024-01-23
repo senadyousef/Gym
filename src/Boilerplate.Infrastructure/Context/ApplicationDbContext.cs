@@ -18,6 +18,9 @@ namespace Boilerplate.Infrastructure.Context
         public DbSet<PersonalTrainersClasses> PersonalTrainersClasses { get; set; }
         public DbSet<Children> Children { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<Gallery> Gallery { get; set; }
+        public DbSet<UserItems> UserItems { get; set; }
+        public DbSet<Carts> Carts { get; set; }
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

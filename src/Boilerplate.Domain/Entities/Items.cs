@@ -25,6 +25,8 @@ namespace Boilerplate.Domain.Entities
 
         #region Relations 
         public List<ItemPhotos> ItemPhotos { get; set; } 
+        public List<UserItems> UserItems { get; set; } 
+        public List<Carts> Carts { get; set; } 
         #endregion
     }
 }
