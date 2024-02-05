@@ -23,14 +23,17 @@ namespace Boilerplate.Application.Interfaces
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int ItemsId { get; set; }
+        public int ItemsId { get; set; } 
         public int BillId { get; set; }
+        public int Quantity { get; set; }
+        public Items Item { get; set; }
     }
     public class CreateCartsDto
     { 
         public int UserId { get; set; }
         public int ItemsId { get; set; }
         public int BillId { get; set; }
+        public int Quantity { get; set; }
     }
 
     public class UpdateCartsDto
@@ -39,6 +42,7 @@ namespace Boilerplate.Application.Interfaces
         public int UserId { get; set; }
         public int ItemsId { get; set; }
         public int BillId { get; set; }
+        public int Quantity { get; set; }
     }
 
     public class GetCartsFilter : PaginationInfoFilter
@@ -46,5 +50,6 @@ namespace Boilerplate.Application.Interfaces
         public int UserId { get; set; }
         public int ItemsId { get; set; }
         public int BillId { get; set; }
+        public int Quantity { get; set; } 
     } 
 }

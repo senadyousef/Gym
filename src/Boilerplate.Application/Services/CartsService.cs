@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Amazon.S3.Model;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Boilerplate.Application.Services
@@ -36,13 +37,14 @@ namespace Boilerplate.Application.Services
                .GetAll()
                .Where(o => o.IsDisabled == false)
                .Where(o => o.UserId == Carts.UserId)
-               .Where(o => o.Status == "Open"); 
+               .Where(o => o.Status == "Open");
 
             var newCarts = new Carts
             {
                 UserId = Carts.UserId,
                 ItemsId = Carts.ItemsId,
                 BillId = Carts.BillId,
+                Quantity = Carts.Quantity,
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
@@ -84,6 +86,7 @@ namespace Boilerplate.Application.Services
                 UserId = Carts.UserId,
                 ItemsId = Carts.ItemsId,
                 BillId = newCarts.BillId,
+                Quantity = newCarts.Quantity,
             };
             return CartsDto;
         }
@@ -114,6 +117,7 @@ namespace Boilerplate.Application.Services
                 UserId = Carts.UserId,
                 ItemsId = Carts.ItemsId,
                 BillId = Carts.BillId,
+                Quantity = Carts.Quantity,
             };
             return CartsDto;
         }
@@ -126,6 +130,7 @@ namespace Boilerplate.Application.Services
             originalCarts.UserId = updatedCarts.UserId;
             originalCarts.ItemsId = updatedCarts.ItemsId;
             originalCarts.BillId = updatedCarts.BillId;
+            originalCarts.Quantity = updatedCarts.Quantity;
 
             var CartsDto = new GetCartsDto
             {
@@ -133,6 +138,7 @@ namespace Boilerplate.Application.Services
                 UserId = originalCarts.UserId,
                 ItemsId = originalCarts.ItemsId,
                 BillId = originalCarts.BillId,
+                Quantity = originalCarts.Quantity,
             };
             _CartsRepository.Update(originalCarts);
             await _CartsRepository.SaveChangesAsync();
@@ -158,13 +164,14 @@ namespace Boilerplate.Application.Services
             var id = _currentUserService.UserId;
 
             filter ??= new GetCartsFilter();
-            IQueryable<Carts> Carts = null;
+            IQueryable<Carts> Carts = null; 
 
             Carts = _CartsRepository
                .GetAll()
                .Where(o => o.IsDisabled == false)
                .Where(o => o.UserId == filter.UserId || filter.UserId == 0)
-               .Where(o => o.ItemsId == filter.ItemsId || filter.ItemsId == 0);
+               .Where(o => o.ItemsId == filter.ItemsId || filter.ItemsId == 0)
+               .Include(o => o.Item);
 
             return await _mapper.ProjectTo<GetCartsDto>(Carts).ToAllListAsync(filter.CurrentPage);
         }

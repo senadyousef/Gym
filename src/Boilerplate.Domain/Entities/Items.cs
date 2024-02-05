@@ -12,13 +12,10 @@ namespace Boilerplate.Domain.Entities
     public class Items : Entity
     {
         #region Parameters 
-        [Required]
         [MaxLength(50)]
         public string NameEn { get; set; } 
-        [Required]
         [MaxLength(50)]
         public string NameAr { get; set; } 
-        [Required]
         public decimal Price { get; set; } 
         public string Description { get; set; }  
         #endregion

@@ -61,5 +61,14 @@ namespace Boilerplate.Application.Interfaces
         public decimal Price { get; set; }
         public string Description { get; set; } 
     }
+    
+    public class GetItemsFromCarts 
+    {
+        public int Id { get; set; }
+        public string NameEn { get; set; }
+        public string NameAr { get; set; }
+        public decimal Price { get; set; }
+        public string Description { get; set; } 
+    }
 
 }
