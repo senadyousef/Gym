@@ -3,6 +3,7 @@ using Boilerplate.Application.DTOs;
 using Boilerplate.Application.Interfaces;
 using Boilerplate.Domain.Entities;
 using Boilerplate.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,7 +109,8 @@ namespace Boilerplate.Application.Services
 
             UserItems = _UserItemsRepository
                .GetAll()
-               .Where(o => o.IsDisabled == false);
+               .Where(o => o.IsDisabled == false)
+               .Include(o => o.Items);
 
             return await _mapper.ProjectTo<GetUserItemsDto>(UserItems).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
         }
@@ -124,7 +126,8 @@ namespace Boilerplate.Application.Services
                .Where(o => o.IsDisabled == false)
                .Where(o => o.UserId == filter.UserId || filter.UserId == 0)
                .Where(o => o.ItemsId == filter.ItemsId || filter.ItemsId == 0)
-               .Where(o => o.CreatedOn.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date);
+               .Where(o => o.CreatedOn.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date)
+               .Include(o => o.Items);
 
             return await _mapper.ProjectTo<GetUserItemsDto>(UserItems).ToAllListAsync(filter.CurrentPage);
         }

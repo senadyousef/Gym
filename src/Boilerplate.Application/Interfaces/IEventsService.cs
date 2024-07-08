@@ -43,7 +43,9 @@ namespace Boilerplate.Application.Interfaces
         public string To { get; set; } 
         public int Capacity { get; set; } 
         public int Booked { get; set; } 
-        public string Type { get; set; } 
+        public string Type { get; set; }
+        public Branches Branches { get; set; }
+        public User User { get; set; }
     }
 
     public class CreateEventsDto

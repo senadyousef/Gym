@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Boilerplate.Application.DTOs;
@@ -11,6 +12,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ISession = Boilerplate.Domain.Auth.Interfaces.ISession;
+using Net.Codecrete.QrCodeGenerator;
+using System.IO;
+using System.Text;
+using System.Drawing;
+using QRCoder;
+using System.Drawing.Imaging;
 
 namespace Boilerplate.Api.Controllers
 {
@@ -55,10 +62,13 @@ namespace Boilerplate.Api.Controllers
             }
             else
             {
-                if (user.MembershipStatus == "Not Active" || user.MembershipExpDate.Date < DateTime.Now.Date)
+                if (user.Role != "SuperAdmin")
                 {
-                    return BadRequest(new { message = "Your Membership Expired" });
-                }
+                    if (user.MembershipStatus == "Not Active" || user.MembershipExpDate.Value.Date < DateTime.Now.Date)
+                    {
+                        return BadRequest(new { message = "Your Membership Expired" });
+                    }
+                } 
             }
             return Ok(await _authService.GenerateTokenAsync(user));
         }
@@ -155,6 +165,27 @@ namespace Boilerplate.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("QR")]
+        [AllowAnonymous] 
+        public string QR(string Password)
+        {
+            string x = "";
+            using (MemoryStream ms = new MemoryStream())
+            {
+                QRCodeGenerator QRCodeGenerator = new QRCodeGenerator();
+                QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode(Password , QRCodeGenerator.ECCLevel.Q);
+                QRCode qRCode = new QRCode(QRCodeData);
+                using (Bitmap oBitmap = qRCode.GetGraphic(20))
+                {
+                    oBitmap.Save(ms, ImageFormat.Png);
+                    x = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                    Console.WriteLine("data:image/png;base64," + Convert.ToBase64String(ms.ToArray()));
+                }
+            } 
+            return x;
+        }
+
         [HttpPut("updateuser")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult> UpdateUser([FromBody] CreateUserDto dto)
@@ -164,7 +195,7 @@ namespace Boilerplate.Api.Controllers
         }
 
         [Authorize]
-        [HttpDelete("{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteUser(int id)
         {

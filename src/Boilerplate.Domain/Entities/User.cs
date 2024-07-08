@@ -17,18 +17,19 @@ namespace Boilerplate.Domain.Entities
         public string Email { get; set; } 
         [Required]
         public string Password { get; set; } 
-        [Required]
+        //[Required]
+        public string MobilePhone { get; set; }
+        public string Gender { get; set; }
         public string Role { get; set; } 
-        public string Gender { get; set; } 
         public int Age { get; set; }
         public DateTime BOD { get; set; }
+        public string PhotoUri { get; set; }
+        public int GymId { get; set; }
         public string MembershipStatus { get; set; }
-        public DateTime MembershipExpDate { get; set; }
-        public string MobilePhone { get; set; }  
+        public DateTime? MembershipExpDate { get; set; }
         public PushToken PushToken { get; set; } 
         public string RefreshToken { get; set; } 
         public DateTime RefreshTokenExpiryTime { get; set; }  
-        public string PhotoUri { get; set; }
         #endregion
 
         #region Relations 

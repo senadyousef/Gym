@@ -16,8 +16,9 @@ namespace Boilerplate.Application.DTOs.User
         public string NameAr { get; set; } 
         public string Gender { get; set; }
         public DateTime BOD { get; set; }
+        public int GymId { get; set; }
         public string MembershipStatus { get; set; }
-        public DateTime MembershipExpDate { get; set; }
+        public DateTime? MembershipExpDate { get; set; }
         public string MobilePhone { get; set; }   
         public UploadPhotoRequest UploadRequests { get; set; } 
         public string PhotoUri { get; set; } 

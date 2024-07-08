@@ -43,7 +43,7 @@ namespace Boilerplate.Application.Services
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
                 DescriptionAr = Events.DescriptionAr,
-                PhotoUri = Events.PhotoUri, 
+                PhotoUri = Events.PhotoUri,
                 Date = Events.Date,
                 From = Events.From,
                 To = Events.To,
@@ -58,7 +58,7 @@ namespace Boilerplate.Application.Services
             {
                 newEvents.PhotoUri = await _uploadService.UploadImageAsync(Events.UploadRequests);
             }
-             
+
             _EventsRepository.Create(newEvents);
             await _EventsRepository.SaveChangesAsync();
 
@@ -144,7 +144,7 @@ namespace Boilerplate.Application.Services
             if (updatedEvents.UploadRequests != null)
             {
                 originalEvents.PhotoUri = await _uploadService.UploadImageAsync(updatedEvents.UploadRequests);
-            } 
+            }
 
             var EventsDto = new GetEventsDto
             {
@@ -186,7 +186,9 @@ namespace Boilerplate.Application.Services
                .Where(o => o.From == filter.From || filter.From == null)
                .Where(o => o.To == filter.To || filter.To == null)
                .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
-               .Where(o => o.Type == filter.Type || filter.Type == null);
+               .Where(o => o.Type == filter.Type || filter.Type == null)
+               .Include(o => o.Branches)
+               .Include(o => o.User);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
         }
@@ -207,7 +209,9 @@ namespace Boilerplate.Application.Services
                .Where(o => o.From == filter.From || filter.From == null)
                .Where(o => o.To == filter.To || filter.To == null)
                .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
-               .Where(o => o.Type == filter.Type || filter.Type == null);
+               .Where(o => o.Type == filter.Type || filter.Type == null)
+               .Include(o => o.Branches)
+               .Include(o => o.User);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToAllListAsync(filter.CurrentPage);
         }
