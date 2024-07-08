@@ -4,6 +4,7 @@ using Boilerplate.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boilerplate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240704084203_gym-id")]
+    partial class gymid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -710,7 +712,7 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("MembershipExpDate")
+                    b.Property<DateTime>("MembershipExpDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MembershipStatus")
@@ -760,7 +762,8 @@ namespace Boilerplate.Infrastructure.Migrations
                             Email = "superadmin@ss.com",
                             GymId = 0,
                             IsDisabled = false,
-                            Password = "$2a$11$uiJH5B6dmwVobZBFDbTjhu0gslI/b4qzZIhhpZSJZSysJ3ka1VKI2",
+                            MembershipExpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Password = "$2a$11$oNk3xJqdy8IBFdOVuQJXb.feDP211DWoiF0wO9ge3iJW2rLwqN3A2",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "SuperAdmin"
                         });

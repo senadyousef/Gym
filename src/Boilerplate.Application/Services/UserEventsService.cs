@@ -49,7 +49,7 @@ namespace Boilerplate.Application.Services
                 CreatedOn = DateTime.Now,
                 IsDisabled = false
             };
-              
+
             _UserEventsRepository.Create(newUserEvents);
             await _UserEventsRepository.SaveChangesAsync();
 
@@ -122,7 +122,8 @@ namespace Boilerplate.Application.Services
 
             UserEvents = _UserEventsRepository
                .GetAll()
-               .Where(o => o.IsDisabled == false);
+               .Where(o => o.IsDisabled == false)
+               .Include(o => o.Events);
 
             return await _mapper.ProjectTo<GetUserEventsDto>(UserEvents).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
         }
@@ -137,8 +138,9 @@ namespace Boilerplate.Application.Services
             UserEvents = _UserEventsRepository
                .GetAll()
                .Where(o => o.IsDisabled == false)
-               .Where(o => o.EventsId == filter.EventsId)
-               .Where(o => o.UserId == filter.UserId);
+               .Where(o => o.EventsId == filter.EventsId || filter.EventsId == 0)
+               .Where(o => o.UserId == filter.UserId || filter.UserId == 0)
+               .Include(o => o.Events);
 
             return await _mapper.ProjectTo<GetUserEventsDto>(UserEvents).ToAllListAsync(filter.CurrentPage);
         }

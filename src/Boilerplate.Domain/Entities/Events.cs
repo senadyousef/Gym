@@ -40,6 +40,9 @@ namespace Boilerplate.Domain.Entities
         public int Booked { get; set; }
         
         public string Type { get; set; }     
+
+        public Branches Branches { get; set; }
+        public User User  { get; set; }
         #endregion
 
         #region Relations

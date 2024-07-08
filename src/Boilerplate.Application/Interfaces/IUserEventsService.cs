@@ -26,7 +26,8 @@ namespace Boilerplate.Application.Interfaces
         public int Id {  get; set; }
         public int UserId { get; set; } 
         public int EventsId { get; set; }
-
+        public Events Events { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
     public class CreateUserEventsDto
     {

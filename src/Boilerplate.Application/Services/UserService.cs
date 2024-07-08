@@ -17,7 +17,10 @@ using Boilerplate.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using BC = BCrypt.Net.BCrypt;
-
+using Net.Codecrete.QrCodeGenerator;
+using System.IO;
+using System.Text;
+using System.Drawing;
 
 namespace Boilerplate.Application.Services
 {
@@ -66,7 +69,7 @@ namespace Boilerplate.Application.Services
                 user = await _userRepository
                 .GetAll()
                 .Where(o => o.IsDisabled == false)
-                .FirstOrDefaultAsync(x => x.MobilePhone.ToLower() == email);
+                .FirstOrDefaultAsync(x => x.Email.ToLower() == email);
             }
             else if (Regex.Match(email, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").Success)
             {
@@ -79,13 +82,16 @@ namespace Boilerplate.Application.Services
             {
                 return null;
             }
-            if (user.MembershipExpDate.Date < DateTime.Now.Date)
+            if (user.MembershipExpDate.HasValue)
             {
-                var userUpdate = await _userRepository.GetById(user.Id);
-                userUpdate.MembershipStatus = "Not Actice";
-                _userRepository.Update(userUpdate);
-                await _userRepository.SaveChangesAsync();
-            }
+                if (user.MembershipExpDate.Value.Date < DateTime.Now.Date)
+                {
+                    var userUpdate = await _userRepository.GetById(user.Id);
+                    userUpdate.MembershipStatus = "Not Actice";
+                    _userRepository.Update(userUpdate);
+                    await _userRepository.SaveChangesAsync();
+                }
+            } 
             return user;
         }
 
@@ -173,7 +179,8 @@ namespace Boilerplate.Application.Services
             if (dto.UploadRequests != null)
             {
                 created.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
-            } 
+            }
+
             created.Password = BC.HashPassword(dto.Password);
             _userRepository.Create(created);
             await _userRepository.SaveChangesAsync();
@@ -183,17 +190,15 @@ namespace Boilerplate.Application.Services
         public async Task<bool> DeleteUser(int id)
         {
             var originalUser = await _userRepository.GetById(id);
-            if (originalUser == null) throw new Exception($"User With Id {id} not found");
+            if (originalUser == null) return false;
 
-            if (_currentUserService.Role == "SuperAdmin")
-                await _userRepository.Delete(id);
-            else if (_currentUserService.Role == "Owner")
-            {
-                if (originalUser.Role == "Owner")
-                    await _userRepository.Delete(id);
-            }
+            originalUser.IsDisabled = true;
+            originalUser.DisabledOn = DateTime.Now;
+            originalUser.DisabledBy = _currentUserService.UserId;
+            _userRepository.Update(originalUser);
+            await _userRepository.SaveChangesAsync();
 
-            return await _userRepository.SaveChangesAsync() > 0;
+            return true;
         }
         public async Task<bool> UpdateUser(User user)
         {
@@ -208,22 +213,19 @@ namespace Boilerplate.Application.Services
             user.NameAr = dto.NameAr;
             user.Gender = dto.Gender;
             user.Role = dto.Role;
+            user.GymId = dto.GymId;
             user.BOD = dto.BOD;
             user.MembershipStatus = dto.MembershipStatus;
-            user.MembershipExpDate = dto.MembershipExpDate; 
-            user.PhotoUri = user.PhotoUri; 
+            user.MembershipExpDate = dto.MembershipExpDate;
+            user.PhotoUri = user.PhotoUri;
             if (dto.UploadRequests != null)
             {
                 user.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
-            } 
+            }
 
             if (!string.IsNullOrEmpty(dto.Password))
                 user.Password = BC.HashPassword(dto.Password);
             _userRepository.Update(user);
-
-            await _userRepository.SaveChangesAsync();
-
-            await _userRepository.SaveChangesAsync();
 
             await _userRepository.SaveChangesAsync();
             return await _userRepository.SaveChangesAsync() > 0;
@@ -250,24 +252,33 @@ namespace Boilerplate.Application.Services
                     .GetAll()
                     .WhereIf(!string.IsNullOrEmpty(filter.Email), x => EF.Functions.Like(x.Email, $"%{filter.Email}%"))
                     .WhereIf(!string.IsNullOrEmpty(filter.Role), x => EF.Functions.Like(x.Role, $"%{filter.Role}%"))
+                    .Where(o => o.GymId == filter.GymId || filter.GymId == 0)
                     .Where(o => o.IsDisabled == false);
             }
-            else if (_currentUserService.Role == "Owner")
+            else if (_currentUserService.Role == "Gym")
             {
                 users = _userRepository
                     .GetAll()
                     .WhereIf(!string.IsNullOrEmpty(filter.Email), x => EF.Functions.Like(x.Email, $"%{filter.Email}%"))
                     .WhereIf(!string.IsNullOrEmpty(filter.Role), x => EF.Functions.Like(x.Role, $"%{filter.Role}%"))
-                    .WhereIf(string.IsNullOrEmpty(filter.Email) && string.IsNullOrEmpty(filter.Role),
-                        u => u.Role == "Coach")
+                    .Where(o => o.GymId == filter.GymId || filter.GymId == 0)
+                    .Where(o => o.MembershipExpDate == filter.MembershipExpDate || filter.MembershipExpDate == null)
+                    .Where(o => o.MembershipStatus == filter.MembershipStatus || filter.MembershipStatus == null)
+                    .Where(o => o.NameEn == filter.NameEn || filter.NameEn == null)
+                    .Where(o => o.NameAr == filter.NameAr || filter.NameAr == null)
+                    .Where(o => o.GymId == int.Parse(_currentUserService.UserId))
                     .Where(o => o.IsDisabled == false);
             }
-            else
+            else if (_currentUserService.Role == "Store")
+            {
+
+            }
+            else if (_currentUserService.Role == "Member")
             {
                 users = _userRepository
                .GetAll()
-               .WhereIf(!string.IsNullOrEmpty(filter.Email), x => EF.Functions.Like(x.Email, $"%{filter.Email}%"))
-               .WhereIf(!string.IsNullOrEmpty(filter.Role), x => EF.Functions.Like(x.Role, $"%{filter.Role}%"))
+               .Where(o => o.Role == "Coach")
+               .Where(o => o.GymId == filter.GymId)
                .Where(o => o.IsDisabled == false);
             }
 
@@ -292,6 +303,7 @@ namespace Boilerplate.Application.Services
                 NameEn = user.NameEn,
                 NameAr = user.NameAr,
                 MobilePhone = user.MobilePhone,
+                GymId = user.GymId,
                 RefreshToken = user.RefreshToken,
                 RefreshTokenExpiryTime = user.RefreshTokenExpiryTime,
                 PhotoUri = user.PhotoUri,

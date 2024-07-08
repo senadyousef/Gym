@@ -1,5 +1,6 @@
 ﻿using Boilerplate.Application.DTOs;
 using Boilerplate.Application.Filters;
+using Boilerplate.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace Boilerplate.Application.Interfaces
     {
         public int Id { get; set; }
         public int UserId { get; set; } 
-        public int ItemsId { get; set; } 
+        public int ItemsId { get; set; }
+        public Items Items { get; set; }
     }
     public class CreateUserItemsDto
     {
