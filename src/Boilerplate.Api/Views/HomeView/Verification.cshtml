@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Verification</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/HeaderGymLogo2.png" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form">
+                    <div style="display: flex; justify-content: center; align-items: center; height: 300px;">
+                        <img src="images/GymLogoWhite.png" alt="" />
+                    </div>
+                    <span class="login100-form-title p-b-34 p-t-27">
+                        Verification code
+                        <p class="login100-form-title-tow p-b-34 p-t-27">
+                            We have send you a code to
+                            verify email address
+                        </p>
+                    </span>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <input type="text" class="otp-input" maxlength="1" id="1" oninput="moveToNext('1', '2')">
+                        <input type="text" class="otp-input" maxlength="1" id="2" oninput="moveToNext('2', '3')" onkeydown="moveToPrevious(event, '2', '1')">
+                        <input type="text" class="otp-input" maxlength="1" id="3" oninput="moveToNext('3', '4')" onkeydown="moveToPrevious(event, '3', '2')">
+                        <input type="text" class="otp-input" maxlength="1" id="4" oninput="moveToNext('4', '5')" onkeydown="moveToPrevious(event, '4', '3')">
+                        <input type="text" class="otp-input" maxlength="1" id="5" oninput="moveToNext('5', '')" onkeydown="moveToPrevious(event, '5', '4')">
+                    </div>
+                    <div class="text-center p-t-90">
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button id="SendButn" onclick="submitOTP()">
+                            Continue
+                        </button>
+                    </div>
+                    <script>
+                        window.onload = onloadpage();
+                        function onloadpage() {
+                            console.log("Load");
+                            document.getElementById('SendButn').disabled = true;
+                            document.getElementById('SendButn').className = 'login100-form-btn-desabled';
+                        }
+                        function moveToNext(current, nextFieldID) {
+                            let isOrdered = true;
+                            if (current !== '1') {
+                                for (let i = 1; i <= current - 1; i++) {
+                                    const currentField = document.getElementById(i);
+                                    console.log(i);
+                                    if (!currentField.value) {
+                                        isOrdered = false;
+                                    }
+                                }
+                                console.log(isOrdered);
+                                if (isOrdered) {
+                                    if (document.getElementById(current).value.length >= document.getElementById(current).maxLength) {
+                                        if (nextFieldID) {
+                                            const nextField = document.getElementById(nextFieldID);
+                                            nextField.focus();
+                                        }
+                                    }
+                                }
+                                else {
+                                    var V = document.getElementById(current).value;
+                                    for (let i = 1; i <= 5; i++) {
+                                        const currentField = document.getElementById(i);
+                                        currentField.value = "";
+                                    }
+                                    document.getElementById('1').value = V;
+                                    document.getElementById('2').focus();
+                                }
+                            }
+                            else {
+                                if (document.getElementById(current).value.length >= document.getElementById(current).maxLength) {
+                                    if (nextFieldID) {
+                                        const nextField = document.getElementById(nextFieldID);
+                                        nextField.focus();
+                                    }
+                                }
+                            }
+                            if (checkInputsOrder()) {
+                                document.getElementById('SendButn').disabled = false;
+                                document.getElementById('SendButn').className = 'login100-form-btn';
+                            }
+                            else {
+                                document.getElementById('SendButn').disabled = true;
+                                document.getElementById('SendButn').className = 'login100-form-btn-desabled';
+                            }
+
+                        }
+
+                        function moveToPrevious(event, currentFieldID, previousFieldID) {
+                            if ((event.key === "Backspace" || event.key === "Delete") && !document.getElementById(currentFieldID).value) {
+                                if (previousFieldID) {
+                                    document.getElementById(previousFieldID).focus();
+                                }
+                            }
+                        }
+
+                        function checkInputsOrder() {
+                            let isOrdered = true;
+                            for (let i = 1; i <= 5; i++) {
+                                const currentField = document.getElementById(i);
+                                if (!currentField.value) {
+                                    currentField.focus();
+                                    isOrdered = false;
+                                    break;
+                                }
+                            }
+                            return isOrdered;
+                        }
+
+                        function submitOTP() {
+                            let otp = '';
+                            for (let i = 1; i <= 5; i++) {
+                                otp += document.getElementById('otp' + i).value;
+                            }
+                            alert('Entered OTP: ' + otp);
+                        }
+                    </script>
+
+
+                    <div class="text-center p-t-90">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+
+</body>
+</html>

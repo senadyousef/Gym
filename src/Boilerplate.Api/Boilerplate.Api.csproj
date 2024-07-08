@@ -16,7 +16,13 @@
   
     <!--<Content Remove="Views\HomeView\Index.cshtml" />-->
   
+    <Content Remove="Views\HomeView\ForgetPassword.cshtml" />
+  
+    <Content Remove="Views\HomeView\ReasetPassword.cshtml" />
+  
     <Content Remove="Views\HomeView\SmartUseHome.cshtml" />
+  
+    <Content Remove="Views\HomeView\Verification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.0" />
@@ -111,9 +117,15 @@
   <ItemGroup><!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
 <!--    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />-->
   
+    <None Include="Views\HomeView\ForgetPassword.cshtml" />
+  
     <None Include="Views\HomeView\Index.cshtml" />
   
+    <None Include="Views\HomeView\ReasetPassword.cshtml" />
+  
     <None Include="Views\HomeView\SmartUseHome.cshtml" />
+  
+    <None Include="Views\HomeView\Verification.cshtml" />
   
     <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
   
