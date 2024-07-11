@@ -16,13 +16,21 @@
   
     <!--<Content Remove="Views\HomeView\Index.cshtml" />-->
   
+    <Content Remove="Views\HomeView\AllGyms.cshtml" />
+  
+    <Content Remove="Views\HomeView\AllStores.cshtml" />
+  
     <Content Remove="Views\HomeView\ForgetPassword.cshtml" />
+  
+    <Content Remove="Views\HomeView\GymDetails.cshtml" />
   
     <Content Remove="Views\HomeView\ReasetPassword.cshtml" />
   
     <Content Remove="Views\HomeView\SmartUseHome.cshtml" />
   
     <Content Remove="Views\HomeView\Verification.cshtml" />
+  
+    <Content Remove="wwwroot\Images\logo-default-dark-200x36.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.0" />
@@ -117,6 +125,12 @@
   </ItemGroup>
   <ItemGroup><!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
 <!--    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />-->
+  
+    <None Include="Views\HomeView\GymDetails.cshtml" />
+  
+    <None Include="Views\HomeView\AllStores.cshtml" />
+  
+    <None Include="Views\HomeView\AllGyms.cshtml" />
   
     <None Include="Views\HomeView\ForgetPassword.cshtml" />
   

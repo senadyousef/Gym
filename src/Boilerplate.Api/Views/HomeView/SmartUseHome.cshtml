@@ -20,15 +20,13 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <!--[if lt IE 10]>
-    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    <script src="js/html5shiv.min.js"></script>
-        <![endif]-->
+
 </head>
 <body>
     <div class="page">
         <header class="page-header">
-            <div class="rd-navbar-wrap">
+            <div class="rd-navbar-wrap" style="flex-direction:row;display:flex; justify-content:center">
+                <img class="rd-navbar-nav" src="images/GymLogo.png.png" alt="" style="max-width:200px ; max-height:200px; margin-top:-20px" />
                 <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fullwidth" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-stick-up-clone="true" data-md-stick-up-offset="140px" data-lg-stick-up-offset="140px">
                     <div class="rd-navbar-inner">
                         <div class="rd-navbar-panel">
@@ -38,9 +36,9 @@
                                     <div class="brand-mobile" style="width:200px; height:51px ;padding-top:6.5px">
                                         <img src="images/logo-default-dark-200x36.png" alt="" style="width:150px; height:38px" />
                                     </div>
-                                    <div class="brand-desktop">
-                                        <img src="images/GymLogo.png.png" alt="" style="max-width:300px ; max-height:300px" />
-                                    </div>
+                                    @* <div class="brand-desktop">
+                                    <img src="images/GymLogo.png.png" alt="" style="max-width:300px ; max-height:300px" />
+                                    </div> *@
                                 </a>
                             </div>
                         </div>
@@ -143,8 +141,6 @@
                                     <li style="min-width:100px;max-width:220px">
                                         <a href="services.html">Services</a>
                                     </li>
-                                    <li style="max-width:300px">
-                                    </li>
                                     <li style="min-width:100px;max-width:220px">
                                         <a href="blog.html">Categories</a>
                                         @*  <ul class="rd-navbar-dropdown">
@@ -168,19 +164,30 @@
                                         </ul> *@
                                     </li>
                                     <li style="min-width:100px;max-width:220px">
-                                        <a href="#">Notifications</a>
-                                        @* <ul class="rd-navbar-dropdown">
-                                        <li>
-                                        <a href="contacts-1.html">Contacts 1</a>
-                                        </li>
-                                        <li>
-                                        <a href="contacts-2.html">Contacts 2</a>
-                                        </li>
-                                        </ul> *@
+                                        <a href="#Dashboardsection">Dashboard</a>
+                                    </li>
+                                    <li style="min-width:100px;max-width:220px">
+                                        @* <a href="#">Profile</a> *@
+                                        <a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-user" style="font-size:25px; display:flex ; align-items:center ; justify-content:center"></a>
+                                        <ul class="rd-navbar-dropdown" style="border:1.5px solid rgb(1,137,255,.5);  border-radius:0 20px 0 20px">
+                                            <li>
+                                                <p style="font-size: 16px ; color:#0189FF">superadmin@ss.com</p>
+                                            </li>
+                                            <li>
+                                                <a href="#">Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Notifications</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Logout</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 </nav>
             </div>
@@ -198,428 +205,202 @@
             </div>
 
         </section>
-        <section class="section-xl bg-periglacial-blue text-center text-md-left">
-            @*  <div class="shell-fluid shell-condensed">
-            <div class="range range-md-reverse range-xs-middle range-md-right range-50">
-            <div class="cell-md-5 cell-lg-4">
-            <div class="inset-1">
-            <h2>WHO WE ARE</h2>
-            <div class="p text-width-smallest">
-            <p class="big">Barbershop is a team of highly qualified barbers dedicated to offering the best value. We do this by providing high quality salon services for men and boys, in a warm, friendly atmosphere.</p>
-            </div><a class="btn btn-sm btn-style-1 btn-primary" href="about.html">Read more</a>
-            </div>
-            </div>
-            <div class="cell-md-7 cell-lg-6">
-            <div class="row row-gutter-custom range-15">
-            <div class="col-xs-4">
-            <figure class="figure-fullwidth">
-            <img src="images/about-1-300x460.jpg" alt="" width="300" height="460" />
-            </figure>
-            </div>
-            <div class="col-xs-4">
-            <figure class="figure-fullwidth">
-            <img src="images/about-2-300x460.jpg" alt="" width="300" height="460" />
-            </figure>
-            </div>
-            <div class="col-xs-4">
-            <figure class="figure-fullwidth">
-            <img src="images/about-3-300x460.jpg" alt="" width="300" height="460" />
-            </figure>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div> *@
-            @* <div class="containers">
-            <div class="row">
-            <div class="col-lg-12">
-            <div class="more-info">
-            <div class="row">
-            <div class="col-lg-3 col-sm-6 col-6">
-            <i class="fa fa-user"></i>
-            <h4><span>Population:</span><br>44.48 M</h4>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-            <i class="fa fa-globe"></i>
-            <h4><span>Territory:</span><br>275.400 KM<em>2</em></h4>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-            <i class="fa fa-home"></i>
-            <h4><span>AVG Price:</span><br>$946.000</h4>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-            <div class="main-button">
-            <a href="about.html">Explore More</a>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div> *@
+        <section class="section-xl bg-periglacial-blue text-center" id="Dashboardsection">
+            <div class="shell">
+                <div class="range range-sm-center range-75">
+                    <div class="cell-xs-12">
+                        <h2>Dashboard</h2>
+                        <div class="p text-width-medium">
+                            <p class="big">These statistics are the best way to learn more about your progress.</p>
+                        </div>
+                    </div>
+                    <div class="cell-xs-12">
+                        <!-- Owl Carousel-->
+                        <div class="owl-carousel owl-carousel-modern owl-style-1" data-items="1" data-stage-padding="0" data-loop="true" data-margin="20" data-xs-margin="30"
+                             data-mouse-drag="true" data-nav="true" data-dots="true" data-animation-in="fadeIn" data-animation-out="fadeOut">
+                            <div class="item">
+                                <script src="https://code.highcharts.com/highcharts.js"></script>
+                                <script src="https://code.highcharts.com/modules/variwide.js"></script>
+                                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                                <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                                <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+                                <figure class="highcharts-figure">
+                                    <div id="Over20gymshaveplayers"></div>
+                                    <p class="highcharts-description">
+
+                                    </p>
+                                </figure>
+                                <script>
+                                    Highcharts.chart('Over20gymshaveplayers', {
+
+                                        chart: {
+                                            type: 'variwide'
+                                        },
+
+                                        title: {
+                                            text: 'Over 20 gyms have players'
+                                        },
+
+                                        // subtitle: {
+                                        //     text: 'Source: <a href="http://ec.europa.eu/eurostat/web/' +
+                                        //         'labour-market/labour-costs/main-tables">eurostat</a>'
+                                        // },
+
+                                        xAxis: {
+                                            type: 'category'
+                                        },
+
+                                        // caption: {
+                                        //     text: 'Column widths are proportional to GDP'
+                                        // },
+
+                                        legend: {
+                                            enabled: false
+                                        },
+
+                                        series: [{
+                                            name: 'Labor Costs',
+                                            data: [
+                                                ['Gym1', 1000, 335504],
+                                                ['Gym2', 685, 277339],
+                                                ['Gym3', 785.2, 421611],
+                                                ['Gym4', 633, 462057],
+                                                ['Gym5', 1350, 2228857],
+                                                ['Gym6', 457, 702641],
+                                                ['Gym7', 973, 215615],
+                                                ['Gym8', 764, 3144050],
+                                                ['Gym9', 911, 349344],
+                                                ['Gym10', 821, 275567],
+                                                ['Gym11', 769, 1672438],
+                                                ['Gym12', 1342, 2366911],
+                                                ['Gym13', 1647, 1113851],
+                                                ['Gym14', 1758, 175887],
+                                                ['Gym15', 1958, 184933],
+                                                ['Gym16', 1744, 176564],
+                                                ['Gym17', 1687, 424269],
+                                                ['Gym18', 1436, 169578],
+                                                ['Gym19', 736, 169578],
+                                                ['Gym20', 1244, 169578]
+
+                                            ],
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '{point.y:.0f}'
+                                            },
+                                            tooltip: {
+                                                pointFormat: '<b>{point.y}</b>'
+                                            },
+                                            borderRadius: 3,
+                                            colorByPoint: true
+                                        }]
+
+                                    });
+                                </script>
+                            </div>
+                            <div class="item">
+                                <div style="padding-left: 5%;padding-right:5%;">
+                                    <div style="max-width: 100%;">
+                                        <script src="https://code.highcharts.com/highcharts.js"></script>
+                                        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+                                        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                                        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                                        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+                                        <figure class="highcharts-figure">
+                                            <div id="Numberofsubscribersannually"></div>
+                                            <p class="highcharts-description">
+
+                                            </p>
+                                        </figure>
+                                        <script>
+                                            Highcharts.chart('Numberofsubscribersannually', {
+                                                chart: {
+                                                    type: 'spline'
+                                                },
+                                                title: {
+                                                    text: 'Number of subscribers annually'
+                                                },
+                                                // subtitle: {
+                                                //     text: 'Source: ' +
+                                                //         '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+                                                //         'target="_blank">Wikipedia.com</a>'
+                                                // },
+                                                xAxis: {
+                                                    categories: [
+                                                        '2024', '2025', '2026', '2027', '2028', '2029',
+                                                        '2023', '2031', '2032', '2033', '2034', '2035'
+                                                    ],
+                                                    accessibility: {
+                                                        description: 'Months of the year'
+                                                    }
+                                                },
+                                                yAxis: {
+                                                    title: {
+                                                        text: 'Number of subscribers'
+                                                    },
+                                                    labels: {
+                                                        format: '{number}'
+                                                    }
+                                                },
+                                                tooltip: {
+                                                    crosshairs: true,
+                                                    shared: true
+                                                },
+                                                plotOptions: {
+                                                    spline: {
+                                                        marker: {
+                                                            radius: 4,
+                                                            lineColor: '#666666',
+                                                            lineWidth: 1
+                                                        }
+                                                    }
+                                                },
+                                                series: [{
+                                                    name: 'Gyms',
+                                                    marker: {
+                                                        symbol: 'square'
+                                                    },
+                                                    data: [5.2, 5.7, 8.7, 13.9, 18.2, 21.4, 25.0, {
+                                                        y: 26.4,
+                                                        // marker: {
+                                                        //     symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)'
+                                                        // },
+                                                        // accessibility: {
+                                                        //     description: 'Sunny symbol, this is the warmest point in the ' +
+                                                        //         'chart.'
+                                                        // }
+                                                    }, 22.8, 17.5, 12.1, 7.6]
+
+                                                }, {
+                                                    name: 'Stores',
+                                                    marker: {
+                                                        symbol: 'diamond'
+                                                    },
+                                                    data: [{
+                                                        y: 1.5,
+                                                        // marker: {
+                                                        //     symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'
+                                                        // },
+                                                        // accessibility: {
+                                                        //     description: 'Snowy symbol, this is the coldest point in the ' +
+                                                        //         'chart.'
+                                                        // }
+                                                    }, 1.6, 3.3, 5.9, 10.5, 13.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6]
+                                                }]
+                                            });
+                                        </script>
 
 
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-
-        @*  <section class="bg-white">
-        <div class="shell-fluid shell-condensed">
-        <div class="range range-condensed">
-        <div class="cell-md-6 cell-md-6-mod-1 image-wrap-left bg-white bg-image" style="background-image: url(images/home-three-2-910x800.jpg);">
-        <div class="image-wrap-inner">
-        <h2>OUR<br>SERVICES</h2>
-        <p class="big">Barbershop offers world-class men's haircuts, beard grooming, and hot razor shaves. Here are just some of the services we are famous for.</p><a class="btn btn-style-1 btn-primary" href="services.html">read more</a>
-        </div>
-        </div>
-        <div class="cell-md-6 cell-md-6-mod-2 image-wrap-right bg-gray-dark bg-image" style="background-image: url(images/home-three-3-1011x800.jpg);">
-        <div class="image-wrap-inner">
-        <div class="range range-condensed range-inner-bordered">
-        <div class="cell-xs-6">
-        <article class="box-icon">
-        <figure class="box-icon-image">
-        <img src="images/icon-service-light-3-70x62.png" alt="" width="70" height="62" />
-        </figure>
-        <p class="box-icon-header"><a class="link-underlined" href="services.html">BEARD trim</a></p>
-        <p class="box-icon-text">Well-trimmed beard is a must-have element of every men’s image</p>
-        </article>
-        </div>
-        <div class="cell-xs-6">
-        <article class="box-icon">
-        <figure class="box-icon-image">
-        <img src="images/icon-service-light-4-70x62.png" alt="" width="70" height="62" />
-        </figure>
-        <p class="box-icon-header"><a class="link-underlined" href="services.html">Mustache TRIM</a></p>
-        <p class="box-icon-text">Mustaches also need to be trimmed regularly</p>
-        </article>
-        </div>
-        <div class="cell-xs-6">
-        <article class="box-icon">
-        <figure class="box-icon-image">
-        <img src="images/icon-service-light-1-70x62.png" alt="" width="70" height="62" />
-        </figure>
-        <p class="box-icon-header"><a class="link-underlined" href="services.html">TRADITIONAL HAIRCUTS</a></p>
-        <p class="box-icon-text">One of the most popular services our barbers provide</p>
-        </article>
-        </div>
-        <div class="cell-xs-6">
-        <article class="box-icon">
-        <figure class="box-icon-image">
-        <img src="images/icon-service-light-2-70x62.png" alt="" width="70" height="62" />
-        </figure>
-        <p class="box-icon-header"><a class="link-underlined" href="services.html">SHAVES</a></p>
-        <p class="box-icon-text">Our shaving services will make you look really handsome</p>
-        </article>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </section> *@
-
-        @*    <section class="section-xl bg-periglacial-blue text-center">
-        <div class="shell">
-        <div class="range range-sm-center range-75">
-        <div class="cell-xs-12">
-        <h2>TESTIMONIALS</h2>
-        <div class="p text-width-medium">
-        <p class="big">These reviews that our clients have recently submitted are the best way to learn more about our barbershop’s level of service and customer support.</p>
-        </div>
-        </div>
-        <div class="cell-xs-12">
-        <!-- Owl Carousel-->
-        <div class="owl-carousel owl-carousel-modern owl-style-1" data-items="1" data-stage-padding="0" data-loop="true" data-margin="20" data-xs-margin="30" data-mouse-drag="false" data-nav="true" data-dots="true" data-animation-in="fadeIn" data-animation-out="fadeOut">
-        <div class="item">
-        <blockquote class="quote-centered">
-        <div class="quote-centered-avatar">
-        <img src="images/testimonials-1-100x100.jpg" alt="" width="100" height="100" />
-        </div>
-        <cite>Matt Parker</cite>
-        <p class="quote-centered-text">
-        <q>I have taken my 3 yr old son for his first men’s haircut and now I’m glad he has such a fantastic look. I recommend any of the barbers at Barbershop for service and pride in their work. I believe my son would never be allowed to leave the chair without a really handsome cut.</q>
-        </p>
-        <ul class="inline-list inline-list-md">
-        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-        </ul>
-        </blockquote>
-        </div>
-        <div class="item">
-        <blockquote class="quote-centered">
-        <div class="quote-centered-avatar">
-        <img src="images/testimonials-2-100x100.jpg" alt="" width="100" height="100" />
-        </div>
-        <cite>John Miller</cite>
-        <p class="quote-centered-text">
-        <q>I wouldn't go anywhere else in San Francisco. I've been coming here for the last year and I've never felt better about paying good money for a haircut. The guys know what they are doing, give solid advice, and cut like pros. I wasn't used to this before but I’ll visit Barbershop again.</q>
-        </p>
-        <ul class="inline-list inline-list-md">
-        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-        </ul>
-        </blockquote>
-        </div>
-        <div class="item">
-        <blockquote class="quote-centered">
-        <div class="quote-centered-avatar">
-        <img src="images/testimonials-3-100x100.jpg" alt="" width="100" height="100" />
-        </div>
-        <cite>Anthony Smith</cite>
-        <p class="quote-centered-text">
-        <q>Polite, professional, charming and courteous team. The best haircut I have ever had! Simon was full of crack, was more than happy to suggest the best cut for me and he even offered a free beverage - what more could you want?! This barbershop is indeed my favorite one.</q>
-        </p>
-        <ul class="inline-list inline-list-md">
-        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-        </ul>
-        </blockquote>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </section> *@
-
-        @*  <section class="section-xl bg-gray-dark bg-image text-center" style="background-image: url(images/bg-image-1.jpg);">
-        <div class="shell">
-        <div class="range range-50">
-        <div class="cell-xs-12">
-        <h2>OUR BARBERS</h2>
-        <div class="p text-width-medium">
-        <p class="big">We employ only highly qualified barbers who are not just professionals, but also enjoy maintaining the atmosphere of a classic barbershop.</p>
-        </div>
-        </div>
-        <div class="cell-xs-12">
-        <div class="range range-30">
-        <div class="cell-sm-6 cell-md-4 height-fill">
-        <div class="thumbnail-card">
-        <img class="thumbnail-card-image" src="images/barbers-1-370x310.jpg" alt="" width="370" height="310" />
-        <div class="thumbnail-card-body">
-        <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">simon Wilson</p>
-        <div class="thumbnail-card-text">
-        <p>Mr. Wilson is the founder and owner of our barbershop.</p>
-        </div>
-        <ul class="inline-list inline-list-md">
-        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        <div class="cell-sm-6 cell-md-4 height-fill">
-        <div class="thumbnail-card">
-        <img class="thumbnail-card-image" src="images/barbers-2-370x310.jpg" alt="" width="370" height="310" />
-        <div class="thumbnail-card-body">
-        <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">Harry Anderson</p>
-        <div class="thumbnail-card-text">
-        <p>Harry brings a detailed, meticulous approach to styling.</p>
-        </div>
-        <ul class="inline-list inline-list-md">
-        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        <div class="cell-sm-6 cell-md-4 height-fill">
-        <div class="thumbnail-card">
-        <img class="thumbnail-card-image" src="images/barbers-3-370x310.jpg" alt="" width="370" height="310" />
-        <div class="thumbnail-card-body">
-        <p class="thumbnail-card-header" data-toggle="modal" data-target="#modalWindow">Matthew phillips</p>
-        <div class="thumbnail-card-text">
-        <p>Matthew has several years of experience in the barber industry.</p>
-        </div>
-        <ul class="inline-list inline-list-md">
-        <li><a class="icon icon-xs link-gray-base fa-facebook" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-twitter" href="#"></a></li>
-        <li><a class="icon icon-xs link-gray-base fa-linkedin" href="#"></a></li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div class="cell-xs-12"><a class="btn btn-sm btn-style-1 btn-primary" href="barbers.html">VIEW all team</a></div>
-        </div>
-        </div>
-        </section> *@
-
-        @*  <section class="section-lg bg-periglacial-blue text-center">
-        <div class="shell">
-        <div class="range range-sm-center range-75">
-        <div class="cell-xs-12">
-        <h2>latest blog posts</h2>
-        <div class="p text-width-medium">
-        <p class="big">Barbershop is not only a place where you can get a first-class haircut. Our barbers also write interesting articles on everything concerning their sphere of interest.</p>
-        </div>
-        </div>
-        <div class="cell-xs-12">
-        <div class="slick-slider carousel-center-mode" data-arrows="false" data-loop="true" data-dots="true" data-swipe="true" data-autoplay="false" data-items="1" data-lg-items="3" data-center-mode="true" data-center-padding="0.0">
-        <div class="item">
-        <div class="slick-slide-inner">
-        <article class="post-classic">
-        <img class="post-classic-image" src="images/blog-1-770x330.jpg" alt="" width="770" height="330" />
-        <div class="post-classic-body">
-        <p class="post-classic-title"><a href="single-post.html">Visiting a Barber</a></p>
-        <div class="post-classic-text">
-        <p>A barber knows how to cut men’s hair. If you’re like most men these days, you’re probably going to some unisex chain salon. Most of the time, you’d walk out of these places with an average haircut. Sometimes...</p>
-        </div>
-        <div class="post-classic-footer">
-        <div class="post-classic-footer-left"><a class="btn btn-xs btn-primary btn-circle" href="single-post.html">READ MORE</a></div>
-        <div class="post-classic-footer-right">
-        <ul class="post-classic-meta">
-        <li><span class="icon icon-xxs icon-primary fa fa-heart"></span><span>24</span></li>
-        <li><span class="icon icon-xxs icon-primary fa fa-eye"></span><span>132</span></li>
-        <li>
-        <span class="icon icon-xxs icon-primary fa fa-calendar-plus-o"></span>
-        <time datetime="2017-08-26">26.08.2017</time>
-        </li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </article>
-        </div>
-        </div>
-        <div class="item">
-        <div class="slick-slide-inner">
-        <article class="post-classic">
-        <img class="post-classic-image" src="images/blog-2-770x330.jpg" alt="" width="770" height="330" />
-        <div class="post-classic-body">
-        <p class="post-classic-title"><a href="single-post.html">What Haircut Suits You</a></p>
-        <div class="post-classic-text">
-        <p>Different people have different face shapes. And not you, but your face shape decides will this haircut suit you or not. The Barbershop has prepared some advice for you, how to choose a proper haircut for...</p>
-        </div>
-        <div class="post-classic-footer">
-        <div class="post-classic-footer-left"><a class="btn btn-xs btn-primary btn-circle" href="single-post.html">READ MORE</a></div>
-        <div class="post-classic-footer-right">
-        <ul class="post-classic-meta">
-        <li><span class="icon icon-xxs icon-primary fa fa-heart"></span><span>24</span></li>
-        <li><span class="icon icon-xxs icon-primary fa fa-eye"></span><span>132</span></li>
-        <li>
-        <span class="icon icon-xxs icon-primary fa fa-calendar-plus-o"></span>
-        <time datetime="2017-08-26">26.08.2017</time>
-        </li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </article>
-        </div>
-        </div>
-        <div class="item">
-        <div class="slick-slide-inner">
-        <article class="post-classic">
-        <img class="post-classic-image" src="images/blog-3-770x330.jpg" alt="" width="770" height="330" />
-        <div class="post-classic-body">
-        <p class="post-classic-title"><a href="single-post.html">Top 7 Shaving Products</a></p>
-        <div class="post-classic-text">
-        <p>The right shaving cream can make the difference between a healthy skin and one plagued by ingrown hairs, razor burns, irritation, and a variety of other issues that arise from nicks and cuts. In the times of old, people used soap when shaving and although there are still plenty of...</p>
-        </div>
-        <div class="post-classic-footer">
-        <div class="post-classic-footer-left"><a class="btn btn-xs btn-primary btn-circle" href="single-post.html">READ MORE</a></div>
-        <div class="post-classic-footer-right">
-        <ul class="post-classic-meta">
-        <li><span class="icon icon-xxs icon-primary fa fa-heart"></span><span>24</span></li>
-        <li><span class="icon icon-xxs icon-primary fa fa-eye"></span><span>132</span></li>
-        <li>
-        <span class="icon icon-xxs icon-primary fa fa-calendar-plus-o"></span>
-        <time datetime="2017-08-26">26.08.2017</time>
-        </li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </article>
-        </div>
-        </div>
-        <div class="item">
-        <div class="slick-slide-inner">
-        <article class="post-classic">
-        <img class="post-classic-image" src="images/blog-2-770x330.jpg" alt="" width="770" height="330" />
-        <div class="post-classic-body">
-        <p class="post-classic-title"><a href="single-post.html">Visiting a Barber</a></p>
-        <div class="post-classic-text">
-        <p>A barber knows how to cut men’s hair. If you’re like most men these days, you’re probably going to some unisex chain salon. Most of the time, you’d walk out of these places with an average haircut. Sometimes...</p>
-        </div>
-        <div class="post-classic-footer">
-        <div class="post-classic-footer-left"><a class="btn btn-xs btn-primary btn-circle" href="single-post.html">READ MORE</a></div>
-        <div class="post-classic-footer-right">
-        <ul class="post-classic-meta">
-        <li><span class="icon icon-xxs icon-primary fa fa-heart"></span><span>24</span></li>
-        <li><span class="icon icon-xxs icon-primary fa fa-eye"></span><span>132</span></li>
-        <li>
-        <span class="icon icon-xxs icon-primary fa fa-calendar-plus-o"></span>
-        <time datetime="2017-08-26">26.08.2017</time>
-        </li>
-        </ul>
-        </div>
-        </div>
-        </div>
-        </article>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </section> *@
-        @*
-        <section class="box-wrap box-wrap-md bg-white">
-        <div class="box-wrap-map">
-        <div class="rd-google-map rd-google-map__model" data-zoom="14" data-x="-74.0150000" data-y="40.643180">
-        <ul class="map_locations"></ul>
-        </div>
-        </div>
-        <div class="box-wrap-content">
-        <div class="shell">
-        <div class="range">
-        <div class="cell-xs-12">
-        <div class="box-contacts box-contacts-horizontal box-wrap-content-interactive block-right">
-        <div class="box-contacts-col">
-        <div class="box-contacts-block">
-        <h3>Address</h3>
-        <address>123 Street W, Seattle WA 99999 United States</address>
-        </div>
-        <div class="divider divider-nebula"></div>
-        <div class="box-contacts-block">
-        <h3>Opening Hours</h3>
-        <dl class="box-contacts-terms-list">
-        <dt>Monday – Friday</dt>
-        <dd>9am - 6pm</dd>
-        <dt>Saturday and Sunday</dt>
-        <dd>10am - 4pm</dd>
-        </dl>
-        </div>
-        </div>
-        <div class="box-contacts-col box-contacts-right">
-        <div class="box-contacts-block">
-        <h3>Get In Touch</h3>
-        <p>Leave your name and phone number, and we’ll contact you.</p>
-        <form class="rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
-        <div class="form-group">
-        <label class="form-label-outside" for="contact-full-name">Full Name</label>
-        <input class="form-control" id="contact-full-name" type="text" name="name" data-constraints="@@Required">
-        </div>
-        <div class="form-group">
-        <label class="form-label-outside" for="contact-phone">Telephone</label>
-        <input class="form-control" id="contact-phone" type="text" name="phone" data-constraints="@@Required @@Numeric">
-        </div>
-        <button class="btn btn-sm btn-primary btn-block btn-circle" type="submit">SEND REQUEST</button>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </section>
-        *@
         <footer class="page-footer page-footer-variant-3">
             <div class="shell">
                 <div class="range range-50">
@@ -627,12 +408,12 @@
                         <h3>Pages</h3>
                         <div class="divider divider-conch"></div>
                         <ul class="footer-navigation row footer-navigation-vertical" style="max-width: 390px;">
-                            <li class="col-xs-6"><a href="index.html">Home</a></li>
-                            <li class="col-xs-6"><a href="blog.html">Blog</a></li>
-                            <li class="col-xs-6"><a href="about.html">About</a></li>
-                            <li class="col-xs-6"><a href="shop.html">Shop</a></li>
-                            <li class="col-xs-6"><a href="services.html">Services</a></li>
-                            <li class="col-xs-6"><a href="contacts-1.html">Contacts</a></li>
+                            <li class="col-xs-6"><a href="index.html">Gym</a></li>
+                            <li class="col-xs-6"><a href="blog.html">Stores</a></li>
+                            <li class="col-xs-6"><a href="about.html">Services</a></li>
+                            <li class="col-xs-6"><a href="shop.html">Notifications</a></li>
+                            <li class="col-xs-6"><a href="services.html">News</a></li>
+                            <li class="col-xs-6"><a href="contacts-1.html">Categories</a></li>
                         </ul>
                     </div>
                     <div class="cell-sm-6 cell-md-5">
@@ -646,10 +427,10 @@
                         <h3>Follow Us</h3>
                         <div class="divider divider-conch"></div>
                         <ul class="inline-list inline-list-xs">
-                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="#"></a></li>
-                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-twitter" href="#"></a></li>
-                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="#"></a></li>
-                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="#"></a></li>
+                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="https://www.facebook.com/profile.php?id=100095431091289&mibextid=ZbWKwL"></a></li>
+                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-instagram" href="https://www.instagram.com/smartuse.jo?igsh=NTc4MTIwNjQ2YQ=="></a></li>
+                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="https://www.youtube.com/channel/UCGGIbazUcR6FKqUtSdhJz_w"></a></li>
+                            <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="https://www.linkedin.com/company/smartusejo/"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -714,8 +495,8 @@
     </div>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
-    @*
-    <div id="js-preloader" class="js-preloader" style="background-image: url('images/bg-01.jpg'); background-size: 100%; opacity: revert; ">
+
+    @*  <div id="js-preloader" class="js-preloader" style="background-image: url('images/bg-01.jpg'); background-size: 100%; opacity: revert; ">
     <div class="preloader-inner">
     <span class="dot"></span>
     <div class="dots">
@@ -727,3 +508,47 @@
     </div> *@
 </body>
 </html>
+<style>
+    .highcharts-figure,
+    .highcharts-data-table table {
+        min-width: 310px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>

@@ -7,6 +7,18 @@
 	font-style: normal;
 }
 
+:root {
+	--BrandColor: #0189FF;
+	--BrandColor--2: #D3F252;
+	--BrandColor--3: #151515;
+}
+
+#foo {
+	color: var(--BrandColor);
+	color: var(--BrandColor--2);
+	color: var(--BrandColor--3);
+}
+
 /**
 * Template Style
 *
@@ -85,6 +97,7 @@ html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -411,7 +424,7 @@ a {
 }
 
 a:hover, a:focus {
-	color: #0189FF;
+	color: var(--BrandColor);
 	text-decoration: none;
 }
 
@@ -642,7 +655,7 @@ mark,
 }
 
 .text-primary {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 a.text-primary:hover,
@@ -691,7 +704,7 @@ a.text-danger:focus {
 }
 
 .bg-primary {
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 }
 
 a.bg-primary:hover,
@@ -1973,8 +1986,8 @@ fieldset[disabled] .btn-default.focus {
 
 .btn-primary {
 	color: #fff;
-	background-color: #0189FF;
-	border-color: #0189FF;
+	background-color: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2014,12 +2027,12 @@ fieldset[disabled] .btn-default.focus {
 fieldset[disabled] .btn-primary:hover,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary.focus {
-	background-color: #0189FF;
-	border-color: #0189FF;
+	background-color: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .btn-primary .badge {
-	color: #0189FF;
+	color: var(--BrandColor);
 	background-color: #fff;
 }
 
@@ -2249,7 +2262,7 @@ fieldset[disabled] .btn-link {
 }
 
 .btn-link:hover, .btn-link:focus {
-	color: #0189FF;
+	color: var(--BrandColor);
 	text-decoration: none;
 	background-color: transparent;
 }
@@ -3167,7 +3180,7 @@ tbody.collapse.in {
 	color: #242423;
 	text-decoration: none;
 	outline: 0;
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 }
 
 .dropdown-menu > .disabled > a, .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
@@ -3707,7 +3720,7 @@ tbody.collapse.in {
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
 	color: #242423;
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 }
 
 .nav-stacked > li {
@@ -4604,7 +4617,7 @@ a.label:hover, a.label:focus {
 }
 
 .label-primary {
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 }
 
 .label-primary[href]:hover, .label-primary[href]:focus {
@@ -4910,7 +4923,7 @@ a.thumbnail.active {
 	line-height: 21px;
 	color: #fff;
 	text-align: center;
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 	-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 	-webkit-transition: width 0.6s ease;
@@ -5099,8 +5112,8 @@ button.list-group-item {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
 	z-index: 2;
 	color: #242423;
-	background-color: #0189FF;
-	border-color: #0189FF;
+	background-color: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .list-group-item.active .list-group-item-heading,
@@ -5558,26 +5571,26 @@ button.list-group-item-danger.active:focus {
 }
 
 .panel-primary {
-	border-color: #0189FF;
+	border-color: var(--BrandColor);
 }
 
 .panel-primary > .panel-heading {
 	color: #fff;
-	background-color: #0189FF;
-	border-color: #0189FF;
+	background-color: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-	border-top-color: #0189FF;
+	border-top-color: var(--BrandColor);
 }
 
 .panel-primary > .panel-heading .badge {
-	color: #0189FF;
+	color: var(--BrandColor);
 	background-color: #fff;
 }
 
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-	border-bottom-color: #0189FF;
+	border-bottom-color: var(--BrandColor);
 }
 
 .panel-success {
@@ -7038,7 +7051,7 @@ button.close {
 	padding: 3px 8px;
 	color: #fff;
 	text-align: center;
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 	border-radius: 0;
 }
 
@@ -7055,7 +7068,7 @@ button.close {
 	left: 50%;
 	margin-left: -5px;
 	border-width: 5px 5px 0;
-	border-top-color: #0189FF;
+	border-top-color: var(--BrandColor);
 }
 
 .tooltip.top-left .tooltip-arrow {
@@ -7063,7 +7076,7 @@ button.close {
 	right: 5px;
 	margin-bottom: -5px;
 	border-width: 5px 5px 0;
-	border-top-color: #0189FF;
+	border-top-color: var(--BrandColor);
 }
 
 .tooltip.top-right .tooltip-arrow {
@@ -7071,7 +7084,7 @@ button.close {
 	left: 5px;
 	margin-bottom: -5px;
 	border-width: 5px 5px 0;
-	border-top-color: #0189FF;
+	border-top-color: var(--BrandColor);
 }
 
 .tooltip.right .tooltip-arrow {
@@ -7079,7 +7092,7 @@ button.close {
 	left: 0;
 	margin-top: -5px;
 	border-width: 5px 5px 5px 0;
-	border-right-color: #0189FF;
+	border-right-color: var(--BrandColor);
 }
 
 .tooltip.left .tooltip-arrow {
@@ -7087,7 +7100,7 @@ button.close {
 	right: 0;
 	margin-top: -5px;
 	border-width: 5px 0 5px 5px;
-	border-left-color: #0189FF;
+	border-left-color: var(--BrandColor);
 }
 
 .tooltip.bottom .tooltip-arrow {
@@ -7095,7 +7108,7 @@ button.close {
 	left: 50%;
 	margin-left: -5px;
 	border-width: 0 5px 5px;
-	border-bottom-color: #0189FF;
+	border-bottom-color: var(--BrandColor);
 }
 
 .tooltip.bottom-left .tooltip-arrow {
@@ -7103,7 +7116,7 @@ button.close {
 	right: 5px;
 	margin-top: -5px;
 	border-width: 0 5px 5px;
-	border-bottom-color: #0189FF;
+	border-bottom-color: var(--BrandColor);
 }
 
 .tooltip.bottom-right .tooltip-arrow {
@@ -7111,7 +7124,7 @@ button.close {
 	left: 5px;
 	margin-top: -5px;
 	border-width: 0 5px 5px;
-	border-bottom-color: #0189FF;
+	border-bottom-color: var(--BrandColor);
 }
 
 .popover {
@@ -7862,44 +7875,34 @@ form {
 .shell,
 .shell-wide,
 .shell-fluid {
-	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-	padding-left: 15px;
-	padding-right: 15px;
+	width: 100%; 
 }
 
 .shell,
-.shell-wide {
-	min-width: 300px;
-	max-width: 100%;
+.shell-wide { 
 }
 
 @media (min-width: 480px) {
 	.shell,
-	.shell-wide {
-		max-width: 480px;
+	.shell-wide { 
 	}
 }
 
 @media (min-width: 768px) {
 	.shell,
-	.shell-wide {
-		max-width: 750px;
+	.shell-wide { 
 	}
 }
 
 @media (min-width: 992px) {
 	.shell,
-	.shell-wide {
-		max-width: 970px;
+	.shell-wide { 
 	}
 }
 
 @media (min-width: 1200px) {
 	.shell,
-	.shell-wide {
-		max-width: 1200px;
+	.shell-wide { 
 	}
 }
 
@@ -9354,9 +9357,7 @@ html.lt-ie-10 .range > .cell-xs-11 {
 	max-width: 91.66667%;
 }
 
-html.lt-ie-10 .range > .cell-xs-12 {
-	margin-left: auto;
-	margin-right: auto;
+html.lt-ie-10 .range > .cell-xs-12 { 
 	max-width: 100%;
 }
 
@@ -10053,7 +10054,7 @@ h1 a, h1 a:active, h1 a:focus, h2 a, h2 a:active, h2 a:focus, h3 a, h3 a:active,
 }
 
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover, .h1 a:hover, .h2 a:hover, .h3 a:hover, .h4 a:hover, .h5 a:hover, .h6 a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 h1,
@@ -10181,7 +10182,7 @@ code {
 mark,
 .mark {
 	color: #fff;
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 	padding: .1em .5em;
 }
 
@@ -10208,7 +10209,7 @@ mark,
 }
 
 .caption a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -10384,7 +10385,7 @@ address {
 }
 
 .page .text-primary {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .page .text-dark {
@@ -10526,8 +10527,8 @@ address {
 
 .btn-primary, .btn-primary:active, .btn-primary:focus {
 	color: #fff;
-	background: #0189FF;
-	border-color: #0189FF;
+	background: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .btn-primary:hover {
@@ -10712,7 +10713,7 @@ address {
 }
 
 .btn-shop .btn-shop-text, .btn-shop:active .btn-shop-text, .btn-shop:focus .btn-shop-text {
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .btn-shop:hover {
@@ -10720,7 +10721,7 @@ address {
 }
 
 .btn-shop:hover .btn-shop-icon {
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .btn-shop:hover .btn-shop-text {
@@ -10800,7 +10801,7 @@ address {
 	line-height: 0;
 	background-color: transparent;
 	border: 0;
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-fixed-linked .booking-control .btn:after {
@@ -10842,17 +10843,17 @@ address {
 }
 
 .page .icon-primary {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .page .icon-wild-sand-filled, .page .icon-wild-sand-filled:active, .page .icon-wild-sand-filled:focus {
-	color: #999;
-	background: #f5f5f5;
+	color: var(--BrandColor--3);
+	background: var(--BrandColor--2);
 }
 
 .page .icon-wild-sand-filled:hover {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .icon-xs {
@@ -22771,7 +22772,7 @@ address {
 }
 
 .thumbnail-card-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .thumbnail-card-text {
@@ -22839,7 +22840,7 @@ address {
 }
 
 .thumbnail-fullwidth-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -22997,7 +22998,7 @@ address {
 
 .thumbnail-option-list > li.active {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 * + .thumbnail-option-list {
@@ -23062,7 +23063,7 @@ address {
 }
 
 [class*='thumbnail'] [data-toggle='modal']:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-mailform {
@@ -23163,7 +23164,7 @@ textarea.form-control {
 	display: block;
 	margin-bottom: 8px;
 	font: 400 12px/18px "Arvo", Helvetica, Arial, sans-serif;
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -23477,7 +23478,7 @@ textarea.form-control {
 }
 
 .radio-bold .radio-custom-dummy:after {
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -23529,7 +23530,7 @@ textarea.form-control {
 	line-height: 15px;
 	left: 2px;
 	margin-top: 1px;
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-mailform {
@@ -25087,12 +25088,12 @@ section {
 }
 
 .footer-navigation > li > a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .footer-navigation > li.active > a {
 	pointer-events: none;
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .footer-navigation-vertical {
@@ -25148,7 +25149,7 @@ a, a:active, a:focus {
 }
 
 a:hover, a:focus {
-	color: #0189FF;
+	color: var(--BrandColor);
 	text-decoration: none;
 }
 
@@ -25893,7 +25894,7 @@ dt {
 }
 
 .terms-list dt a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -25951,7 +25952,7 @@ dt {
 }
 
 .terms-list-bordered dt a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -26199,7 +26200,7 @@ dt {
 }
 
 .link-list a, .link-list a:active, .link-list a:focus {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .link-list a:hover {
@@ -26321,7 +26322,7 @@ dt {
 }
 
 .page .link-default, .page .link-default.active, .page .link-default:active, .page .link-default:focus {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .page .link-default.hover, .page .link-default:hover {
@@ -26333,7 +26334,7 @@ dt {
 }
 
 .page .link-gray-light:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .page .link-gray-base, .page .link-gray-base:active, .page .link-gray-base:focus {
@@ -26341,11 +26342,11 @@ dt {
 }
 
 .page .link-gray-base:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .page .link-primary, .page .link-primary:active, .page .link-primary:focus {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .page .link-primary:hover {
@@ -26390,7 +26391,7 @@ dt {
 	background-size: cover;
 	background-position: center 90%;
 	background-color: #000;
-	background-image: url("../images/bg-image-title.jpg");
+	background-image: url("../images/GymPageBackground.jpg");
 	color: #fff;
 	display: -ms-flexbox;
 	display: -webkit-flex;
@@ -26472,7 +26473,7 @@ dt {
 }
 
 .page-title-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -26531,7 +26532,7 @@ blockquote .small:before {
 	position: relative;
 	padding: 80px 25px 40px;
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 	text-align: left;
 }
 
@@ -26610,7 +26611,7 @@ blockquote .small:before {
 }
 
 .quote-fullwidth cite a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -26802,7 +26803,7 @@ blockquote .small:before {
 }
 
 .quote-card cite a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -26992,7 +26993,7 @@ blockquote .small:before {
 }
 
 .quote-review-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -27021,7 +27022,7 @@ blockquote .small:before {
 
 .quote-review-user {
 	font-weight: 700;
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 * + .quote-review-meta {
@@ -27227,7 +27228,7 @@ blockquote .small:before {
 }
 
 .box-icon-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .box-icon-text {
@@ -27447,7 +27448,7 @@ blockquote .small:before {
 }
 
 .box-portfolio-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -27558,7 +27559,7 @@ blockquote .small:before {
 
 .box-service-title a:hover,
 .box-service-price a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .box-service-title {
@@ -27582,8 +27583,8 @@ blockquote .small:before {
 
 .box-service-control, .box-service-control:active, .box-service-control:focus {
 	color: #fff;
-	background: #0189FF;
-	border-color: #0189FF;
+	background: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .box-service-control:hover {
@@ -27728,7 +27729,7 @@ blockquote .small:before {
 }
 
 .card-service-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .card-service-price {
@@ -27755,7 +27756,7 @@ blockquote .small:before {
 }
 
 .card-service-price a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .card-service-price small {
@@ -27768,8 +27769,8 @@ blockquote .small:before {
 
 .card-service-control, .card-service-control:active, .card-service-control:focus {
 	color: #fff;
-	background: #0189FF;
-	border-color: #0189FF;
+	background: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .card-service-control:hover {
@@ -27871,7 +27872,7 @@ blockquote .small:before {
 }
 
 .card-service-option-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .card-service-option-text {
@@ -27887,8 +27888,8 @@ blockquote .small:before {
 
 .card-service-option-control, .card-service-option-control:active, .card-service-option-control:focus {
 	color: #fff;
-	background: #0189FF;
-	border-color: #0189FF;
+	background: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .card-service-option-control:hover {
@@ -28095,13 +28096,11 @@ blockquote .small:before {
 
 .box-contacts {
 	background: #fff;
-	padding: 30px 0;
-	text-align: left;
+	padding: 30px 0; 
 }
 
 .box-contacts address {
-	display: inline-block;
-	width: 150px;
+	display: inline-block; 
 }
 
 .box-contacts .form-control {
@@ -28127,8 +28126,7 @@ blockquote .small:before {
 }
 
 .box-contacts-horizontal-small .box-contacts-col > * {
-	margin-left: auto;
-	margin-right: auto;
+	 
 }
 
 .box-contacts-block {
@@ -28166,8 +28164,7 @@ blockquote .small:before {
 }
 
 @media (min-width: 480px) {
-	.box-contacts {
-		max-width: 770px;
+	.box-contacts { 
 	}
 	.box-contacts-horizontal {
 		display: -ms-flexbox;
@@ -28332,7 +28329,7 @@ blockquote .small:before {
 		padding: 55px 100px;
 	}
 	.box-contacts-horizontal .box-contacts-col > * {
-		max-width: 200px;
+		max-width: 100%;
 	}
 	.box-contacts-horizontal-small {
 		padding: 70px 85px;
@@ -28697,7 +28694,7 @@ blockquote .small:before {
 .custom-progress-body {
 	height: 100%;
 	width: 0;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .rd-navbar-sidebar-linked .custom-progress {
@@ -28853,7 +28850,7 @@ blockquote .small:before {
 
 .table-custom-primary th {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .table-custom-light thead {
@@ -28999,7 +28996,7 @@ blockquote .small:before {
 }
 
 .cart-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -29031,7 +29028,7 @@ blockquote .small:before {
 
 .cart-control:hover {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .cart-control:after {
@@ -29495,8 +29492,8 @@ blockquote .small:before {
 .tabs-custom.tabs-corporate .nav-tabs li a:hover,
 .tabs-custom.tabs-corporate .nav-tabs li.active a {
 	color: #fff;
-	background: #0189FF;
-	border-color: #0189FF;
+	background: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .tabs-custom.tabs-corporate .tab-content {
@@ -29548,7 +29545,7 @@ blockquote .small:before {
 	}
 	.tabs-custom.tabs-horizontal.tabs-corporate .nav-tabs li.active a,
 	.tabs-custom.tabs-horizontal.tabs-corporate .nav-tabs li a:hover {
-		border-color: #0189FF;
+		border-color: var(--BrandColor);
 	}
 	.tabs-custom.tabs-horizontal.tabs-corporate .tab-content {
 		padding: 30px 0 0;
@@ -29736,7 +29733,7 @@ blockquote .small:before {
 .panel-light .panel-arrow:after {
 	content: '\e313';
 	font: 400 24px "Material Icons";
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .panel-light .panel-collapse {
@@ -29780,7 +29777,7 @@ blockquote .small:before {
 }
 
 .panel-contrast .panel-title a a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -29876,7 +29873,7 @@ blockquote .small:before {
 }
 
 .panel-minimal .panel-title a a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -29966,7 +29963,7 @@ blockquote .small:before {
 }
 
 .post-classic-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -30081,7 +30078,7 @@ blockquote .small:before {
 }
 
 .post-block-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -30109,7 +30106,7 @@ blockquote .small:before {
 	text-align: center;
 	margin-left: 10px;
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 	border-radius: 10px;
 	font-size: 22px;
 	line-height: 0;
@@ -30391,7 +30388,7 @@ blockquote .small:before {
 }
 
 .box-post-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .box-post-title a, .box-post-title a:active, .box-post-title a:focus {
@@ -30399,7 +30396,7 @@ blockquote .small:before {
 }
 
 .box-post-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .box-post-text {
@@ -30414,8 +30411,8 @@ blockquote .small:before {
 
 .box-post-control, .box-post-control:active, .box-post-control:focus {
 	color: #fff;
-	background: #0189FF;
-	border-color: #0189FF;
+	background: var(--BrandColor);
+	border-color: var(--BrandColor);
 }
 
 .box-post-control:hover {
@@ -30619,7 +30616,7 @@ blockquote .small:before {
 	text-align: center;
 	border-radius: 20px;
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .shop-panel-link:hover .icon {
@@ -30627,7 +30624,7 @@ blockquote .small:before {
 }
 
 .shop-panel-link:hover .count {
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .shop-panel-price {
@@ -30723,13 +30720,13 @@ blockquote .small:before {
 }
 
 .product {
-	padding: 50px;
+	padding: 10px;
 	background: #fff;
 	text-align: center;
 }
 
 .product * + .btn-shop {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 .product-image {
@@ -30745,11 +30742,11 @@ blockquote .small:before {
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	height: 170px;
+	height: 160px;
 }
 
 .product-title {
-	font: 400 14px/24px "Arvo", Helvetica, Arial, sans-serif;
+	font: 50 14px/24px "Arvo", Helvetica, Arial, sans-serif;
 	letter-spacing: 0;
 	color: #000;
 	text-transform: uppercase;
@@ -30760,18 +30757,18 @@ blockquote .small:before {
 }
 
 .product-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .product-price {
-	font: 400 24px "Arvo", Helvetica, Arial, sans-serif;
+	font: 50 24px "Arvo", Helvetica, Arial, sans-serif;
 	line-height: 1.2;
 	letter-spacing: .2em;
 	color: #000;
 }
 
 * + .product-title {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 * + .product-price {
@@ -30789,7 +30786,7 @@ blockquote .small:before {
 
 @media (min-width: 768px) {
 	.product {
-		padding: 70px;
+		padding: 10px;
 	}
 	.product-price {
 		font-size: 30px;
@@ -30833,7 +30830,7 @@ blockquote .small:before {
 }
 
 .product-single-title a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -31137,7 +31134,7 @@ blockquote .small:before {
 
 .rd-material-tab-active .date-picker-date {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .rd-material-tab-active .date-picker-list > li:nth-child(n) {
@@ -31307,7 +31304,7 @@ blockquote .small:before {
 
 .date-picker-list li a:hover {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .date-picker-list li.disabled a {
@@ -35798,7 +35795,7 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-fullwidth .rd-megamenu-list > li > a:hover,
 .rd-navbar-static .rd-navbar-dropdown > li > a:hover,
 .rd-navbar-static .rd-megamenu-list > li > a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-fullwidth .rd-navbar-dropdown > li > a, .rd-navbar-fullwidth .rd-navbar-dropdown > li > a:focus, .rd-navbar-fullwidth .rd-navbar-dropdown > li > a:active,
@@ -35819,7 +35816,7 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-fullwidth .rd-megamenu-list > li > a:hover,
 .rd-navbar-static .rd-navbar-dropdown > li > a:hover,
 .rd-navbar-static .rd-megamenu-list > li > a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 	background: transparent;
 }
 
@@ -35827,7 +35824,7 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-fullwidth .rd-megamenu-list > li + li,
 .rd-navbar-static .rd-navbar-dropdown > li + li,
 .rd-navbar-static .rd-megamenu-list > li + li {
-	margin-top: 6px;
+	margin-top: 25px;
 }
 
 .rd-navbar-fullwidth .rd-navbar-dropdown,
@@ -35869,7 +35866,7 @@ html:not(.lt-ie10) .not-animated {
 
 .rd-navbar-fullwidth .rd-navbar-dropdown > li > a:hover,
 .rd-navbar-static .rd-navbar-dropdown > li > a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 	background: transparent;
 }
 
@@ -35877,7 +35874,7 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-fullwidth .rd-navbar-dropdown > li.opened > a,
 .rd-navbar-static .rd-navbar-dropdown > li.focus > a,
 .rd-navbar-static .rd-navbar-dropdown > li.opened > a {
-	color: #0189FF;
+	color: var(--BrandColor);
 	background: transparent;
 }
 
@@ -35962,7 +35959,7 @@ html:not(.lt-ie10) .not-animated {
 
 .rd-navbar-fullwidth .rd-megamenu-header a:hover,
 .rd-navbar-static .rd-megamenu-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 @media (min-width: 768px) {
@@ -36188,8 +36185,8 @@ html:not(.lt-ie10) .not-animated {
 	margin-left: 36px;
 }
 
-.rd-navbar-fullwidth .rd-navbar-nav > li:nth-child(4) {
-	margin-left: 275px;
+.rd-navbar-fullwidth {
+	margin-left:0px;
 }
 
 .rd-navbar-fullwidth .rd-navbar-megamenu > li:first-child {
@@ -36311,7 +36308,7 @@ html:not(.lt-ie10) .not-animated {
 		bottom: 0;
 		right: 0;
 		box-shadow: none;
-		border-bottom: 3px solid #D3F252;
+		border-bottom: 3px solid var(--BrandColor--2);
 		border-radius: 0 0 20px 20px;
 		background: rgb(21,21,21,1);
 		height: 75px;
@@ -36374,13 +36371,13 @@ html:not(.lt-ie10) .not-animated {
 	.rd-navbar-fixed .rd-navbar-nav li > a {
 		display: block;
 		padding: 11px 56px 11px 16px;
-		color: #D3F252;
+		color: var(--BrandColor--2);
 		border-radius: 0 25px 25px 0;
 	}
 
 .rd-navbar-fixed .rd-navbar-nav li:hover > a, .rd-navbar-fixed .rd-navbar-nav li:hover > a:hover, .rd-navbar-fixed .rd-navbar-nav li.focus > a, .rd-navbar-fixed .rd-navbar-nav li.focus > a:hover, .rd-navbar-fixed .rd-navbar-nav li.active > a, .rd-navbar-fixed .rd-navbar-nav li.active > a:hover, .rd-navbar-fixed .rd-navbar-nav li.opened > a, .rd-navbar-fixed .rd-navbar-nav li.opened > a:hover {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .rd-navbar-fixed .rd-navbar-nav li:hover > .rd-navbar-submenu-toggle::after, .rd-navbar-fixed .rd-navbar-nav li.focus > .rd-navbar-submenu-toggle::after, .rd-navbar-fixed .rd-navbar-nav li.active > .rd-navbar-submenu-toggle::after, .rd-navbar-fixed .rd-navbar-nav li.opened > .rd-navbar-submenu-toggle::after {
@@ -36447,7 +36444,7 @@ html:not(.lt-ie10) .not-animated {
 .rd-navbar-fixed .rd-navbar-dropdown.opened > a,
 .rd-navbar-fixed .rd-navbar-dropdown.opened > a:hover {
 	color: #fff;
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .rd-navbar-fixed .rd-megamenu-list > li + li,
@@ -36471,7 +36468,7 @@ html:not(.lt-ie10) .not-animated {
 }
 
 .rd-navbar-fixed .rd-navbar-megamenu .rd-megamenu-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-fixed .rd-navbar-megamenu .rd-megamenu-header:after {
@@ -36855,15 +36852,15 @@ html:not(.lt-ie10) .not-animated {
 }
 
 .rd-navbar-sidebar .rd-navbar-nav > li > a, .rd-navbar-sidebar .rd-navbar-nav > li > a:active, .rd-navbar-sidebar .rd-navbar-nav > li > a:focus {
-	color: #000;
+	color: var(--BrandColor--2);
 }
 
 .rd-navbar-sidebar .rd-navbar-nav > li > a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-sidebar .rd-navbar-nav > li.active > a {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-sidebar .rd-navbar-nav > li + li {
@@ -36899,7 +36896,7 @@ html:not(.lt-ie10) .not-animated {
 	position: relative;
 	display: inline-block;
 	font: 400 20px "FontAwesome";
-	color: #0189FF;
+	color: var(--BrandColor);
 	will-change: transform;
 	transition: .33s all ease;
 }
@@ -36993,7 +36990,7 @@ html:not(.lt-ie10) .not-animated {
 
 .rd-navbar-sidebar .rd-megamenu-list > li > a:hover,
 .rd-navbar-sidebar .rd-navbar-dropdown > li > a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-sidebar .rd-megamenu-list > li + li,
@@ -37025,7 +37022,7 @@ html:not(.lt-ie10) .not-animated {
 }
 
 .rd-navbar-sidebar .rd-megamenu-header a:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .rd-navbar-sidebar .rd-megamenu-header:after {
@@ -37330,6 +37327,7 @@ html:not(.lt-ie10) .not-animated {
 	-webkit-perspective: 1500px;
 	-moz-perspective: 1500px;
 	perspective: 1500px;
+	background-color:var(--BrandColor--3);
 }
 
 .rd-navbar-sidebar-linked #perspective.modalView .content-wrapper {
@@ -37421,13 +37419,13 @@ html:not(.lt-ie10) .not-animated {
 	top: 8px;
 }
 
-.rd-navbar-default .rd-navbar-toggle span:after, .rd-navbar-default .rd-navbar-toggle span:before, .rd-navbar-default .rd-navbar-toggle span {
-	width: 26px;
-	height: 1px;
-	background-color: #000;
-	backface-visibility: hidden;
-	border-radius: 2px;
-}
+	.rd-navbar-default .rd-navbar-toggle span:after, .rd-navbar-default .rd-navbar-toggle span:before, .rd-navbar-default .rd-navbar-toggle span {
+		width: 26px;
+		height: 1px;
+		background-color: white;
+		backface-visibility: hidden;
+		border-radius: 2px; 
+	}
 
 .rd-navbar-default .rd-navbar-toggle span:before, .rd-navbar-default .rd-navbar-toggle span:after, .rd-navbar-default .rd-navbar-toggle span span {
 	-webkit-transform-origin: 50% 0;
@@ -37443,6 +37441,7 @@ html:not(.lt-ie10) .not-animated {
 	transition-delay: 0.3s, 0s;
 	-webkit-transition-property: top, -webkit-transform;
 	transition-property: top, transform;
+	color:white;
 }
 
 .rd-navbar-default .rd-navbar-toggle.active span {
@@ -38410,7 +38409,7 @@ a.pswp__share--download:hover {
 }
 
 .progress-bar-primary .progress-bar__stroke {
-	stroke: #0189FF;
+	stroke: var(--BrandColor);
 }
 
 .progress-bar-primary .progress-bar__trail {
@@ -38418,7 +38417,7 @@ a.pswp__share--download:hover {
 }
 
 .progress-bar-primary-v2 .progress-bar__stroke {
-	stroke: #0189FF;
+	stroke: var(--BrandColor);
 }
 
 .progress-bar-primary-v2 .progress-bar__trail {
@@ -38715,7 +38714,7 @@ a.pswp__share--download:hover {
 }
 
 .select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
-	background-color: #0189FF;
+	background-color: var(--BrandColor);
 	color: #242423;
 }
 
@@ -38769,7 +38768,7 @@ a.pswp__share--download:hover {
 }
 
 .select2-container--bootstrap.select2-container--open .select2-selection .select2-selection__arrow b {
-	border-color: transparent transparent #0189FF transparent;
+	border-color: transparent transparent var(--BrandColor) transparent;
 	border-width: 0 5px 5px 5px;
 }
 
@@ -38792,7 +38791,7 @@ a.pswp__share--download:hover {
 }
 
 .select2-container--bootstrap .select2-selection__clear:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .select2-container--bootstrap.select2-container--disabled .select2-selection {
@@ -38850,7 +38849,7 @@ a.pswp__share--download:hover {
 	content: '\f107';
 	font-family: 'FontAwesome';
 	font-size: 22px;
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .select2-container--bootstrap .select2-selection--single .select2-selection__rendered {
@@ -38914,7 +38913,7 @@ a.pswp__share--download:hover {
 }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear {
@@ -39546,7 +39545,7 @@ a.pswp__share--download:hover {
 
 .slick-dots li.slick-active button,
 .slick-dots li:hover button {
-	background: #0189FF;
+	background: var(--BrandColor);
 }
 
 .slick-carousel-product {
@@ -39744,7 +39743,7 @@ a.pswp__share--download:hover {
 }
 
 .stepper-arrow:hover {
-	color: #0189FF;
+	color: var(--BrandColor);
 }
 
 .stepper-arrow.up {
