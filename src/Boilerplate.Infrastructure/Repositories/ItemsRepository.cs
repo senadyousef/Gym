@@ -6,6 +6,8 @@ namespace Boilerplate.Infrastructure.Repositories
 {
     public class ItemsRepository : Repository<Items>, IItemsRepository
     {
-        public ItemsRepository(ApplicationDbContext dbContext) : base(dbContext) { }
-    }
-}   
+        public ItemsRepository(ApplicationDbContext dbContext) : base(dbContext)
+        {
+        }
+    } 
+}

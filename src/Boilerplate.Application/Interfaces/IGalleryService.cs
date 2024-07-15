@@ -3,6 +3,8 @@ using Boilerplate.Application.Filters;
 using Boilerplate.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,28 +20,29 @@ namespace Boilerplate.Application.Interfaces
         public Task<GetGalleryDto> UpdateGallery(int id, UpdateGalleryDto updatedGallery); 
         public Task<bool> DeleteGallery(int id); 
     }
- 
+
     public class GetGalleryDto
     {
-        public int Id {  get; set; } 
-        public string PhotoUri { get; set; }  
+        public int Id {  get; set; }
+        public int UserId { get; set; } 
+        public string PhotoUrl { get; set; }
     }
-
     public class CreateGalleryDto
-    { 
-        public UploadPhotoRequest UploadRequests { get; set; }
-        public string PhotoUri { get; set; } 
+    {
+        public int UserId { get; set; }
+        public string PhotoUrl { get; set; }
     }
 
     public class UpdateGalleryDto
     {
-        public int Id { get; set; } 
-        public UploadPhotoRequest UploadRequests { get; set; }
-        public string PhotoUri { get; set; } 
+        public int UserId { get; set; }
+        public string PhotoUrl { get; set; }
     }
 
     public class GetGalleryFilter : PaginationInfoFilter
-    { 
-        public string PhotoUri { get; set; } 
-    } 
+    {
+        public int UserId { get; set; }
+        public string PhotoUrl { get; set; }
+    }
+
 }

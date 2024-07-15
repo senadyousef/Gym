@@ -19,6 +19,10 @@ using Microsoft.AspNetCore.Http;
 using Rotativa.AspNetCore;
 using static Boilerplate.Application.Services.UploadService;
 using ISession = Boilerplate.Domain.Auth.Interfaces.ISession;
+using Boilerplate.Application.AllServices;
+using Boilerplate.Application.UserAllServices;
+using Boilerplate.Application.Items;
+using Boilerplate.Application.Gallery;
 
 namespace Boilerplate.Api
 {
@@ -58,19 +62,7 @@ namespace Boilerplate.Api
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISession, Session>();
-             
-            //Items
-            services.AddScoped<IItemsRepository, ItemsRepository>();
-            services.AddScoped<IItemsService, ItemsService>(); 
-
-            //Item Photos
-            services.AddScoped<IItemPhotosRepository, ItemPhotosRepository>();
-            services.AddScoped<IItemPhotosService, ItemPhotosService>();
- 
-            //Top Of Top
-            services.AddScoped<ITopOfTopRepository, TopOfTopRepository>();
-            services.AddScoped<ITopOfTopService, TopOfTopService>();
-            
+              
             //Events
             services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<IEventsService, EventsService>();
@@ -78,39 +70,32 @@ namespace Boilerplate.Api
             //User Events
             services.AddScoped<IUserEventsRepository, UserEventsRepository>();
             services.AddScoped<IUserEventsService, UserEventsService>();
-
-            //Branches
-            services.AddScoped<IBranchesRepository, BranchesRepository>();
-            services.AddScoped<IBranchesService, BranchesService>();
-
+             
             //Personal Trainers Classes
             services.AddScoped<IPersonalTrainersClassesRepository, PersonalTrainersClassesRepository>();
             services.AddScoped<IPersonalTrainersClassesService, PersonalTrainersClassesService>();
-
-            //Children
-            services.AddScoped<IChildrenRepository, ChildrenRepository>();
-            services.AddScoped<IChildrenService, ChildrenService>();
-            
+              
             //News
             services.AddScoped<INewsRepository, NewsRepository>();
             services.AddScoped<INewsService, NewsService>();
 
+            //AllServices
+            services.AddScoped<IAllServicesRepository, AllServicesRepository>();
+            services.AddScoped<IAllServicesService, AllServicesService>();
+
+
+            //UserAllServices
+            services.AddScoped<IUserAllServicesRepository, UserAllServicesRepository>();
+            services.AddScoped<IUserAllServicesService, UserAllServicesService>();
+
+            //Items
+            services.AddScoped<IItemsRepository, ItemsRepository>();
+            services.AddScoped<IItemsService, ItemsService>();
+
             //Gallery
             services.AddScoped<IGalleryRepository, GalleryRepository>();
             services.AddScoped<IGalleryService, GalleryService>();
-
-            //User Items
-            services.AddScoped<IUserItemsRepository, UserItemsRepository>();
-            services.AddScoped<IUserItemsService, UserItemsService>();
-            
-            //Carts 
-            services.AddScoped<ICartsRepository, CartsRepository>();
-            services.AddScoped<ICartsService, CartsService>();
-            
-            //Bill
-            services.AddScoped<IBillRepository, BillRepository>();
-            services.AddScoped<IBillService, BillService>();
-              
+             
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             // notification service 

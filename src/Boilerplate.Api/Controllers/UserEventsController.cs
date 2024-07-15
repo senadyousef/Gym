@@ -29,7 +29,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
         ///  
         [HttpGet]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<PaginatedList<GetUserEventsDto>>> GetUserEvents([FromQuery] GetUserEventsFilter filter)
         {
             return Ok(await _UserEventservice.GetAllUserEvents(filter));
@@ -37,7 +37,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetUserEventsDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetUserEventsDto>> GetUserEventsById(int id)
@@ -54,7 +54,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetUserEventsDto>> Create([FromBody] CreateUserEventsDto dto)
@@ -74,7 +74,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<GetUserEventsDto>> UpdateUserEvents(int id, [FromBody] UpdateUserEventsDto dto)
         {
 
@@ -91,7 +91,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The UserEvents's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]

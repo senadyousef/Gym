@@ -15,33 +15,17 @@ namespace Boilerplate.Domain.Entities
         [Required]
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
-        
-        [ForeignKey(nameof(Branches))]
-        public int BranchesId { get; set; }
-
         public string NameAr { get; set; }
-         
         public string NameEn { get; set; }
-           
         public string DescriptionEn { get; set; }
-
         public string DescriptionAr { get; set; } 
-         
         public string PhotoUri { get; set; }
-
         public DateTime Date { get; set; }
-
         public string From { get; set; }
-
         public string To { get; set; }
-
         public int Capacity { get; set; }
-
         public int Booked { get; set; }
-        
         public string Type { get; set; }     
-
-        public Branches Branches { get; set; }
         public User User  { get; set; }
         #endregion
 

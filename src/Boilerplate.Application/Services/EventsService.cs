@@ -37,8 +37,7 @@ namespace Boilerplate.Application.Services
         {
             var newEvents = new Events
             {
-                UserId = Events.UserId,
-                BranchesId = Events.BranchesId,
+                UserId = Events.UserId, 
                 NameAr = Events.NameAr,
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
@@ -64,8 +63,7 @@ namespace Boilerplate.Application.Services
 
             var EventsDto = new GetEventsDto
             {
-                UserId = Events.UserId,
-                BranchesId = Events.BranchesId,
+                UserId = Events.UserId, 
                 NameAr = Events.NameAr,
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
@@ -106,8 +104,7 @@ namespace Boilerplate.Application.Services
             var EventsDto = new GetEventsDto
             {
                 Id = Events.Id,
-                UserId = Events.UserId,
-                BranchesId = Events.BranchesId,
+                UserId = Events.UserId, 
                 NameAr = Events.NameAr,
                 NameEn = Events.NameEn,
                 DescriptionEn = Events.DescriptionEn,
@@ -130,8 +127,7 @@ namespace Boilerplate.Application.Services
 
             originalEvents.NameAr = updatedEvents.NameAr;
             originalEvents.NameEn = updatedEvents.NameEn;
-            originalEvents.UserId = updatedEvents.UserId;
-            originalEvents.BranchesId = updatedEvents.BranchesId;
+            originalEvents.UserId = updatedEvents.UserId; 
             originalEvents.DescriptionEn = updatedEvents.DescriptionEn;
             originalEvents.DescriptionAr = updatedEvents.DescriptionAr;
             originalEvents.Date = updatedEvents.Date;
@@ -149,8 +145,7 @@ namespace Boilerplate.Application.Services
             var EventsDto = new GetEventsDto
             {
                 Id = originalEvents.Id,
-                UserId = originalEvents.UserId,
-                BranchesId = originalEvents.BranchesId,
+                UserId = originalEvents.UserId, 
                 NameAr = originalEvents.NameAr,
                 NameEn = originalEvents.NameEn,
                 DescriptionEn = originalEvents.DescriptionEn,
@@ -184,10 +179,8 @@ namespace Boilerplate.Application.Services
                .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null)
                .Where(o => o.Date.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date)
                .Where(o => o.From == filter.From || filter.From == null)
-               .Where(o => o.To == filter.To || filter.To == null)
-               .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
-               .Where(o => o.Type == filter.Type || filter.Type == null)
-               .Include(o => o.Branches)
+               .Where(o => o.To == filter.To || filter.To == null) 
+               .Where(o => o.Type == filter.Type || filter.Type == null) 
                .Include(o => o.User);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
@@ -207,10 +200,8 @@ namespace Boilerplate.Application.Services
                .Where(o => o.NameAr.Contains(filter.NameAr) || filter.NameAr == null)
                .Where(o => o.Date.Date == filter.Date.Date || filter.Date == new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc).Date)
                .Where(o => o.From == filter.From || filter.From == null)
-               .Where(o => o.To == filter.To || filter.To == null)
-               .Where(o => o.BranchesId == filter.BranchesId || filter.BranchesId == 0)
-               .Where(o => o.Type == filter.Type || filter.Type == null)
-               .Include(o => o.Branches)
+               .Where(o => o.To == filter.To || filter.To == null) 
+               .Where(o => o.Type == filter.Type || filter.Type == null) 
                .Include(o => o.User);
 
             return await _mapper.ProjectTo<GetEventsDto>(Events).ToAllListAsync(filter.CurrentPage);

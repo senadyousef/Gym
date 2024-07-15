@@ -23,7 +23,7 @@ namespace Boilerplate.Api.Controllers
             _Eventservice = Eventservice;
         }
         [HttpGet]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<PaginatedList<GetEventsDto>>> GetEvents([FromQuery] GetEventsFilter filter)
         {
             return Ok(await _Eventservice.GetAllEventsWithPageSize(filter));
@@ -31,7 +31,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("getallEvents")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<AllList<GetEventsDto>>> GetAllEvents([FromQuery] GetEventsFilter filter)
         {
             return Ok(await _Eventservice.GetAllEvents(filter));
@@ -46,7 +46,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetEventsDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetEventsDto>> GetEventsById(int id)
@@ -63,7 +63,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetEventsDto>> Create([FromBody] CreateEventsDto dto)
@@ -80,7 +80,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<GetEventsDto>> UpdateEvents(int id, [FromBody] UpdateEventsDto dto)
         {
 
@@ -97,7 +97,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The Events's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]

@@ -18,6 +18,8 @@ using System.Text;
 using System.Drawing;
 using QRCoder;
 using System.Drawing.Imaging;
+using Boilerplate.Application.Services;
+using Boilerplate.Domain.Auth;
 
 namespace Boilerplate.Api.Controllers
 {
@@ -64,11 +66,11 @@ namespace Boilerplate.Api.Controllers
             {
                 if (user.Role != "SuperAdmin")
                 {
-                    if (user.MembershipStatus == "Not Active" || user.MembershipExpDate.Value.Date < DateTime.Now.Date)
+                    if (user.MembershipStatus == "Not Active" || user.MembershipExpDate.Date < DateTime.Now.Date)
                     {
                         return BadRequest(new { message = "Your Membership Expired" });
                     }
-                } 
+                }
             }
             return Ok(await _authService.GenerateTokenAsync(user));
         }
@@ -102,6 +104,14 @@ namespace Boilerplate.Api.Controllers
             return Ok(await _userService.GetAllUser(filter));
         }
 
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
+        [HttpGet]
+        [Route("NumberOfMembersInTheGym")]
+        public async Task<ActionResult<int>> NumberOfMembersInTheGym()
+        { 
+            return await _userService.NumberOfMembersInTheGym();
+        }
+
         /// <summary>
         /// Get one user by id from the database
         /// </summary>
@@ -119,13 +129,37 @@ namespace Boilerplate.Api.Controllers
             return Ok(user);
         }
 
-        [AllowAnonymous]
-        [Authorize]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<Boilerplate.Application.DTOs.User.GetUserDto>> CreateUser(Boilerplate.Application.DTOs.User.CreateUserDto dto)
         {
+            var currentRole = _currentUserService.Role;
             var newAccount = await _userService.CreateUser(dto);
+
+            if (currentRole == "SuperAdmin")
+            {
+                if (dto.Role == "Gym" || dto.Role == "Store")
+                {
+
+                }
+                else
+                {
+                    return BadRequest(new { message = "SuperAdmin Can Add Gym Or Store Users Only" });
+                }
+            }
+
+            if (currentRole == "Gym")
+            {
+                if (dto.Role == "Member" || dto.Role == "Coach")
+                {
+
+                }
+                else
+                {
+                    return BadRequest(new { message = "Gym Can Add Member Or Coach Users Only" });
+                }
+            }
             return CreatedAtAction(nameof(GetUserById), new { id = newAccount.Id }, newAccount);
         }
 
@@ -167,14 +201,14 @@ namespace Boilerplate.Api.Controllers
 
         [HttpPost]
         [Route("QR")]
-        [AllowAnonymous] 
+        [AllowAnonymous]
         public string QR(string Password)
         {
             string x = "";
             using (MemoryStream ms = new MemoryStream())
             {
                 QRCodeGenerator QRCodeGenerator = new QRCodeGenerator();
-                QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode(Password , QRCodeGenerator.ECCLevel.Q);
+                QRCodeData QRCodeData = QRCodeGenerator.CreateQrCode(Password, QRCodeGenerator.ECCLevel.Q);
                 QRCode qRCode = new QRCode(QRCodeData);
                 using (Bitmap oBitmap = qRCode.GetGraphic(20))
                 {
@@ -182,7 +216,7 @@ namespace Boilerplate.Api.Controllers
                     x = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
                     Console.WriteLine("data:image/png;base64," + Convert.ToBase64String(ms.ToArray()));
                 }
-            } 
+            }
             return x;
         }
 

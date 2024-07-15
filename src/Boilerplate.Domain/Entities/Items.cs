@@ -11,19 +11,20 @@ namespace Boilerplate.Domain.Entities
 {
     public class Items : Entity
     {
-        #region Parameters 
-        [MaxLength(50)]
-        public string NameEn { get; set; } 
-        [MaxLength(50)]
-        public string NameAr { get; set; } 
-        public decimal Price { get; set; } 
-        public string Description { get; set; }  
+        #region Parameters    
+        [Required]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+        [Required]
+        public string NameEn { get; set; }
+        [Required]
+        public string NameAr { get; set; }
+        public float Price { get; set; }
+        public string DescriptionAr { get; set; }
+        public string DescriptionEn { get; set; } 
         #endregion
 
         #region Relations 
-        public List<ItemPhotos> ItemPhotos { get; set; } 
-        public List<UserItems> UserItems { get; set; } 
-        public List<Carts> Carts { get; set; } 
         #endregion
     }
 }

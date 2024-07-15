@@ -16,7 +16,7 @@ namespace Boilerplate.Application.Services
             if(httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier) != null)
             {
                 UserId = httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
-                Role = httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Role).Value;
+                Role = httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Role).Value; 
             }
             if(httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.System) !=null)
             Project = httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.System).Value;
@@ -24,10 +24,8 @@ namespace Boilerplate.Application.Services
 
         }
 
-        public string UserId { get; }
-
-        public string Role { get; }
-
+        public string UserId { get; } 
+        public string Role { get; }  
         public string Project { get; }
     }
 }

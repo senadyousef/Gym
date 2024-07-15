@@ -56,42 +56,37 @@ namespace Boilerplate.Application.Services
         public async Task<User> Authenticate(string email, string password)
         {
             var user = new User();
-            bool IsMobileNumer = true;
-            foreach (char c in email)
-            {
-                if (c < '0' || c > '9')
-                {
-                    IsMobileNumer = false;
-                }
-            }
-            if (IsMobileNumer)
-            {
-                user = await _userRepository
-                .GetAll()
-                .Where(o => o.IsDisabled == false)
-                .FirstOrDefaultAsync(x => x.Email.ToLower() == email);
-            }
-            else if (Regex.Match(email, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").Success)
-            {
-                user = await _userRepository
+            user = await _userRepository
                 .GetAll()
                 .Where(o => o.IsDisabled == false)
                 .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
-            }
             if (user == null || !BC.Verify(password, user.Password))
             {
                 return null;
             }
-            if (user.MembershipExpDate.HasValue)
+            if (user != null)
             {
-                if (user.MembershipExpDate.Value.Date < DateTime.Now.Date)
+                if (user.Role != "SuperAdmin")
                 {
-                    var userUpdate = await _userRepository.GetById(user.Id);
-                    userUpdate.MembershipStatus = "Not Actice";
-                    _userRepository.Update(userUpdate);
-                    await _userRepository.SaveChangesAsync();
+                    if (user.MembershipExpDate.Date < DateTime.Now.Date)
+                    {
+                        var userUpdate = await _userRepository.GetById(user.Id);
+                        userUpdate.MembershipStatus = "Not Active";
+                        _userRepository.Update(userUpdate);
+                        await _userRepository.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        if (user.MembershipStatus == "Not Active")
+                        {
+                            var userUpdate = await _userRepository.GetById(user.Id);
+                            userUpdate.MembershipStatus = "Active";
+                            _userRepository.Update(userUpdate);
+                            await _userRepository.SaveChangesAsync();
+                        }
+                    }
                 }
-            } 
+            }
             return user;
         }
 
@@ -181,9 +176,29 @@ namespace Boilerplate.Application.Services
                 created.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
             }
 
-            created.Password = BC.HashPassword(dto.Password);
-            _userRepository.Create(created);
-            await _userRepository.SaveChangesAsync();
+            var id = _currentUserService.UserId;
+            var user = await _userRepository.GetById(int.Parse(id));
+            if (user != null)
+            {
+                if (user.Role == "SuperAdmin")
+                {
+                    if (dto.Role == "Gym" || dto.Role == "Store")
+                    {
+                        created.Password = BC.HashPassword(dto.Password);
+                        _userRepository.Create(created);
+                        await _userRepository.SaveChangesAsync();
+                    }
+                }
+                if (user.Role == "Gym")
+                {
+                    if (dto.Role == "Member" || dto.Role == "Coach")
+                    {
+                        created.Password = BC.HashPassword(dto.Password);
+                        _userRepository.Create(created);
+                        await _userRepository.SaveChangesAsync();
+                    }
+                }
+            }
             return _mapper.Map<GetUserDto>(created);
         }
 
@@ -214,9 +229,10 @@ namespace Boilerplate.Application.Services
             user.Gender = dto.Gender;
             user.Role = dto.Role;
             user.GymId = dto.GymId;
-            user.BOD = dto.BOD;
+            user.DOB = dto.DOB;
             user.MembershipStatus = dto.MembershipStatus;
             user.MembershipExpDate = dto.MembershipExpDate;
+            user.MembershipStartDate = user.MembershipStartDate;
             user.PhotoUri = user.PhotoUri;
             if (dto.UploadRequests != null)
             {
@@ -250,24 +266,33 @@ namespace Boilerplate.Application.Services
             {
                 users = _userRepository
                     .GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(filter.Email), x => EF.Functions.Like(x.Email, $"%{filter.Email}%"))
-                    .WhereIf(!string.IsNullOrEmpty(filter.Role), x => EF.Functions.Like(x.Role, $"%{filter.Role}%"))
+                    .Where(o => o.Role == filter.Role || filter.Role == null)
+                    .Where(o => o.Email == filter.Email || filter.Email == null)
+                    .Where(o => o.MembershipExpDate == filter.MembershipExpDate || filter.MembershipExpDate == null)
+                    .Where(o => o.MembershipStartDate == filter.MembershipStartDate || filter.MembershipStartDate == null)
+                    .Where(o => o.MembershipStatus == filter.MembershipStatus || filter.MembershipStatus == null)
+                    .Where(o => o.NameEn == filter.NameEn || filter.NameEn == null)
+                    .Where(o => o.NameAr == filter.NameAr || filter.NameAr == null)
                     .Where(o => o.GymId == filter.GymId || filter.GymId == 0)
                     .Where(o => o.IsDisabled == false);
             }
             else if (_currentUserService.Role == "Gym")
             {
-                users = _userRepository
+                if (filter.Role == "Gym" || filter.Role == "Store" || filter.Role == "Coach")
+                {
+                    users = _userRepository
                     .GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(filter.Email), x => EF.Functions.Like(x.Email, $"%{filter.Email}%"))
-                    .WhereIf(!string.IsNullOrEmpty(filter.Role), x => EF.Functions.Like(x.Role, $"%{filter.Role}%"))
+                    .Where(o => o.Role == filter.Role || filter.Role == null)
+                    .Where(o => o.Email == filter.Email || filter.Email == null)
                     .Where(o => o.GymId == filter.GymId || filter.GymId == 0)
                     .Where(o => o.MembershipExpDate == filter.MembershipExpDate || filter.MembershipExpDate == null)
+                    .Where(o => o.MembershipStartDate == filter.MembershipStartDate || filter.MembershipStartDate == null)
                     .Where(o => o.MembershipStatus == filter.MembershipStatus || filter.MembershipStatus == null)
                     .Where(o => o.NameEn == filter.NameEn || filter.NameEn == null)
                     .Where(o => o.NameAr == filter.NameAr || filter.NameAr == null)
                     .Where(o => o.GymId == int.Parse(_currentUserService.UserId))
                     .Where(o => o.IsDisabled == false);
+                }
             }
             else if (_currentUserService.Role == "Store")
             {
@@ -275,11 +300,15 @@ namespace Boilerplate.Application.Services
             }
             else if (_currentUserService.Role == "Member")
             {
-                users = _userRepository
-               .GetAll()
-               .Where(o => o.Role == "Coach")
-               .Where(o => o.GymId == filter.GymId)
-               .Where(o => o.IsDisabled == false);
+                if (filter.Role == "Gym" || filter.Role == "Store" || filter.Role == "Coach")
+                {
+                    users = _userRepository
+                    .GetAll()
+                    .Where(o => o.Role == filter.Role)
+                    .Where(o => o.GymId == filter.GymId || filter.GymId == 0)
+                    .Where(o => o.IsDisabled == false);
+                }
+
             }
 
             return await _mapper.ProjectTo<GetUserExtendedDto>(users).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
@@ -308,9 +337,10 @@ namespace Boilerplate.Application.Services
                 RefreshTokenExpiryTime = user.RefreshTokenExpiryTime,
                 PhotoUri = user.PhotoUri,
                 Gender = user.Gender,
-                BOD = user.BOD,
+                DOB = user.DOB.Value,
                 MembershipStatus = user.MembershipStatus,
                 MembershipExpDate = user.MembershipExpDate,
+                MembershipStartDate = user.MembershipStartDate,
             };
             return userDto;
         }
@@ -318,6 +348,45 @@ namespace Boilerplate.Application.Services
         public async Task<User> GetUser(int id)
         {
             return await _userRepository.GetById(id);
+        }
+
+        public async Task<int> NumberOfMembersInTheGym()
+        {
+            int Num = 0;
+            IQueryable<User> users = null;
+
+            if (_currentUserService.Role == "Gym")
+            {
+                var id = _currentUserService.UserId;
+                var user = await _userRepository.GetById(int.Parse(id));
+                if (user != null)
+                {
+                    users = _userRepository
+                   .GetAll()
+                   .Where(o => o.Role == "Member")
+                   .Where(o => o.IsInGym == true)
+                   .Where(o => o.GymId == user.Id)
+                   .Where(o => o.IsDisabled == false);
+                    Num = users.Count();
+                } 
+            }
+            else if (_currentUserService.Role == "Member")
+            {
+                var id = _currentUserService.UserId;
+                var user = await _userRepository.GetById(int.Parse(id));
+                if (user != null)
+                {
+                    users = _userRepository
+                   .GetAll()
+                   .Where(o => o.Role == "Member")
+                   .Where(o => o.IsInGym == true)
+                   .Where(o => o.GymId == user.GymId)
+                   .Where(o => o.IsDisabled == false);
+                    Num = users.Count();
+                }
+            }
+
+            return Num;
         }
     }
 }

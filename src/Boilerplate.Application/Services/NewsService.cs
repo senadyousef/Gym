@@ -36,6 +36,7 @@ namespace Boilerplate.Application.Services
                 DescriptionAr = News.DescriptionAr,
                 NewsDate = News.NewsDate,
                 Highlight = News.Highlight,
+                UserId = News.UserId,
                 CreatedOn = DateTime.Now,
                 PhotoUri = News.PhotoUri,
                 IsDisabled = false,
@@ -57,6 +58,7 @@ namespace Boilerplate.Application.Services
                 NewsDate = newNews.NewsDate,
                 Highlight = newNews.Highlight,
                 PhotoUri = newNews.PhotoUri,
+                UserId = newNews.UserId,
             };
 
             return NewsDto;
@@ -90,6 +92,7 @@ namespace Boilerplate.Application.Services
                 NewsDate = News.NewsDate,
                 Highlight = News.Highlight,
                 PhotoUri = News.PhotoUri,
+                UserId = News.UserId,
             };
             return NewsDto;
         }
@@ -104,6 +107,7 @@ namespace Boilerplate.Application.Services
             originalNews.NewsDate = updatedNews.NewsDate;
             originalNews.Highlight = updatedNews.Highlight;
             originalNews.PhotoUri = originalNews.PhotoUri;
+            originalNews.UserId = originalNews.UserId;
             if (updatedNews.UploadRequests != null)
             {
                 originalNews.PhotoUri = await _uploadService.UploadImageAsync(updatedNews.UploadRequests);
@@ -118,6 +122,7 @@ namespace Boilerplate.Application.Services
                 NewsDate = originalNews.NewsDate,
                 Highlight = originalNews.Highlight,
                 PhotoUri = originalNews.PhotoUri,
+                UserId = originalNews.UserId,
             };
             _NewsRepository.Update(originalNews);
             await _NewsRepository.SaveChangesAsync();
@@ -132,6 +137,7 @@ namespace Boilerplate.Application.Services
             IQueryable<News> News = null; 
             News = _NewsRepository
                .GetAll()
+               .Where(o => o.UserId == filter.UserId || filter.UserId == 0)
                .Where(o => o.IsDisabled == false);  
             return await _mapper.ProjectTo<GetNewsDto>(News).ToPaginatedListAsync(filter.CurrentPage, filter.PageSize);
         } 
@@ -143,6 +149,7 @@ namespace Boilerplate.Application.Services
             IQueryable<News> News = null; 
             News = _NewsRepository
                .GetAll()
+               .Where(o => o.UserId == filter.UserId || filter.UserId == 0)
                .Where(o => o.IsDisabled == false); 
             return await _mapper.ProjectTo<GetNewsDto>(News).ToAllListAsync(filter.CurrentPage);
         } 

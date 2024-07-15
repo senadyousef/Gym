@@ -28,6 +28,7 @@ namespace Boilerplate.Application.Interfaces
         public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
+        public int UserId { get; set; }
     }
     public class CreateNewsDto
     {
@@ -36,6 +37,7 @@ namespace Boilerplate.Application.Interfaces
         public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
+        public int UserId { get; set; }
         public UploadPhotoRequest UploadRequests { get; set; }
     }
 
@@ -47,6 +49,7 @@ namespace Boilerplate.Application.Interfaces
         public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
+        public int UserId { get; set; }
         public UploadPhotoRequest UploadRequests { get; set; }
     }
 
@@ -57,5 +60,6 @@ namespace Boilerplate.Application.Interfaces
         public DateTime NewsDate { get; set; }
         public string Highlight { get; set; }
         public string PhotoUri { get; set; }
+        public int UserId { get; set; }
     } 
 }

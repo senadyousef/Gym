@@ -5,10 +5,9 @@ using Boilerplate.Domain.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Boilerplate.Api.Controllers
 {
@@ -22,24 +21,23 @@ namespace Boilerplate.Api.Controllers
         {
             _Galleryervice = Galleryervice;
         }
-        [HttpGet]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
-        public async Task<ActionResult<PaginatedList<GetGalleryDto>>> GetGallery([FromQuery] GetGalleryFilter filter)
-        {
-            return Ok(await _Galleryervice.GetAllGalleryWithPageSize(filter));
-        }
 
+        /// <summary>
+        /// Returns all Gallery in the database
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        ///  
         [HttpGet]
-        [Route("getallGallery")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
-        public async Task<ActionResult<AllList<GetGalleryDto>>> GetAllGallery([FromQuery] GetGalleryFilter filter)
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
+        public async Task<ActionResult<PaginatedList<GetGalleryDto>>> GetGallery([FromQuery] GetGalleryFilter filter)
         {
             return Ok(await _Galleryervice.GetAllGallery(filter));
         }
-       
+
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetGalleryDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetGalleryDto>> GetGalleryById(int id)
@@ -56,14 +54,17 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetGalleryDto>> Create([FromBody] CreateGalleryDto dto)
         {
             var newGallery = await _Galleryervice.CreateGallery(dto);
+            if (newGallery == null)
+            {
+                return BadRequest(new { message = "This class is already booked." });
+            }
             return CreatedAtAction(nameof(GetGalleryById), new { id = newGallery.Id }, newGallery);
-
         }
 
         /// <summary>
@@ -73,7 +74,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<GetGalleryDto>> UpdateGallery(int id, [FromBody] UpdateGalleryDto dto)
         {
 
@@ -90,7 +91,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The Gallery's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]
@@ -100,5 +101,6 @@ namespace Boilerplate.Api.Controllers
             if (deleted) return NoContent();
             return NotFound();
         }
+
     }
 }

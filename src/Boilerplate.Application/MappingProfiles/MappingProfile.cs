@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Boilerplate.Application.DTOs.User;
+using Boilerplate.Application.Gallery;
 using Boilerplate.Application.Interfaces; 
 using Boilerplate.Domain.Entities;  
 
@@ -14,45 +15,30 @@ namespace Boilerplate.Application.MappingProfiles
             CreateMap<User, GetUserExtendedDto>().ReverseMap();
             CreateMap<CreateUserDto, User>();
             CreateMap<UpdatePasswordDto, User>();
-
-            // Items
-            CreateMap<Items, GetItemsDto>().ReverseMap();
-
-            // Top Of Top
-            CreateMap<TopOfTop, GetTopOfTopDto>().ReverseMap();
-
-            // Item Photos
-            CreateMap<ItemPhotos, GetItemPhotosDto>().ReverseMap();
             
             // Events
             CreateMap<Events, GetEventsDto>().ReverseMap();
 
             // UserEvents
             CreateMap<UserEvents, GetUserEventsDto>().ReverseMap();
-            
-            // Branches
-            CreateMap<Branches, GetBranchesDto>().ReverseMap();
-
+             
             // Personal Trainers Classes
             CreateMap<PersonalTrainersClasses, GetPersonalTrainersClassesDto>().ReverseMap();
-            
-            // Children
-            CreateMap<Children, GetChildrenDto>().ReverseMap();
-
+             
             // News
             CreateMap<News, GetNewsDto>().ReverseMap();
 
-            // Gallery
-            CreateMap<Gallery, GetGalleryDto>().ReverseMap();
+            // AllServices
+            CreateMap<Domain.Entities.AllServices, GetAllServicesDto>().ReverseMap(); 
+            
+            // UserAllServices
+            CreateMap<Domain.Entities.UserAllServices, GetUserAllServicesDto>().ReverseMap();
 
-            // User Items
-            CreateMap<UserItems, GetUserItemsDto>().ReverseMap();
+            // Items
+            CreateMap<Domain.Entities.Items, GetItemsDto>().ReverseMap(); 
             
-            // Carts
-            CreateMap<Carts, GetCartsDto>().ReverseMap();
-            
-            // Bill
-            CreateMap<Bill, GetBillDto>().ReverseMap();
+            // Items
+            CreateMap<Domain.Entities.Gallery, GetGalleryDto>().ReverseMap(); 
         }
     }
 }

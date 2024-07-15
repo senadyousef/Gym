@@ -28,7 +28,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="filter"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<PaginatedList<GetNewsDto>>> GetNews([FromQuery] GetNewsFilter filter)
         {
             return Ok(await _Newservice.GetAllNewsWithPageSize(filter));
@@ -36,7 +36,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("getallNews")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<AllList<GetNewsDto>>> GetAllNews([FromQuery] GetNewsFilter filter)
         {
             return Ok(await _Newservice.GetAllNews(filter));
@@ -44,7 +44,7 @@ namespace Boilerplate.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetNewsDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetNewsDto>> GetNewsById(int id)
@@ -61,7 +61,7 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetNewsDto>> Create([FromBody] CreateNewsDto dto)
@@ -78,7 +78,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<GetNewsDto>> UpdateNews(int id, [FromBody] UpdateNewsDto dto)
         {
 
@@ -95,7 +95,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The News's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]

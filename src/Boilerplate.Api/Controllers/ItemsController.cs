@@ -1,9 +1,12 @@
-﻿using Boilerplate.Application.DTOs;
+﻿
+using Boilerplate.Application.DTOs;
 using Boilerplate.Application.Interfaces;
 using Boilerplate.Domain.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 using System;
 using System.Threading.Tasks;
 
@@ -25,31 +28,24 @@ namespace Boilerplate.Api.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
+        ///  
         [HttpGet]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<PaginatedList<GetItemsDto>>> GetItems([FromQuery] GetItemsFilter filter)
-        {
-            return Ok(await _Itemservice.GetAllItemsWithPageSize(filter));
-        }
-
-        [HttpGet]
-        [Route("getallItems")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
-        public async Task<ActionResult<AllList<GetItemsDto>>> GetAllItems([FromQuery] GetItemsFilter filter)
         {
             return Ok(await _Itemservice.GetAllItems(filter));
         }
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(GetItemsDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<GetItemsDto>> GetItemsById(int id)
         {
-            var subCategories = await _Itemservice.GetItemsById(id);
-            if (subCategories == null) return NotFound();
-            return Ok(subCategories);
+            var Items = await _Itemservice.GetItemsById(id);
+            if (Items == null) return NotFound();
+            return Ok(Items);
         }
 
         /// <summary>
@@ -59,14 +55,17 @@ namespace Boilerplate.Api.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GetItemsDto>> Create([FromBody] CreateItemsDto dto)
         {
             var newItems = await _Itemservice.CreateItems(dto);
+            if (newItems == null)
+            {
+                return BadRequest(new { message = "This class is already booked." });
+            }
             return CreatedAtAction(nameof(GetItemsById), new { id = newItems.Id }, newItems);
-
         }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="dto">The update object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         public async Task<ActionResult<GetItemsDto>> UpdateItems(int id, [FromBody] UpdateItemsDto dto)
         {
 
@@ -93,7 +92,7 @@ namespace Boilerplate.Api.Controllers
         /// <param name="id">The Items's ID</param>
         /// <returns></returns>
         [HttpDelete]
-        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Customer)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("{id}")]
