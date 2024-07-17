@@ -29,7 +29,7 @@ namespace Boilerplate.Api.Controllers
             _session = session;
         }
 
-        [Authorize(Roles = Roles.SuperAdmin)]
+        [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [HttpGet]
         [Route("GetMyProfile")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
