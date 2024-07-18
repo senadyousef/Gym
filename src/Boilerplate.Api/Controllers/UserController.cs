@@ -31,11 +31,13 @@ namespace Boilerplate.Api.Controllers
         private readonly IConfiguration _configuration;
         private readonly ICurrentUser _currentCustomer;
         private readonly IUserService _userService;
+        private readonly IUploadService _uploadService;
         private readonly IAuthService _authService;
         private readonly ISession _session;
         private ICurrentUserService _currentUserService;
 
-        public UserController(IUserService userService, IAuthService authService, ISession session, ICurrentUserService currentUserService, IConfiguration configuration, ICurrentUser currentUser)
+        public UserController(IUserService userService, IAuthService authService, ISession session, ICurrentUserService currentUserService, IConfiguration configuration, ICurrentUser currentUser,
+            IUploadService uploadService)
         {
             _userService = userService;
             _authService = authService;
@@ -43,6 +45,7 @@ namespace Boilerplate.Api.Controllers
             _currentUserService = currentUserService;
             _configuration = configuration;
             _currentCustomer = currentUser;
+            _uploadService = uploadService;
         }
 
         /// <summary>
@@ -89,7 +92,7 @@ namespace Boilerplate.Api.Controllers
                 return BadRequest(new { message = "Cannot generate refresh token." });
             }
             return Ok(token);
-        }
+        } 
 
         /// <summary>
         /// Returns all users in the database
@@ -108,7 +111,7 @@ namespace Boilerplate.Api.Controllers
         [HttpGet]
         [Route("NumberOfMembersInTheGym")]
         public async Task<ActionResult<int>> NumberOfMembersInTheGym()
-        { 
+        {
             return await _userService.NumberOfMembersInTheGym();
         }
 

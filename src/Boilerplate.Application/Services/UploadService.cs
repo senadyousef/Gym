@@ -63,7 +63,7 @@ namespace Boilerplate.Application.Services
                 imageName = photoRequest.UploadType + "_" + imageName + "." + photoRequest.Extension;
 
                 wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/" + photoRequest.UploadType);
-                result = "http://gym.useitsmart.com/webimages/" + photoRequest.UploadType + "/" + imageName; 
+                result = "http://gym.useitsmart.com/webimages/" + photoRequest.UploadType + "/" + imageName;
 
                 byte[] imageBytes = Convert.FromBase64String(image);
                 string imagePath = Path.Combine(wwwRootPath, imageName);
@@ -80,7 +80,7 @@ namespace Boilerplate.Application.Services
             }
 
             return result;
-        }
+        } 
 
         public string UploadAsync(UploadRequest request)
         {

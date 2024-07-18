@@ -35,10 +35,13 @@ namespace Boilerplate.Application.MappingProfiles
             CreateMap<Domain.Entities.UserAllServices, GetUserAllServicesDto>().ReverseMap();
 
             // Items
-            CreateMap<Domain.Entities.Items, GetItemsDto>().ReverseMap(); 
-            
-            // Items
-            CreateMap<Domain.Entities.Gallery, GetGalleryDto>().ReverseMap(); 
+            CreateMap<Domain.Entities.Items, GetItemsDto>().ReverseMap();
+
+            // Gallery
+            CreateMap<Domain.Entities.Gallery, GetGalleryDto>().ReverseMap();
+
+            // Files
+            CreateMap<Domain.Entities.Files, GetFilesDto>().ReverseMap(); 
         }
     }
 }

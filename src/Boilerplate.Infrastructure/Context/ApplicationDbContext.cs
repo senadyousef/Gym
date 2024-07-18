@@ -17,6 +17,7 @@ namespace Boilerplate.Infrastructure.Context
         public DbSet<UserAllServices> UserAllServices { get; set; }
         public DbSet<Items> Items { get; set; }
         public DbSet<Gallery> Gallery { get; set; }
+        public DbSet<Files> Files { get; set; }
          
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

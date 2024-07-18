@@ -23,6 +23,7 @@ using Boilerplate.Application.AllServices;
 using Boilerplate.Application.UserAllServices;
 using Boilerplate.Application.Items;
 using Boilerplate.Application.Gallery;
+using Boilerplate.Application.Files;
 
 namespace Boilerplate.Api
 {
@@ -95,6 +96,10 @@ namespace Boilerplate.Api
             //Gallery
             services.AddScoped<IGalleryRepository, GalleryRepository>();
             services.AddScoped<IGalleryService, GalleryService>();
+
+            //Files
+            services.AddScoped<IFilesRepository, FilesRepository>();
+            services.AddScoped<IFilesService, FilesService>();
              
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
