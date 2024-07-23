@@ -21,6 +21,12 @@ using Net.Codecrete.QrCodeGenerator;
 using System.IO;
 using System.Text;
 using System.Drawing;
+using static QRCoder.PayloadGenerator;
+using System.Net.Mail;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+
 
 namespace Boilerplate.Application.Services
 {
@@ -234,6 +240,7 @@ namespace Boilerplate.Application.Services
             user.MembershipExpDate = dto.MembershipExpDate;
             user.MembershipStartDate = user.MembershipStartDate;
             user.PhotoUri = user.PhotoUri;
+            user.GymCapacity = dto.GymCapacity;
             if (dto.UploadRequests != null)
             {
                 user.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
@@ -341,6 +348,7 @@ namespace Boilerplate.Application.Services
                 MembershipStatus = user.MembershipStatus,
                 MembershipExpDate = user.MembershipExpDate,
                 MembershipStartDate = user.MembershipStartDate,
+                GymCapacity = user.GymCapacity,
             };
             return userDto;
         }
@@ -350,10 +358,11 @@ namespace Boilerplate.Application.Services
             return await _userRepository.GetById(id);
         }
 
-        public async Task<int> NumberOfMembersInTheGym()
+        public async Task<NumberOfMembersInTheGym> NumberOfMembersInTheGym()
         {
-            int Num = 0;
+            NumberOfMembersInTheGym Num = new NumberOfMembersInTheGym();
             IQueryable<User> users = null;
+            User usersId = new User();
 
             if (_currentUserService.Role == "Gym")
             {
@@ -367,8 +376,15 @@ namespace Boilerplate.Application.Services
                    .Where(o => o.IsInGym == true)
                    .Where(o => o.GymId == user.Id)
                    .Where(o => o.IsDisabled == false);
-                    Num = users.Count();
-                } 
+                    Num.NumberOfMembers = users.Count();
+                    usersId = await _userRepository.GetById(user.Id);
+                    Num.Percentage = ((float)100 * (float)Num.NumberOfMembers) / (float)usersId.GymCapacity;
+                    Num.Percentage = (float)Math.Round(Num.Percentage, 2);
+                    if (Num.Percentage > 100)
+                    {
+                        Num.Percentage = 100;
+                    }
+                }
             }
             else if (_currentUserService.Role == "Member")
             {
@@ -382,11 +398,65 @@ namespace Boilerplate.Application.Services
                    .Where(o => o.IsInGym == true)
                    .Where(o => o.GymId == user.GymId)
                    .Where(o => o.IsDisabled == false);
-                    Num = users.Count();
+                    Num.NumberOfMembers = users.Count();
+                    usersId = await _userRepository.GetById(user.GymId);
+                    Num.Percentage = ((float)100 * (float)Num.NumberOfMembers) / (float)usersId.GymCapacity;
+                    Num.Percentage = (float)Math.Round(Num.Percentage, 2);
+                    if (Num.Percentage > 100)
+                    {
+                        Num.Percentage = 100;
+                    }
                 }
             }
 
             return Num;
+        }
+
+        public string GenerateOTP(string email)
+        {
+            string message = string.Empty;
+            Random random = new Random();
+            int otp = random.Next(100000, 999999);
+               
+            try
+            {
+                //ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+                // Set up the email details
+                string smtpAddress = "smtp.gmail.com"; // Replace with your SMTP server address
+                int portNumber = 587; // Typically 587 for TLS, 465 for SSL
+                bool enableSSL = true;
+                string emailFrom = "morad.amer.9595@gmail.com"; // Your email address
+                string password = "#9#5#%1%6%@M@G@"; // Your email password
+                string emailTo = email; // Recipient's email address
+                string subject = "Your OTP Code";
+                string body = $"Your OTP code is {otp}";
+
+                using (MailMessage mail = new MailMessage())
+                {
+                    mail.From = new MailAddress(emailFrom);
+                    mail.To.Add(emailTo);
+                    mail.Subject = subject;
+                    mail.Body = body;
+                    mail.IsBodyHtml = true; // Set to false if the email body is plain text
+                     
+                    using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+                    {
+                        smtp.Credentials = new NetworkCredential(emailFrom, password);
+                        smtp.EnableSsl = enableSSL;
+                        smtp.Send(mail);
+                        smtp.Timeout = 20000;
+                        message = "OTP sent successfully! Check your email please";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+                return message;
+            } 
+            return message;
         }
     }
 }

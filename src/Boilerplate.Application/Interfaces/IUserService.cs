@@ -23,12 +23,19 @@ namespace Boilerplate.Application.Interfaces
         Task<GetUserDto> GetUserById(int id);
         Task<GetUserExtendedDto> GetExtendedUserById(int id);
         Task<bool> EditUser(CreateUserDto dto);
-        Task<int> NumberOfMembersInTheGym();
+        Task<NumberOfMembersInTheGym> NumberOfMembersInTheGym();
+        string GenerateOTP(string email);
     }
 
     public class CheckEmailAndMobieNumber
     {
         public string Message { get; set; }
         public bool IsValid { get; set; }
+    }
+
+    public class NumberOfMembersInTheGym
+    {
+        public int NumberOfMembers { get; set; }
+        public float Percentage { get; set; }
     }
 }

@@ -21,7 +21,8 @@ namespace Boilerplate.Application.DTOs.User
         public string MobilePhone { get; set; } 
         public string RefreshToken { get; set; }
         public string PhotoUri { get; set; }
-        public bool IsInGym { get; set; } 
+        public bool IsInGym { get; set; }
+        public int GymCapacity { get; set; }
     }
 
     public class GetUserExtendedDto
@@ -43,6 +44,6 @@ namespace Boilerplate.Application.DTOs.User
         public DateTime RefreshTokenExpiryTime { get; set; }
         public string PhotoUri { get; set; }
         public bool IsInGym { get; set; }
-    }
-
-}
+        public int GymCapacity { get; set; }
+    } 
+} 

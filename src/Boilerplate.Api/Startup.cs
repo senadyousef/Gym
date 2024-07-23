@@ -100,6 +100,7 @@ namespace Boilerplate.Api
             //Files
             services.AddScoped<IFilesRepository, FilesRepository>();
             services.AddScoped<IFilesService, FilesService>();
+            services.AddTransient<IFilesService, FilesService>();
              
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 

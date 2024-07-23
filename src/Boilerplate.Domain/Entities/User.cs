@@ -31,6 +31,7 @@ namespace Boilerplate.Domain.Entities
         public string RefreshToken { get; set; } 
         public DateTime RefreshTokenExpiryTime { get; set; } 
         public bool IsInGym { get; set; }
+        public int GymCapacity { get; set; }
         #endregion
 
         #region Relations 

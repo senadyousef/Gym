@@ -92,7 +92,7 @@ namespace Boilerplate.Api.Controllers
                 return BadRequest(new { message = "Cannot generate refresh token." });
             }
             return Ok(token);
-        } 
+        }
 
         /// <summary>
         /// Returns all users in the database
@@ -110,7 +110,7 @@ namespace Boilerplate.Api.Controllers
         [Authorize(Roles = Roles.SuperAdmin + "," + Roles.Member + "," + Roles.Coach + "," + Roles.Gym + "," + Roles.Store)]
         [HttpGet]
         [Route("NumberOfMembersInTheGym")]
-        public async Task<ActionResult<int>> NumberOfMembersInTheGym()
+        public async Task<ActionResult<NumberOfMembersInTheGym>> NumberOfMembersInTheGym()
         {
             return await _userService.NumberOfMembersInTheGym();
         }
@@ -239,6 +239,14 @@ namespace Boilerplate.Api.Controllers
             var deleted = await _userService.DeleteUser(id);
             if (deleted) return NoContent();
             return NotFound();
+        }
+
+        [HttpPost]
+        [Route("generateOTP")]
+        [AllowAnonymous]
+        public string GenerateOTP(string email)
+        {
+            return _userService.GenerateOTP(email);
         }
     }
 }

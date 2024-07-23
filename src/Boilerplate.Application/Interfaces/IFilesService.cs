@@ -15,7 +15,7 @@ namespace Boilerplate.Application.Interfaces
     public interface IFilesService
     { 
         public Task<AllList<GetFilesDto>> GetAllFiles();
-        Task<string> UploadJson(IFormFile file);
+        Task<string> UploadJson(CreateFilesDto createFilesDto);
     } 
     public class GetFilesDto
     {
@@ -25,7 +25,8 @@ namespace Boilerplate.Application.Interfaces
     }
     public class CreateFilesDto
     {
-        public string Name { get; set; } 
-        public string Url { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }  
+        public string file { get; set; }
     } 
 }

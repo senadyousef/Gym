@@ -1,254 +1,260 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 
-	  <UserSecretsId>83093e71-d34c-405d-b8eb-442525b137fc</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
-    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
-  </PropertyGroup>
-  <ItemGroup><!--<Content Remove="Views\HomeView\Index.cshtml" />-->
-  
-    <!--<Content Remove="Views\HomeView\Index.cshtml" />-->
-  
-    <Content Remove="Views\HomeView\AllGyms.cshtml" />
-  
-    <Content Remove="Views\HomeView\AllStores.cshtml" />
-  
-    <Content Remove="Views\HomeView\ForgetPassword.cshtml" />
-  
-    <Content Remove="Views\HomeView\GymDetails.cshtml" />
-  
-    <Content Remove="Views\HomeView\ReasetPassword.cshtml" />
-  
-    <Content Remove="Views\HomeView\SmartUseHome.cshtml" />
-  
-    <Content Remove="Views\HomeView\Verification.cshtml" />
-  
-    <Content Remove="wwwroot\Images\logo-default-dark-200x36.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="Docker.DotNet" Version="3.125.15" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-    <PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
-    <PackageReference Include="QRCoderNetCore" Version="1.0.0" />
-    <PackageReference Include="Serilog" Version="2.10.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
-    <PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
-    <PackageReference Include="Serilog.Exceptions" Version="8.0.0" />
-    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="DevExtreme.AspNet.Core">
-      <HintPath>Libs\DevExtreme.AspNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExtreme.AspNet.Data">
-      <HintPath>Libs\DevExtreme.AspNet.Data.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="wwwroot\Rotativa\help-wkhtmltoimage.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Rotativa\help-wkhtmltopdf.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-<!--    <Content Include="Views\Home\Index.cshtml" />-->
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Boilerplate.Application\Boilerplate.Application.csproj" />
-    <ProjectReference Include="..\Boilerplate.Domain\Boilerplate.Domain.csproj" />
-    <ProjectReference Include="..\Boilerplate.Infrastructure\Boilerplate.Infrastructure.csproj" />
+		<UserSecretsId>83093e71-d34c-405d-b8eb-442525b137fc</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+	</PropertyGroup>
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<!--<Content Remove="Views\HomeView\Index.cshtml" />-->
 
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Files\" />
-    <Folder Include="wwwroot\WebImages\Items\" />
-    <Folder Include="wwwroot\WebImages\Events\" />
-    <Folder Include="wwwroot\WebImages\News\" />
-    <Folder Include="wwwroot\WebImages\User\" />
-    <!-- <Folder Include="wwwroot\**" /> -->
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="wwwroot\Rotativa\help-wkhtmltoimage.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Rotativa\help-wkhtmltopdf.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Rotativa\wkhtmltoimage.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Rotativa\wkhtmltopdf.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-<!--    <Content Include="Views\Shared\_Layout.cshtml.css" />-->
-  </ItemGroup>
-<!--  <ItemGroup>-->
-<!--    <AdditionalFiles Include="Views\Account\Login.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\Shared\Error.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\Shared\_Layout.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\Shared\_ValidationScriptsPartial.cshtml" />--> 
-<!--    <AdditionalFiles Include="Views\UserView\Create.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\UserView\Edit.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\UserView\Index.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\UserView\Profile.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\_ViewImports.cshtml" />-->
-<!--    <AdditionalFiles Include="Views\_ViewStart.cshtml" />-->
-<!--  </ItemGroup>-->
-  <ItemGroup>
-    <Folder Include="Libs" />
-    <Folder Include="Models" />
-  </ItemGroup>
-  <ItemGroup><!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
-<!--    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />-->
-  
-    <None Include="Views\HomeView\GymDetails.cshtml" />
-  
-    <None Include="Views\HomeView\AllStores.cshtml" />
-  
-    <None Include="Views\HomeView\AllGyms.cshtml" />
-  
-    <None Include="Views\HomeView\ForgetPassword.cshtml" />
-  
-    <None Include="Views\HomeView\Index.cshtml" />
-  
-    <None Include="Views\HomeView\ReasetPassword.cshtml" />
-  
-    <None Include="Views\HomeView\SmartUseHome.cshtml" />
-  
-    <None Include="Views\HomeView\Verification.cshtml" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\animated.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\core.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\fixed-width.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\font-awesome.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\icons.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\larger.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\list.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\mixins.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\path.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\screen-reader.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\stacked.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\variables.less" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_animated.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_core.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_icons.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_larger.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_list.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_path.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
-  
-    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_variables.scss" />
-  
-    <None Include="wwwroot\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
-  
-    <None Include="wwwroot\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
-  
-    <None Include="wwwroot\vendor\animsition\js\animsition.js" />
-  
-    <None Include="wwwroot\vendor\animsition\js\animsition.min.js" />
-  
-    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-grid.css.map" />
-  
-    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
-  
-    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-reboot.css.map" />
-  
-    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
-  
-    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.css.map" />
-  
-    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
-  
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
-  
-    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
-  
-    <None Include="wwwroot\vendor\bootstrap\js\popper.js" />
-  
-    <None Include="wwwroot\vendor\bootstrap\js\popper.min.js" />
-  
-    <None Include="wwwroot\vendor\bootstrap\js\tooltip.js" />
-  
-    <None Include="wwwroot\vendor\countdowntime\countdowntime.js" />
-  
-    <None Include="wwwroot\vendor\daterangepicker\daterangepicker.js" />
-  
-    <None Include="wwwroot\vendor\daterangepicker\moment.js" />
-  
-    <None Include="wwwroot\vendor\daterangepicker\moment.min.js" />
-  
-    <None Include="wwwroot\vendor\jquery\jquery-3.2.1.min.js" />
-  
-    <None Include="wwwroot\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
-  
-    <None Include="wwwroot\vendor\select2\select2.js" />
-  
-    <None Include="wwwroot\vendor\select2\select2.min.js" />
-  
-    <None Include="wwwroot\WebImages\v.png" />
-  </ItemGroup>
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema" /></VisualStudio></ProjectExtensions>
+		<!--<Content Remove="Views\HomeView\Index.cshtml" />-->
+
+		<Content Remove="Views\HomeView\AllGyms.cshtml" />
+
+		<Content Remove="Views\HomeView\AllStores.cshtml" />
+
+		<Content Remove="Views\HomeView\ForgetPassword.cshtml" />
+
+		<Content Remove="Views\HomeView\GymDetails.cshtml" />
+
+		<Content Remove="Views\HomeView\ReasetPassword.cshtml" />
+
+		<Content Remove="Views\HomeView\SmartUseHome.cshtml" />
+
+		<Content Remove="Views\HomeView\Verification.cshtml" />
+
+		<Content Remove="wwwroot\Images\logo-default-dark-200x36.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="11.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Docker.DotNet" Version="3.125.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+		<PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
+		<PackageReference Include="QRCoderNetCore" Version="1.0.0" />
+		<PackageReference Include="Serilog" Version="2.10.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
+		<PackageReference Include="Serilog.Exceptions" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Rotativa.AspNetCore" Version="1.2.0" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" /> 
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="DevExtreme.AspNet.Core">
+			<HintPath>Libs\DevExtreme.AspNet.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="DevExtreme.AspNet.Data">
+			<HintPath>Libs\DevExtreme.AspNet.Data.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\Rotativa\help-wkhtmltoimage.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\Rotativa\help-wkhtmltopdf.txt">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<!--    <Content Include="Views\Home\Index.cshtml" />-->
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Boilerplate.Application\Boilerplate.Application.csproj" />
+		<ProjectReference Include="..\Boilerplate.Domain\Boilerplate.Domain.csproj" />
+		<ProjectReference Include="..\Boilerplate.Infrastructure\Boilerplate.Infrastructure.csproj" />
+
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Files\" />
+		<Folder Include="wwwroot\WebImages\Items\" />
+		<Folder Include="wwwroot\WebImages\Events\" />
+		<Folder Include="wwwroot\WebImages\News\" />
+		<Folder Include="wwwroot\WebImages\User\" />
+		<!-- <Folder Include="wwwroot\**" /> -->
+	</ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\Rotativa\help-wkhtmltoimage.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\Rotativa\help-wkhtmltopdf.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\Rotativa\wkhtmltoimage.exe">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\Rotativa\wkhtmltopdf.exe">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<!--    <Content Include="Views\Shared\_Layout.cshtml.css" />-->
+	</ItemGroup>
+	<!--  <ItemGroup>-->
+	<!--    <AdditionalFiles Include="Views\Account\Login.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\Shared\Error.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\Shared\_Layout.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\Shared\_ValidationScriptsPartial.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\UserView\Create.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\UserView\Edit.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\UserView\Index.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\UserView\Profile.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\_ViewImports.cshtml" />-->
+	<!--    <AdditionalFiles Include="Views\_ViewStart.cshtml" />-->
+	<!--  </ItemGroup>-->
+	<ItemGroup>
+		<Folder Include="Libs" />
+		<Folder Include="Models" />
+	</ItemGroup>
+	<ItemGroup>
+		<!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
+		<!--    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />-->
+
+		<None Include="Views\HomeView\GymDetails.cshtml" />
+
+		<None Include="Views\HomeView\AllStores.cshtml" />
+
+		<None Include="Views\HomeView\AllGyms.cshtml" />
+
+		<None Include="Views\HomeView\ForgetPassword.cshtml" />
+
+		<None Include="Views\HomeView\Index.cshtml" />
+
+		<None Include="Views\HomeView\ReasetPassword.cshtml" />
+
+		<None Include="Views\HomeView\SmartUseHome.cshtml" />
+
+		<None Include="Views\HomeView\Verification.cshtml" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\animated.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\core.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\icons.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\larger.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\list.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\mixins.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\path.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\stacked.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\less\variables.less" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_core.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_list.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_path.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+
+		<None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+
+		<None Include="wwwroot\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+
+		<None Include="wwwroot\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+
+		<None Include="wwwroot\vendor\animsition\js\animsition.js" />
+
+		<None Include="wwwroot\vendor\animsition\js\animsition.min.js" />
+
+		<None Include="wwwroot\vendor\bootstrap\css\bootstrap-grid.css.map" />
+
+		<None Include="wwwroot\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+
+		<None Include="wwwroot\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+
+		<None Include="wwwroot\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+
+		<None Include="wwwroot\vendor\bootstrap\css\bootstrap.css.map" />
+
+		<None Include="wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
+
+		<None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
+
+		<None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+
+		<None Include="wwwroot\vendor\bootstrap\js\popper.js" />
+
+		<None Include="wwwroot\vendor\bootstrap\js\popper.min.js" />
+
+		<None Include="wwwroot\vendor\bootstrap\js\tooltip.js" />
+
+		<None Include="wwwroot\vendor\countdowntime\countdowntime.js" />
+
+		<None Include="wwwroot\vendor\daterangepicker\daterangepicker.js" />
+
+		<None Include="wwwroot\vendor\daterangepicker\moment.js" />
+
+		<None Include="wwwroot\vendor\daterangepicker\moment.min.js" />
+
+		<None Include="wwwroot\vendor\jquery\jquery-3.2.1.min.js" />
+
+		<None Include="wwwroot\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+
+		<None Include="wwwroot\vendor\select2\select2.js" />
+
+		<None Include="wwwroot\vendor\select2\select2.min.js" />
+
+		<None Include="wwwroot\WebImages\v.png" />
+	</ItemGroup>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties appsettings_1development_1json__JsonSchema="https://appliedengdesign.github.io/cnccodes-json-schema/draft/2022-07/schema" />
+		</VisualStudio>
+	</ProjectExtensions>
 </Project>

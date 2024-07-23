@@ -16,5 +16,6 @@ namespace Boilerplate.Application.Filters
         public DateTime? MembershipExpDate { get; set; }
         public DateTime? MembershipStartDate { get; set; }
         public bool IsInGym { get; set; }
+        public int GymCapacity { get; set; }
     }
 }

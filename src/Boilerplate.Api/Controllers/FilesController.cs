@@ -32,9 +32,9 @@ namespace Boilerplate.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)] 
-        public async Task<string> UpLoadFile(IFormFile formFile)
+        public async Task<string> UpLoadFile(CreateFilesDto createFilesDto)
         {
-            string newFiles = await _Fileservice.UploadJson(formFile);
+            string newFiles = await _Fileservice.UploadJson(createFilesDto);
             
             return newFiles;
         } 

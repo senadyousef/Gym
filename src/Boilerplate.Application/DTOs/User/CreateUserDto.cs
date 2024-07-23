@@ -24,5 +24,6 @@ namespace Boilerplate.Application.DTOs.User
         public UploadPhotoRequest UploadRequests { get; set; } 
         public string PhotoUri { get; set; }
         public bool IsInGym { get; set; }
+        public int GymCapacity { get; set; }
     }
 }
