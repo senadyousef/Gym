@@ -417,46 +417,84 @@ namespace Boilerplate.Application.Services
             string message = string.Empty;
             Random random = new Random();
             int otp = random.Next(100000, 999999);
-               
-            try
+
+            // Email credentials and settings
+            string smtpAddress = "smtp.gmail.com"; // e.g., smtp.gmail.com
+            int portNumber = 587; // or 465 for SSL
+            bool enableSSL = true;
+
+            string emailFrom =  "Morad.amer.9595@gmail.com"; // Your email address
+            string password = "0"; // Your email password
+            string emailTo = email;
+            string subject = "Your OTP Code";
+            string body = $"Your OTP code is {otp}";
+
+            using (MailMessage mail = new MailMessage())
             {
-                //ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+                mail.From = new MailAddress(emailFrom);
+                mail.To.Add(new MailAddress(emailTo));
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = false; // Set to true if the body is HTML
 
-                // Set up the email details
-                string smtpAddress = "smtp.gmail.com"; // Replace with your SMTP server address
-                int portNumber = 587; // Typically 587 for TLS, 465 for SSL
-                bool enableSSL = true;
-                string emailFrom = "morad.amer.9595@gmail.com"; // Your email address
-                string password = "#9#5#%1%6%@M@G@"; // Your email password
-                string emailTo = email; // Recipient's email address
-                string subject = "Your OTP Code";
-                string body = $"Your OTP code is {otp}";
-
-                using (MailMessage mail = new MailMessage())
+                using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
                 {
-                    mail.From = new MailAddress(emailFrom);
-                    mail.To.Add(emailTo);
-                    mail.Subject = subject;
-                    mail.Body = body;
-                    mail.IsBodyHtml = true; // Set to false if the email body is plain text
-                     
-                    using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+                    smtp.Credentials = new NetworkCredential(emailFrom, password);
+                    smtp.EnableSsl = enableSSL;
+                    try
                     {
-                        smtp.Credentials = new NetworkCredential(emailFrom, password);
-                        smtp.EnableSsl = enableSSL;
                         smtp.Send(mail);
-                        smtp.Timeout = 20000;
                         message = "OTP sent successfully! Check your email please";
+                        return message;
+                    }
+                    catch (Exception ex)
+                    {
+                        message = ex.Message;
+                        return message;
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                message = ex.Message;
-                return message;
-            } 
-            return message;
+
+
+            //try
+            //{
+            //    //ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+            //    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+            //    // Set up the email details
+            //    string smtpAddress = "smtp.gmail.com"; // Replace with your SMTP server address
+            //    int portNumber = 587; // Typically 587 for TLS, 465 for SSL
+            //    bool enableSSL = true;
+            //    string emailFrom = "morad.amer.9595@gmail.com"; // Your email address
+            //    string password = "#9#5#%1%6%@M@G@"; // Your email password
+            //    string emailTo = email; // Recipient's email address
+            //    string subject = "Your OTP Code";
+            //    string body = $"Your OTP code is {otp}";
+
+            //    using (MailMessage mail = new MailMessage())
+            //    {
+            //        mail.From = new MailAddress(emailFrom);
+            //        mail.To.Add(emailTo);
+            //        mail.Subject = subject;
+            //        mail.Body = body;
+            //        mail.IsBodyHtml = true; // Set to false if the email body is plain text
+                     
+            //        using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+            //        {
+            //            smtp.Credentials = new NetworkCredential(emailFrom, password);
+            //            smtp.EnableSsl = enableSSL;
+            //            smtp.Send(mail);
+            //            smtp.Timeout = 20000;
+            //            message = "OTP sent successfully! Check your email please";
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    message = ex.Message;
+            //    return message;
+            //} 
+            //return message;
         }
     }
 }
