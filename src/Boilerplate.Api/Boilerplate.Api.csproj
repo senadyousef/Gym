@@ -27,7 +27,11 @@
 
 		<Content Remove="Views\HomeView\GymHome.cshtml" />
 
+		<Content Remove="Views\HomeView\Items.cshtml" />
+
 		<Content Remove="Views\HomeView\ItemsDetails.cshtml" />
+
+		<Content Remove="Views\HomeView\News.cshtml" />
 
 		<Content Remove="Views\HomeView\ReasetPassword.cshtml" />
 
@@ -141,6 +145,10 @@
 		<None Include="Views\HomeView\AllGyms.cshtml" />
 
 		<None Include="Views\HomeView\ForgetPassword.cshtml" />
+
+		<None Include="Views\HomeView\Items.cshtml" />
+
+		<None Include="Views\HomeView\News.cshtml" />
 
 		<None Include="Views\HomeView\ItemsDetails.cshtml" />
 

@@ -50,24 +50,32 @@
                                                             <label class="form-label-outside" for="contact-English-name">English Name</label>
                                                             <input class="form-control" id="contact-English-name" type="text" name="EnName">
                                                         </div>
-                                                        <div class="form-group" style="width:25%">
-                                                            <label class="form-label-outside" for="contact-Arabic-Discription">Arabic Discription</label>
-                                                            <input class="form-control" id="contact-Arabic-Discription" type="text" name="ArDisc">
+                                                        <div class="form-group" style="width: 25%;">
+                                                            <label class="form-label-outside" for="contact-English-Description">English Description</label>
+                                                            <textarea class="form-control" id="contact-English-Description" name="EnDisc" rows="1"></textarea>
                                                         </div>
-                                                        <div class="form-group" style="width:25%">
-                                                            <label class="form-label-outside" for="contact-English-Discription">English Discription</label>
-                                                            <input class="form-control" id="contact-English-Discription" type="text" name="EnDisc">
+                                                        <div class="form-group" style="width: 25%;">
+                                                            <label class="form-label-outside" for="contact-English-Description">English Description</label>
+                                                            <textarea class="form-control" id="contact-English-Description" name="EnDisc" rows="1"></textarea>
                                                         </div>
+                                                        <script>
+                                                            const textarea = document.getElementById('contact-English-Description');
+
+                                                            textarea.addEventListener('input', function () {
+                                                                this.style.height = 'auto';
+                                                                this.style.height = (this.scrollHeight) + 'px';
+                                                            });
+                                                        </script>
                                                         <div class="form-group" style="width:25%">
                                                             <label class="form-label-outside" for="contact-Brand">* Brand</label>
                                                             <input class="form-control" id="contact-Brand" type="text" name="Brand">
                                                         </div>
                                                         <div class="form-group" style="width:25%">
-                                                            <label class="form-label-outside" for="contact-phone">Price</label>
-                                                            <input class="form-control" id="contact-phone" type="number" name="phone" min="0" max="9999999999" step="1"><a>JD</a>
+                                                            <label class="form-label-outside" for="contact-price">Price</label>
+                                                            <input class="form-control" id="contact-price" type="number" name="price" min="0" max="9999999999" step="1" lang="en"><a>JD</a>
                                                         </div>
                                                         <div class="form-group" style="width:25%">
-                                                            <label class="form-label-outside" for="contact-checkbox">Available</label>
+                                                            <label class="form-label-outside" for="contact-checkbox">Is in stock</label>
                                                             <input class="form-control-check" id="contact-checkbox" type="checkbox" name="isActive">
                                                         </div>
                                                         <div class="form-group" style="width:100%; display: flex; align-items: center; justify-content: center;">
@@ -82,7 +90,7 @@
                                                                         <i class="fa fa-download" aria-hidden="true"></i>
                                                                         <div>Select a file or drag here</div>
                                                                         <div id="notimage" class="hidden">Please select an image</div>
-                                                                        <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                                                        <span id="file-upload-btn" class="btn btn-primary">Select image</span>
                                                                     </div>
                                                                     <div id="response" class="hidden">
                                                                         <div id="messages"></div>
@@ -352,11 +360,19 @@
 
 </html>
 <style>
+
+    textarea {
+        overflow: hidden;
+        resize: none;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     @@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
     @@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-    // Vars and Reset
-    //
+    Vars and Reset
+
     $theme: #454cad;
     $dark-text: #5f6982;
 
