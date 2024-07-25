@@ -1312,6 +1312,24 @@ output {
 	-o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.form-control-check {
+	display: block;
+	width: 10%;
+	height: 40px;
+	padding: 13px 33px;
+	font-size: 12px;
+	line-height: 1.75;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #d0dbd7;
+	border-radius: 25px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	-o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
 
 .form-control:focus {
 	border-color: #d0dbd7;
@@ -26392,6 +26410,32 @@ dt {
 	background-position: center 90%;
 	background-color: #000;
 	background-image: url("../images/GymPageBackground.jpg");
+	color: #fff;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	min-height: 20.83333333333333vw;
+}
+
+.page-Items-title {
+	text-align: center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center 90%;
+	background-color: #000;
+	background-image: url("../images/sneakers-near-healthy-food.jpg");
 	color: #fff;
 	display: -ms-flexbox;
 	display: -webkit-flex;
