@@ -17,7 +17,11 @@
 
 		<!--<Content Remove="Views\HomeView\Index.cshtml" />-->
 
+		<Content Remove="Views\HomeView\AllCoaches.cshtml" />
+
 		<Content Remove="Views\HomeView\AllGyms.cshtml" />
+
+		<Content Remove="Views\HomeView\AllPlayers.cshtml" />
 
 		<Content Remove="Views\HomeView\AllStores.cshtml" />
 
@@ -38,6 +42,8 @@
 		<Content Remove="Views\HomeView\SmartUseHome.cshtml" />
 
 		<Content Remove="Views\HomeView\StoreHome.cshtml" />
+
+		<Content Remove="Views\HomeView\Users.cshtml" />
 
 		<Content Remove="Views\HomeView\Verification.cshtml" />
 
@@ -138,6 +144,10 @@
 		<!--    <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />-->
 		<!--    <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />-->
 
+		<None Include="Views\HomeView\AllCoaches.cshtml" />
+
+		<None Include="Views\HomeView\AllPlayers.cshtml" />
+
 		<None Include="Views\HomeView\GymDetails.cshtml" />
 
 		<None Include="Views\HomeView\AllStores.cshtml" />
@@ -147,6 +157,8 @@
 		<None Include="Views\HomeView\ForgetPassword.cshtml" />
 
 		<None Include="Views\HomeView\Items.cshtml" />
+
+		<None Include="Views\HomeView\Users.cshtml" />
 
 		<None Include="Views\HomeView\News.cshtml" />
 
