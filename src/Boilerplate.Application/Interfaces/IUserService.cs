@@ -24,7 +24,8 @@ namespace Boilerplate.Application.Interfaces
         Task<GetUserExtendedDto> GetExtendedUserById(int id);
         Task<bool> EditUser(CreateUserDto dto);
         Task<NumberOfMembersInTheGym> NumberOfMembersInTheGym();
-        string GenerateOTP(string email);
+        Task<string> GenerateOTP(string email);
+        Task<bool> CheckOTP(string email, int OTP);
     }
 
     public class CheckEmailAndMobieNumber

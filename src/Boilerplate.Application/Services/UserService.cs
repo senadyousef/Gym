@@ -241,6 +241,7 @@ namespace Boilerplate.Application.Services
             user.MembershipStartDate = user.MembershipStartDate;
             user.PhotoUri = user.PhotoUri;
             user.GymCapacity = dto.GymCapacity;
+            user.OTP = user.GymCapacity;
             if (dto.UploadRequests != null)
             {
                 user.PhotoUri = await _uploadService.UploadImageAsync(dto.UploadRequests);
@@ -412,8 +413,20 @@ namespace Boilerplate.Application.Services
             return Num;
         }
 
-        public string GenerateOTP(string email)
+        public async Task<string> GenerateOTP(string email)
         {
+            bool emailSent = false;
+            var user = new User();
+            user = await _userRepository
+                .GetAll()
+                .Where(o => o.IsDisabled == false)
+                .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+
+            if (user == null)
+            {
+                return "Email not available";
+            }
+
             string message = string.Empty;
             Random random = new Random();
             int otp = random.Next(100000, 999999);
@@ -429,11 +442,11 @@ namespace Boilerplate.Application.Services
 
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
-                    smtp.Credentials = new NetworkCredential("morad.amer.9595@gmail.com", "xcav drkl ptmc knlw");
+                    smtp.Credentials = new NetworkCredential("morad.amer.9595@gmail.com", "phmk pyqg bzos tieb");
                     smtp.EnableSsl = true;
 
                     int retryCount = 3;
-                    bool emailSent = false;
+                    
 
                     for (int i = 0; i < retryCount && !emailSent; i++)
                     {
@@ -441,7 +454,7 @@ namespace Boilerplate.Application.Services
                         {
                             smtp.Send(mail);
                             emailSent = true;
-                            message = "OTP sent successfully! Check your email please";
+                            message = "OTP sent successfully! Check your email please"; 
                         }
                         catch (SmtpException ex)
                         {
@@ -454,16 +467,53 @@ namespace Boilerplate.Application.Services
                                 message = "Retrying...";
                                 System.Threading.Thread.Sleep(2000);
                             }
+                            emailSent = false;
                         }
                         catch (Exception ex)
                         {
                             message = ex.Message;
+                            emailSent = false;
                             break; 
                         }
                     } 
                 }
+                if (emailSent)
+                {
+                    user.MobilePhone = user.MobilePhone;
+                    user.NameEn = user.NameEn;
+                    user.NameAr = user.NameAr;
+                    user.Gender = user.Gender;
+                    user.Role = user.Role;
+                    user.GymId = user.GymId;
+                    user.DOB = user.DOB;
+                    user.MembershipStatus = user.MembershipStatus;
+                    user.MembershipExpDate = user.MembershipExpDate;
+                    user.MembershipStartDate = user.MembershipStartDate;
+                    user.PhotoUri = user.PhotoUri;
+                    user.GymCapacity = user.GymCapacity;
+                    user.OTP = otp;
+                    _userRepository.Update(user);
+                } 
+                await _userRepository.SaveChangesAsync();
                 return message;
             } 
+        }
+
+        public async Task<bool> CheckOTP(string email,int OTP)
+        {
+            bool IsOTP = true;
+            var user = new User();
+            user = await _userRepository
+                .GetAll()
+                .Where(o => o.IsDisabled == false)
+                .Where(o => o.OTP == OTP)
+                .FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+
+            if (user == null)
+            {
+                IsOTP = false;
+            } 
+            return IsOTP;
         }
     }
 }

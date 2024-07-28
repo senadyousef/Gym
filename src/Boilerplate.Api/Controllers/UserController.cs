@@ -244,9 +244,17 @@ namespace Boilerplate.Api.Controllers
         [HttpPost]
         [Route("generateOTP")]
         [AllowAnonymous]
-        public string GenerateOTP(string email)
+        public async Task<string> GenerateOTP(string email)
         {
-            return _userService.GenerateOTP(email);
+            return await _userService.GenerateOTP(email);
+        }
+        
+        [HttpPost]
+        [Route("checkOTP")]
+        [AllowAnonymous]
+        public async Task<bool> CheckOTP(string email,int Opt)
+        {
+            return await _userService.CheckOTP(email, Opt);
         }
     }
 }
