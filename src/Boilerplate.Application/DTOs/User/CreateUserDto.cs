@@ -25,5 +25,6 @@ namespace Boilerplate.Application.DTOs.User
         public string PhotoUri { get; set; }
         public bool IsInGym { get; set; }
         public int GymCapacity { get; set; }
+        public int OTP { get; set; }
     }
 }
