@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
 
 </head>
 <body>
@@ -43,13 +44,13 @@
                             <div class="rd-navbar-nav-inner" style="max-width:100% ; min-width:250px">
                                 <ul class="rd-navbar-nav">
                                     <li style="min-width:100px;max-width:220px">
-                                        <a href="index.html">Items</a>
+                                        <a href="index.html" style="font-size:20px">Items</a>
                                     </li>
                                     <li style="min-width:100px;max-width:220px">
-                                        <a href="about.html">News</a>
+                                        <a href="about.html" style="font-size:20px">News</a>
                                     </li>
                                     <li style="min-width:100px;max-width:220px">
-                                        <a href="#Dashboardsection">Dashboard</a>
+                                        <a href="#Dashboardsection" style="font-size:20px">Dashboard</a>
                                     <li style="min-width:100px;max-width:220px">
                                         <a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-user" style="font-size:25px; display:flex ; align-items:center ; justify-content:center"></a>
                                         <ul class="rd-navbar-dropdown" style="border:1.5px solid rgb(1,137,255,.5);  border-radius:0 20px 0 20px">
@@ -89,29 +90,98 @@
                 </nav>
             </div>
         </header>
-        <section class="section-xl bg-periglacial-blue text-center">
-            <div id="slider-wrapper" style="border-radius:20px">
-                <div class="inner-wrapper" style="border-radius:20px">
-                    <input checked type="radio" name="slide" class="control" id="Slide1" />
-                    <label for="Slide1" id="s1"></label>
-                    <input type="radio" name="slide" class="control" id="Slide2" />
-                    <label for="Slide2" id="s2"></label>
-                    <input type="radio" name="slide" class="control" id="Slide3" />
-                    <label for="Slide3" id="s3"></label>
-                    <input type="radio" name="slide" class="control" id="Slide4" />
-                    <label for="Slide4" id="s4"></label>
-                    <div class="overflow-wrapper" style="border-radius:20px">
-                        <a class="slide" href="" style="border-radius:20px">
-                            <img src="~/Images/store.png" style="border-radius:20px" />
-                            <img src="~/Images/store2.jpg" style="border-radius:20px" />
-                            <img src="~/Images/store2.jpg" style="border-radius:20px" />
-                            <img src="~/Images/store2.jpg" style="border-radius:20px" />
-                        </a>
+        @*    <section class="section-xl bg-periglacial-blue text-center">
+        <div id="slider-wrapper" style="border-radius:20px">
+        <div class="inner-wrapper" style="border-radius:20px">
+        <input checked type="radio" name="slide" class="control" id="Slide1" />
+        <label for="Slide1" id="s1"></label>
+        <input type="radio" name="slide" class="control" id="Slide2" />
+        <label for="Slide2" id="s2"></label>
+        <input type="radio" name="slide" class="control" id="Slide3" />
+        <label for="Slide3" id="s3"></label>
+        <input type="radio" name="slide" class="control" id="Slide4" />
+        <label for="Slide4" id="s4"></label>
+        <div class="overflow-wrapper" style="border-radius:20px">
+        <a class="slide" href="" style="border-radius:20px">
+        <img src="~/Images/store.png" style="border-radius:20px" />
+        <img src="~/Images/store2.jpg" style="border-radius:20px" />
+        <img src="~/Images/store2.jpg" style="border-radius:20px" />
+        <img src="~/Images/store2.jpg" style="border-radius:20px" />
+        </a>
+        </div>
+        </div>
+        </div>
+
+        </section> *@
+        <section id="section-1">
+            <div class="content-slider">
+                <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
+                <input type="radio" id="banner2" class="sec-1-input" name="banner">
+                <input type="radio" id="banner3" class="sec-1-input" name="banner">
+                <input type="radio" id="banner4" class="sec-1-input" name="banner">
+                <div class="slider">
+                    <div id="top-banner-store-1" class="banner">
+                        <div class="banner-inner-wrapper header-text">
+                        </div>
+                    </div>
+                    <div id="top-banner-store-2" class="banner">
+                        <div class="banner-inner-wrapper header-text">
+                        </div>
+                    </div>
+                    <div id="top-banner-store-3" class="banner">
+                        <div class="banner-inner-wrapper header-text">
+                        </div>
+                    </div>
+                    <div id="top-banner-store-4" class="banner">
+                        <div class="banner-inner-wrapper header-text">
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <nav>
+                    <div class="controls">
+                        <label for="banner1"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">1</span></label>
+                        <label for="banner2"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">2</span></label>
+                        <label for="banner3"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">3</span></label>
+                        <label for="banner4"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">4</span></label>
+                    </div>
+                </nav>
+            </div>
         </section>
+        <section class="section-xl bg-periglacial-blue text-center" id="Statistics" style="top:-600px; background-color: transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <div class="info-bar" id="Statistics">
+                <div class="info-item">
+                    <img src="~/Images/storeicon.png" alt="Territory Icon">
+                    <h3>Gyms</h3>
+                    <p id="gymCount">320</p>
+                </div>
+                <div class="info-item">
+                    <img src="~/Images/HeaderGymLogo2.png" alt="Price Icon">
+                    <h3>Players</h3>
+                    <p id="playerCount">28820</p>
+                </div>
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var gymCountUp = new CountUp('gymCount', 0, 320);
+                    var storeCountUp = new CountUp('storeCount', 0, 92);
+                    var playerCountUp = new CountUp('playerCount', 0, 28820);
+
+                    var waypoint = new Waypoint({
+                        element: document.getElementById('Statistics'),
+                        handler: function () {
+                            gymCountUp.start();
+                            storeCountUp.start();
+                            playerCountUp.start();
+
+                        },
+                        offset: '75%'
+                    });
+                });
+            </script>
+        </section>
+
         <section class="section-xl bg-periglacial-blue text-center" id="Dashboardsection">
             <div class="shell">
 

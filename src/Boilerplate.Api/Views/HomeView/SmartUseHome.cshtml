@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
 
 </head>
 <body>
@@ -194,17 +195,54 @@
         </header>
         <section class="jumbotron-custom jumbotron-custom-3 bg-white bg-image bg-image-custom bg-image-center" style="background-image: url(images/home-three-1-1920x800.jpg);">
             <div class="jumbotron-custom-content text-center">
-                <div class="shell">
+                <div class="shell" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                     <div class="range range-sm-center">
                         <div class="cell-sm-9 cell-md-8 cell-lg-7">
                             <h1>Your fitness companoin !</h1>
                             <p class="large"> Establish your new amazing look with Barbershop services! From haircuts to hot shaves, you can experience the best level of barbering in the area.</p>
                         </div>
                     </div>
+                    <div class="info-bar" id="Statistics">
+                        <div class="info-item">
+                            <img src="~/Images/storeicon.png" alt="Territory Icon">
+                            <h3>Gyms</h3>
+                            <p id="gymCount">320</p>
+                        </div>
+                        <div class="info-item">
+                            <img src="~/Images/storeicon.png" alt="Territory Icon">
+                            <h3>Stores</h3>
+                            <p id="storeCount">92</p>
+                        </div>
+                        <div class="info-item">
+                            <img src="~/Images/HeaderGymLogo2.png" alt="Price Icon">
+                            <h3>Players</h3>
+                            <p id="playerCount">28820</p>
+                        </div>
+                    </div>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var gymCountUp = new CountUp('gymCount', 0, 320);
+                            var storeCountUp = new CountUp('storeCount', 0, 92);
+                            var playerCountUp = new CountUp('playerCount', 0, 28820);
+
+                            var waypoint = new Waypoint({
+                                element: document.getElementById('Statistics'),
+                                handler: function () {
+                                    gymCountUp.start();
+                                    storeCountUp.start();
+                                    playerCountUp.start();
+
+                                },
+                                offset: '75%'
+                            });
+                        });
+                    </script>
                 </div>
             </div>
 
         </section>
+
         <section class="section-xl bg-periglacial-blue text-center" id="Dashboardsection">
             <div class="shell">
                 <div class="range range-sm-center range-75">
@@ -508,47 +546,3 @@
     </div> *@
 </body>
 </html>
-<style>
-    .highcharts-figure,
-    .highcharts-data-table table {
-        min-width: 310px;
-        max-width: 800px;
-        margin: 1em auto;
-    }
-
-    .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #ebebeb;
-        margin: 10px auto;
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-    }
-
-    .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table td,
-    .highcharts-data-table th,
-    .highcharts-data-table caption {
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table thead tr,
-    .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-    }
-
-    .highcharts-data-table tr:hover {
-        background: #f1f7ff;
-    }
-</style>

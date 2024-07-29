@@ -817,22 +817,39 @@ Banner Style
   border-color: #0189FF;
   transition: 0.3s;
 }
-#section-1 .content-slider .slider #top-banner-1 {
-  background: url('../images/banner-01.jpg') no-repeat center center;
-  background-size: cover;
-}
-#section-1 .content-slider .slider #top-banner-2 {
-  background: url('../images/banner-02.jpg') no-repeat center center;
-  background-size: cover;
-}
-#section-1 .content-slider .slider #top-banner-3 {
-  background: url('../images/banner-03.jpg') no-repeat center center;
-  background-size: cover;
-}
-#section-1 .content-slider .slider #top-banner-4 {
-  background: url('../images/banner-04.jpg') no-repeat center center;
-  background-size: cover;
-}
+    #section-1 .content-slider .slider #top-banner-1 {
+        background: url('../images/anastase-maragos-FP7cfYPPUKM-unsplash.jpg') no-repeat center center;
+        background-size: cover;
+    }
+    #section-1 .content-slider .slider #top-banner-2 {
+        background: url('../images/bg-01.jpg') no-repeat center center;
+        background-size: cover;
+    }
+    #section-1 .content-slider .slider #top-banner-3 {
+        background: url('../images/GymPageBackground.jpg') no-repeat center center;
+        background-size: cover;
+    }
+    #section-1 .content-slider .slider #top-banner-4 {
+        background: url('../images/victor-freitas-KkYWWpurqbE-unsplash.jpg') no-repeat center center;
+        background-size: cover;
+    }
+
+     #top-banner-store-1 {
+        background: url('../images/store2.jpg') no-repeat center center;
+        background-size: cover;
+    }
+    #top-banner-store-2 {
+        background: url('../images/store.png') no-repeat center center;
+        background-size: cover;
+    }
+    #top-banner-store-3 {
+        background: url('../images/store2.jpg') no-repeat center center;
+        background-size: cover;
+    }
+    #top-banner-store-4 {
+        background: url('../images/store.png') no-repeat center center;
+        background-size: cover;
+    }
 #section-1 .content-slider nav {
   position: absolute;
   bottom: 30px;
@@ -893,14 +910,15 @@ Banner Style
 #section-1 .content-slider #banner1:checked ~ .slider #top-banner-1,
 #section-1 .content-slider #banner2:checked ~ .slider #top-banner-2,
 #section-1 .content-slider #banner3:checked ~ .slider #top-banner-3,
-#section-1 .content-slider #banner4:checked ~ .slider #top-banner-4 {
-  opacity: 1;
-  z-index: 1;
+#section-1 .content-slider #banner4:checked ~ .slider #top-banner-4,
+#section-1 .content-slider #banner1:checked ~ .slider #top-banner-store-1,
+#section-1 .content-slider #banner2:checked ~ .slider #top-banner-store-2,
+#section-1 .content-slider #banner3:checked ~ .slider #top-banner-store-3,
+#section-1 .content-slider #banner4:checked ~ .slider #top-banner-store-4 {
+    opacity: 1;
+    z-index: 1;
 }
-#section-1 .content-slider #banner1:checked ~ nav label:nth-of-type(1),
-#section-1 .content-slider #banner2:checked ~ nav label:nth-of-type(2),
-#section-1 .content-slider #banner3:checked ~ nav label:nth-of-type(3),
-#section-1 .content-slider #banner4:checked ~ nav label:nth-of-type(4) {
+    #section-1 .content-slider #banner1:checked ~ nav label:nth-of-type(1), #section-1 .content-slider #banner2:checked ~ nav label:nth-of-type(2), #section-1 .content-slider #banner3:checked ~ nav label:nth-of-type(3), #section-1 .content-slider #banner4:checked ~ nav label:nth-of-type(4) {
   cursor: default;
   color: #fff;
   transition: all 0.5s;
