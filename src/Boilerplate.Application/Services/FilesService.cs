@@ -67,6 +67,7 @@ namespace Boilerplate.Application.Files
                             Id = 0,
                             Name = fileName,
                             Url = result,
+                            Type = createFilesDto.Type,
                             CreatedOn = DateTime.Now,
                             IsDisabled = false,
                         };
@@ -82,6 +83,7 @@ namespace Boilerplate.Application.Files
                         FilesById.Url = result;
                         FilesById.Name = createFilesDto.Name;
                         FilesById.LastModifiedOn = DateTime.Now;
+                        FilesById.Type = createFilesDto.Type;
 
                         _FilesRepository.Update(FilesById);
                     }
