@@ -25,7 +25,11 @@
 
 		<Content Remove="Views\HomeView\AllStores.cshtml" />
 
+		<Content Remove="Views\HomeView\Contactus.cshtml" />
+
 		<Content Remove="Views\HomeView\ForgetPassword.cshtml" />
+
+		<Content Remove="Views\HomeView\Gallery.cshtml" />
 
 		<Content Remove="Views\HomeView\GymDetails.cshtml" />
 
@@ -146,6 +150,8 @@
 
 		<None Include="Views\HomeView\AllCoaches.cshtml" />
 
+		<None Include="Views\HomeView\Contactus.cshtml" />
+
 		<None Include="Views\HomeView\AllPlayers.cshtml" />
 
 		<None Include="Views\HomeView\GymDetails.cshtml" />
@@ -173,6 +179,8 @@
 		<None Include="Views\HomeView\GymHome.cshtml" />
 
 		<None Include="Views\HomeView\SmartUseHome.cshtml" />
+
+		<None Include="Views\HomeView\Gallery.cshtml" />
 
 		<None Include="Views\HomeView\Verification.cshtml" />
 
