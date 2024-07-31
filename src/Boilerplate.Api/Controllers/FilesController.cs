@@ -33,10 +33,17 @@ namespace Boilerplate.Api.Controllers
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)] 
         public async Task<string> UpLoadFile(CreateFilesDto createFilesDto)
-        {
-            string newFiles = await _Fileservice.UploadJson(createFilesDto);
-            
-            return newFiles;
+        { 
+            return await _Fileservice.UploadJson(createFilesDto);
+        } 
+        
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("deleteFiles")]
+        [ProducesResponseType(StatusCodes.Status201Created)] 
+        public async Task<string> DeleteFile(string name)
+        { 
+            return await _Fileservice.DeleteFile(name);
         } 
     }
 }

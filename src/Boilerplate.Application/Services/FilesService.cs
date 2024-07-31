@@ -14,6 +14,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static QRCoder.PayloadGenerator;
 
 namespace Boilerplate.Application.Files
 {
@@ -42,14 +43,14 @@ namespace Boilerplate.Application.Files
             {
                 try
                 {
-                    result = "http://gym.useitsmart.com/webimages/" + createFilesDto.Name; 
+                    result = "http://gym.useitsmart.com/webimages/" + createFilesDto.Name;
                     var wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/");
 
                     filePath = Path.Combine("wwwroot/WebImages/", createFilesDto.Name);
 
                     byte[] data = Convert.FromBase64String(createFilesDto.file);
                     jsonString = Encoding.UTF8.GetString(data);
-                    File.WriteAllText(filePath, jsonString); 
+                    File.WriteAllText(filePath, jsonString);
                     createFilesDto.file = result;
                 }
                 catch (Exception ex)
@@ -63,7 +64,7 @@ namespace Boilerplate.Application.Files
                 {
                     var wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/");
                     result = "http://gym.useitsmart.com/webimages/" + createFilesDto.Name;
-                    
+
                     byte[] imageBytes = Convert.FromBase64String(createFilesDto.file);
                     string imagePath = Path.Combine(wwwRootPath, createFilesDto.Name);
                     if (!Directory.Exists(wwwRootPath))
@@ -137,6 +138,48 @@ namespace Boilerplate.Application.Files
                .GetAll()
                .Where(o => o.IsDisabled == false);
             return await _mapper.ProjectTo<GetFilesDto>(Files).ToAllListAsync(1);
+        }
+
+        public async Task<string> DeleteFile(string name)
+        {
+            string Message = string.Empty;
+            var FilesByName = _FilesRepository.GetAll()
+               .Where(o => o.Name == name)
+               .Where(o => o.IsDisabled == false).FirstOrDefault();
+
+            if (FilesByName == null)
+            {
+                Message = "Something wrong";
+            }
+            else
+            {
+                FilesByName.Url = FilesByName.Url;
+                FilesByName.Name = FilesByName.Name;
+                FilesByName.DisabledOn = DateTime.Now;
+                FilesByName.IsDisabled = true;
+                FilesByName.Type = FilesByName.Type;
+
+                _FilesRepository.Update(FilesByName);
+
+                string[] fileName = name.Split('.'); 
+                string firstPart = fileName[0];
+                var other = _FilesRepository.GetAll()
+               .Where(o => o.Name.Contains(firstPart))
+               .Where(o => o.IsDisabled == false).FirstOrDefault();
+
+                if (other != null) 
+                {
+                    other.Url = other.Url;
+                    other.Name = other.Name;
+                    other.DisabledOn = DateTime.Now;
+                    other.IsDisabled = true;
+                    other.Type = other.Type;
+                    _FilesRepository.Update(FilesByName);
+                }
+                Message = firstPart + " deleted successfully"; 
+            }
+            await _FilesRepository.SaveChangesAsync();
+            return Message;
         }
     }
 }
