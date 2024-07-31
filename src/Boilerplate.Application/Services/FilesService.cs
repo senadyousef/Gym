@@ -6,6 +6,7 @@ using Boilerplate.Domain.Entities;
 using Boilerplate.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
 using System;
 using System.Collections;
 using System.IO;
@@ -35,85 +36,97 @@ namespace Boilerplate.Application.Files
         public async Task<string> UploadJson(CreateFilesDto createFilesDto)
         {
             string result = string.Empty;
-            var fileName = createFilesDto.Name;
             var filePath = string.Empty;
             string jsonString = string.Empty;
-            try
+            if (createFilesDto.Type == "Floor" || createFilesDto.Type == "File")
             {
-                result = "http://gym.useitsmart.com/webimages/" + fileName;
-
-                var wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/");
-
-                filePath = Path.Combine("wwwroot/WebImages/", fileName);
-
-                byte[] data = Convert.FromBase64String(createFilesDto.file);
-                jsonString = Encoding.UTF8.GetString(data);
-
-                if (createFilesDto.Id == 0)
+                try
                 {
-                    IQueryable<Domain.Entities.Files> Files = null;
-                    Files = _FilesRepository
-                       .GetAll()
-                       .Where(o => o.Name == createFilesDto.Name)
-                       .Where(o => o.IsDisabled == false);
-                    if (Files.Count() > 0)
-                    {
-                        result = "Name already exist !!";
-                    }
-                    else
-                    {
-                        var newFiles = new Domain.Entities.Files
-                        {
-                            Id = 0,
-                            Name = fileName,
-                            Url = result,
-                            Type = createFilesDto.Type,
-                            CreatedOn = DateTime.Now,
-                            IsDisabled = false,
-                        };
+                    result = "http://gym.useitsmart.com/webimages/" + createFilesDto.Name; 
+                    var wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/");
 
-                        _FilesRepository.Create(newFiles);
+                    filePath = Path.Combine("wwwroot/WebImages/", createFilesDto.Name);
+
+                    byte[] data = Convert.FromBase64String(createFilesDto.file);
+                    jsonString = Encoding.UTF8.GetString(data);
+                    File.WriteAllText(filePath, jsonString); 
+                    createFilesDto.file = result;
+                }
+                catch (Exception ex)
+                {
+                    return ex.InnerException.Message;
+                }
+            }
+            if (createFilesDto.Type == "Image")
+            {
+                try
+                {
+                    var wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WebImages/");
+                    result = "http://gym.useitsmart.com/webimages/" + createFilesDto.Name;
+                    
+                    byte[] imageBytes = Convert.FromBase64String(createFilesDto.file);
+                    string imagePath = Path.Combine(wwwRootPath, createFilesDto.Name);
+                    if (!Directory.Exists(wwwRootPath))
+                    {
+                        Directory.CreateDirectory(wwwRootPath);
                     }
+                    System.IO.File.WriteAllBytes(imagePath, imageBytes);
+                    createFilesDto.file = result;
+                }
+                catch (Exception ex)
+                {
+                    return ex.InnerException.Message;
+                }
+            }
+
+            return await saveFile(createFilesDto);
+        }
+
+        public async Task<string> saveFile(CreateFilesDto createFilesDto)
+        {
+            string url = createFilesDto.file;
+            if (createFilesDto.Id == 0)
+            {
+                IQueryable<Domain.Entities.Files> Files = null;
+                Files = _FilesRepository
+                   .GetAll()
+                   .Where(o => o.Name == createFilesDto.Name)
+                   .Where(o => o.IsDisabled == false);
+                if (Files.Count() > 0)
+                {
+                    url = "Name already exist !!";
                 }
                 else
                 {
-                    var FilesById = await _FilesRepository.GetById(createFilesDto.Id);
-                    if (FilesById != null)
+                    var newFiles = new Domain.Entities.Files
                     {
-                        FilesById.Url = result;
-                        FilesById.Name = createFilesDto.Name;
-                        FilesById.LastModifiedOn = DateTime.Now;
-                        FilesById.Type = createFilesDto.Type;
+                        Id = 0,
+                        Name = createFilesDto.Name,
+                        Url = createFilesDto.file,
+                        Type = createFilesDto.Type,
+                        CreatedOn = DateTime.Now,
+                        IsDisabled = false,
+                    };
 
-                        _FilesRepository.Update(FilesById);
-                    }
+                    _FilesRepository.Create(newFiles);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                return ex.InnerException.Message;
-            }
-            await _FilesRepository.SaveChangesAsync();
-            return await saveFile(filePath, jsonString, result);
-        }
-
-        public async Task<string> saveFile(string filePath, string jsonString,string result)
-        {
-            try
-            {
-                File.WriteAllText(filePath, jsonString);
-
-                var streamFile = new FileStream(jsonString, FileMode.Open);
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                var FilesById = await _FilesRepository.GetById(createFilesDto.Id);
+                if (FilesById != null)
                 {
-                    await streamFile.CopyToAsync(stream);
+                    FilesById.Url = createFilesDto.file;
+                    FilesById.Name = createFilesDto.Name;
+                    FilesById.LastModifiedOn = DateTime.Now;
+                    FilesById.Type = createFilesDto.Type;
+
+                    _FilesRepository.Update(FilesById);
                 }
-            } 
-            catch (Exception ex) 
-            {
-                return ex.InnerException.Message;
             }
-            return result;
+
+            await _FilesRepository.SaveChangesAsync();
+            return url;
         }
 
         public async Task<AllList<GetFilesDto>> GetAllFiles()
