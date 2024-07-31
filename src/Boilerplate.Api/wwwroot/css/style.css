@@ -2313,7 +2313,7 @@ fieldset[disabled] .btn-link:focus {
 }
 
 .btn-block {
-	display: block;
+	/*display: block;*/
 	width: 100%;
 }
 
@@ -10622,7 +10622,7 @@ address {
 
 .btn-sm, .btn-group-sm > .btn {
 	font-size: 12px;
-	padding: 8px 28px;
+	padding: 8px 0;
 }
 
 .btn-lg, .btn-group-lg > .btn {
@@ -26425,7 +26425,7 @@ dt {
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	min-height: 20.83333333333333vw;
+	min-height: 30.83333333333333vw;
 }
 
 .page-Items-title {
@@ -26451,7 +26451,32 @@ dt {
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	min-height: 20.83333333333333vw;
+	min-height: 30.83333333333333vw;
+}
+.page-Classes-title {
+	text-align: center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center 90%;
+	background-color: #000;
+	background-image: url("../images/Classes.jpg");
+	color: #fff;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	min-height:30.83333333333333vw;
 }
 .page-Player-title {
 	text-align: center;
@@ -30668,7 +30693,7 @@ blockquote .small:before {
 .shop-panel {
 	color: #fff;
 	background: #000;
-	padding: 20px 0;
+	padding: 10px 0;
 	text-align: center;
 }
 
@@ -36429,7 +36454,7 @@ html:not(.lt-ie10) .not-animated {
 		border-bottom: 3px solid var(--BrandColor--2);
 		border-radius: 0 0 20px 20px;
 		background: rgb(21,21,21,1);
-		height: 75px;
+		height: 62px;
 	}
 
 .rd-navbar-fixed .rd-navbar-secondary {
