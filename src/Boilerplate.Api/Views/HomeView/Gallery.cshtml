@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+<head>
+    <!-- Site Title-->
+    <title>Gyms</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="images/HeaderGymLogo2.png" />
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono:300,300italic,400,700%7CArvo:400,700">
+    <link rel="stylesheet" href="css/style.css">
+    <!--[if lt IE 10]>
+    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative;
+    z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42"
+    width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <script src="js/html5shiv.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+    <div class="page">
+        <main class="page-content" id="perspective">
+            <div class="content-wrapper">
+                <div class="page-header page-header-perspective">
+                    <div class="page-header-left"><a class="brand" href="index.html"><img src="images/HorezntalBlueGymLogo.png" alt="" width="200" height="51" /></a></div>
+                    <div class="page-header-right">
+                        <div id="perspective-open-menu" data-custom-toggle=".perspective-menu-toggle" data-custom-toggle-hide-on-blur="true">
+                            <span class="perspective-menu-text">Menu</span>
+                            <button class="perspective-menu-toggle"><span></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="wrapper">
+                    <div class="page-title">
+                        <div class="page-title-content">
+                            <div class="shell">
+                                <p class="page-title-header">Gallery</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-panel">
+                        <div class="shell">
+                            <div class="shop-panel-inner" style="padding: 0 20px; background-color: transparent;">
+                                <div class="shop-panel-left">
+                                    <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius: 50px;">Add Image/Video +</span></a>
+                                </div>
+                                <div class="shop-panel-right">
+                                    <div class="shop-panel-select">
+                                        <span class="shop-panel-select-title">Sort By</span>
+                                        <select class="form-control select-filter" id="filter-select" data-minimum-results-for-search="Infinity" data-custom-theme="modern">
+                                            <option onclick="moveToNext('image')" value="image">Image</option>
+                                            <option onclick="moveToNext('image') value="image">Image</option>
+                                            <option onclick="moveToNext('video') value="video">Video</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section id="image-section" class="section-md bg-periglacial-blue text-center">
+                        <div class="shell">
+                            <div class="range range-30">
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <img class="myImg" src="images/Maskgroup(1).png" alt="Image" width="160" height="160" style="cursor:pointer">
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <img class="myImg" src="images/Maskgroup(2).png" alt="Image" width="160" height="160" style="cursor:pointer">
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <img class="myImg" src="images/Maskgroup(3).png" alt="Image" width="160" height="160" style="cursor:pointer">
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <img class="myImg" src="images/Maskgroup(4).png" alt="Image" width="160" height="160" style="cursor:pointer">
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                                <!-- Add more products as needed -->
+                                <!-- Single modal for all images -->
+                                <div id="myModal" class="modal">
+                                    <span class="close">&times;</span>
+                                    <img class="modal-content" id="img01">
+                                </div>
+                            </div>
+                            @*   <ul class="pagination-custom">
+                            <li class="disabled"><a href="#"></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li class="ellipsis">...</li>
+                            <li><a href="#">12</a></li>
+                            <li><a href="#"></a></li>
+                            </ul> *@
+                        </div>
+                    </section>
+                    <section id="video-section" class="section-md bg-periglacial-blue text-center">
+                        <div class="shell">
+                            <div class="range range-30">
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <video controls="controls" width="300" height="300" class="myVideoThumbnail" data-video-src="images/video3.mp4" style="cursor:pointer">
+                                                <source src="images/Video1.mp4" type="video/mp4" />
+                                            </video>
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; margin-top:75px ; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <video controls="controls" width="300" height="300" class="myVideoThumbnail" data-video-src="images/video3.mp4" style="cursor:pointer">
+                                                <source src="images/video2.mp4" type="video/mp4" />
+                                            </video>
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; margin-top:75px ; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                                <div class="cell-sm-6 cell-md-4">
+                                    <article class="product">
+                                        <a class="product-image" href="#">
+                                            <video controls="controls" width="300" height="300" class="myVideoThumbnail" data-video-src="images/video3.mp4" style="cursor:pointer">
+                                                <source src="images/video3.mp4" type="video/mp4" />
+                                            </video>
+                                        </a>
+                                        <a class="btn-shop" href="cart.html"><span class="btn-shop-text" style="border-radius:50px; margin-top:75px ; background-color:red">Delete</span></a>
+                                    </article>
+                                </div>
+                            </div>
+                            <ul class="pagination-custom">
+                                <li class="disabled"><a href="#"></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li class="ellipsis">...</li>
+                                <li><a href="#">12</a></li>
+                                <li><a href="#"></a></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <script>
+                        function move(value) {
+                            if (value === 'image') {
+                                document.getElementById('image-section').style.display('block');
+                                document.getElementById('video-section').style.display('none');
+
+                            } else if (value === 'video') {
+                                document.getElementById('image-section').style.display('none');
+                                document.getElementById('video-section').style.display('block');
+                            }
+                        }
+
+                        var modal = document.getElementById("myModal");
+                        var modalImg = document.getElementById("img01");
+                        var images = document.getElementsByClassName("myImg");
+
+                        for (var i = 0; i < images.length; i++) {
+                            images[i].onclick = function () {
+                                modal.style.display = "flex";
+                                modalImg.src = this.src;
+                            }
+                        }
+
+                        var span = document.getElementsByClassName("close")[0];
+                        span.onclick = function () {
+                            modal.style.display = "none";
+                        }
+                    </script>
+                    <footer class="page-footer page-footer-default">
+                        <div class="shell">
+                            <div class="range range-xs-center">
+                                <div class="cell-lg-10">
+                                    <a class="brand" href="index.html"><img src="images/logo-default-dark-200x36.png" alt="" width="200" height="36" /></a>
+                                    <div class="text-highlighted-wrap">
+                                        <p class="text-highlighted">Barbershop is a No.1 place to have a men’s haircut in San Francisco. Here you can get luxury barber experience at a reasonable price.</p>
+                                    </div>
+                                    <ul class="footer-navigation footer-navigation-horizontal">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li class="active"><a href="index.html">Gym</a></li>
+                                        <li><a href="blog.html">Stores</a></li>
+                                        <li><a href="about.html">Services</a></li>
+                                        <li><a href="services.html">News</a></li>
+                                        <li><a href="contacts-1.html">Categories</a></li>
+                                    </ul>
+                                    <div class="divider divider-small divider-light block-centered"></div>
+                                    <ul class="inline-list inline-list-md">
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="https://www.facebook.com/profile.php?id=100095431091289&mibextid=ZbWKwL"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-instagram" href="https://www.instagram.com/smartuse.jo?igsh=NTc4MTIwNjQ2YQ=="></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="https://www.youtube.com/channel/UCGGIbazUcR6FKqUtSdhJz_w"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="https://www.linkedin.com/company/smartusejo/"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+                <div id="perspective-content-overlay"></div>
+            </div>
+            <!-- RD Navbar-->
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-default" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed"
+                     data-md-layout="rd-navbar-sidebar" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-sidebar" data-stick-up-clone="false">
+                    <div class="rd-navbar-inner">
+                        <div class="rd-navbar-panel">
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/logo-default-dark-200x36.png" alt="" width="200" height="36" /></a></div>
+                        </div>
+                        <div class="rd-navbar-nav-wrap">
+                            <div class="rd-navbar-nav-inner">
+                                <ul class="rd-navbar-nav">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active"><a href="index.html">Gym</a></li>
+                                    <li><a href="blog.html">Stores</a></li>
+                                    <li><a href="about.html">Services</a></li>
+                                    <li><a href="services.html">News</a></li>
+                                    <li><a href="contacts-1.html">Categories</a></li>
+                                </ul>
+                                <div class="rd-navbar-nav-footer">
+                                    <ul class="inline-list inline-list-md">
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="https://www.facebook.com/profile.php?id=100095431091289&mibextid=ZbWKwL"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-instagram" href="https://www.instagram.com/smartuse.jo?igsh=NTc4MTIwNjQ2YQ=="></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="https://www.youtube.com/channel/UCGGIbazUcR6FKqUtSdhJz_w"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="https://www.linkedin.com/company/smartusejo/"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </main>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__cent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
+
+<style>
+    /* Styles for the modal overlay */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 9999; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.9); /* Black background with opacity */
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Styles for the modal content */
+    .modal-content {
+        max-width: 90%; /* Ensure it fits within screen width */
+        max-height: 90vh; /* Ensure it fits within screen height */
+        object-fit: contain;
+        margin: auto;
+        display: block;
+    }
+
+    /* Styles for the close button */
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+    /* Responsive design for smaller screens */
+    @@media screen and (max-width: 768px) {
+        .close {
+            font-size: 30px;
+            top: 10px;
+            right: 10px;
+        }
+
+        .modal-content {
+            max-width: 95%;
+            max-height: 80vh;
+        }
+    }
+</style>

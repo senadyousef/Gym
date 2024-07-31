@@ -26503,6 +26503,31 @@ dt {
 	justify-content: center;
 	min-height: 20.83333333333333vw;
 }
+.page-ContactUs-title {
+	text-align: center;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center 90%;
+	background-color: #000;
+	background-image: url("../images/contactUs.jpg");
+	color: #fff;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	min-height: 20.83333333333333vw;
+}
 
 .page-title > * {
 	width: 100%;

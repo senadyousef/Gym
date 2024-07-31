@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+<head>
+    <!-- Site Title-->
+    <title>Gyms</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="images/HeaderGymLogo2.png" />
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono:300,300italic,400,700%7CArvo:400,700">
+    <link rel="stylesheet" href="css/style.css">
+    <!--[if lt IE 10]>
+    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative;
+    z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42"
+    width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <script src="js/html5shiv.min.js"></script>
+        <![endif]-->
+
+    <link rel="stylesheet" href="~/css/fontawesome.css">
+    <link rel="stylesheet" href="~/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="~/css/owl.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+</head>
+<body>
+    <div class="page">
+        <main class="page-content" id="perspective">
+            <div class="content-wrapper">
+                <div class="page-header page-header-perspective">
+                    <div class="page-header-left"><a class="brand" href="index.html"><img src="images/HorezntalBlueGymLogo.png" alt="" width="200" height="51" /></a></div>
+                    <div class="page-header-right">
+                        <div id="perspective-open-menu" data-custom-toggle=".perspective-menu-toggle" data-custom-toggle-hide-on-blur="true">
+                            <span class="perspective-menu-text">Menu</span>
+                            <button class="perspective-menu-toggle"><span></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="wrapper">
+                    <div class="page-ContactUs-title" style="height:700px">
+                        <div class="page-title-content">
+                            <div class="shell">
+                                <img src="~/Images/SmartUseLogo.png" width="300px" height="300px" />
+                                <p class="page-title-header">Contact us</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more-info reservation-info">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="info-item">
+                                        <i class="fa fa-phone"></i>
+                                        <h4>Make a phone call</h4>
+                                        <a href="#" onclick="copyToClipboard('+962770134991')">+962 77 0134991</a>
+                                    </div>
+                                    <script>
+                                        function isMobile() {
+                                            // Check for mobile devices
+                                            return /Mobi|Android/i.test(navigator.userAgent);
+                                        }
+
+                                        function copyToClipboard(text) {
+                                            const tempInput = document.createElement('input');
+                                            tempInput.style.position = 'absolute';
+                                            tempInput.style.left = '-9999px';
+                                            tempInput.value = text;
+                                            document.body.appendChild(tempInput);
+                                            tempInput.select();
+                                            document.execCommand('copy');
+                                            document.body.removeChild(tempInput);
+                                            alert('Phone number copied to clipboard');
+                                        }
+
+                                        function handlePhoneAction(phoneNumber) {
+                                            if (isMobile()) {
+                                                // If the device is a mobile, open the dialer with the phone number
+                                                window.location.href = 'tel:' + phoneNumber;
+                                            } else {
+                                                // If the device is not a mobile, copy the number to the clipboard
+                                                copyToClipboard(phoneNumber);
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="info-item">
+                                        <i class="fa fa-envelope"></i>
+                                        <h4>Contact us via email</h4>
+                                        <a href="mailto:info@useitsmart.com">info@useitsmart.com</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="info-item">
+                                        <i class="fa fa-globe"></i>
+                                        <h4>Visit the website</h4>
+                                        <a href="https://www.useitsmart.com/">WWW.UseItSmart.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="section-md bg-periglacial-blue text-center">
+                        <div class="shell">
+                            <div class="range range-30">
+                                <div class="col-lg-12">
+                                    <div id="map" style="display:flex;justify-content:center;align-items:center">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11374.606506178152!2d35.87656807610325!3d32.05056116767067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c9f0053c78e4d%3A0x6c07af3af9580090!2sSmart%20Use%20Solutions!5e0!3m2!1sen!2sjo!4v1722324592804!5m2!1sen!2sjo"
+                                                width="1000" height="600"
+                                                style="border:0; border-radius:40px"
+                                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="page-footer page-footer-default">
+                        <div class="shell">
+                            <div class="range range-xs-center">
+                                <div class="cell-lg-10">
+                                    <a class="brand" href="index.html"><img src="images/logo-default-dark-200x36.png" alt="" width="200" height="36" /></a>
+                                    <ul class="footer-navigation footer-navigation-horizontal">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li class="active"><a href="index.html">Gym</a></li>
+                                        <li><a href="blog.html">Stores</a></li>
+                                        <li><a href="about.html">Services</a></li>
+                                        <li><a href="services.html">News</a></li>
+                                        <li><a href="contacts-1.html">Categories</a></li>
+                                    </ul>
+                                    <div class="divider divider-small divider-light block-centered"></div>
+                                    <ul class="inline-list inline-list-md">
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="https://www.facebook.com/profile.php?id=100095431091289&mibextid=ZbWKwL"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-instagram" href="https://www.instagram.com/smartuse.jo?igsh=NTc4MTIwNjQ2YQ=="></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="https://www.youtube.com/channel/UCGGIbazUcR6FKqUtSdhJz_w"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="https://www.linkedin.com/company/smartusejo/"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+                <div id="perspective-content-overlay"></div>
+            </div>
+            <!-- RD Navbar-->
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-default" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-sm-device-layout="rd-navbar-fixed"
+                     data-md-layout="rd-navbar-sidebar" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-sidebar" data-stick-up-clone="false">
+                    <div class="rd-navbar-inner">
+                        <div class="rd-navbar-panel">
+                            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img src="images/logo-default-dark-200x36.png" alt="" width="200" height="36" /></a></div>
+                        </div>
+                        <div class="rd-navbar-nav-wrap">
+                            <div class="rd-navbar-nav-inner">
+                                <ul class="rd-navbar-nav">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active"><a href="index.html">Gym</a></li>
+                                    <li><a href="blog.html">Stores</a></li>
+                                    <li><a href="about.html">Services</a></li>
+                                    <li><a href="services.html">News</a></li>
+                                    <li><a href="contacts-1.html">Categories</a></li>
+                                </ul>
+                                <div class="rd-navbar-nav-footer">
+                                    <ul class="inline-list inline-list-md">
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-facebook" href="https://www.facebook.com/profile.php?id=100095431091289&mibextid=ZbWKwL"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-instagram" href="https://www.instagram.com/smartuse.jo?igsh=NTc4MTIwNjQ2YQ=="></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-youtube" href="https://www.youtube.com/channel/UCGGIbazUcR6FKqUtSdhJz_w"></a></li>
+                                        <li><a class="icon icon-xs-outline icon-wild-sand-filled icon-circle fa-linkedin" href="https://www.linkedin.com/company/smartusejo/"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </main>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__cent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+
+
