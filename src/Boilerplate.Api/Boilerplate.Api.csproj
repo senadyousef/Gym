@@ -25,6 +25,8 @@
 
 		<Content Remove="Views\HomeView\AllStores.cshtml" />
 
+		<Content Remove="Views\HomeView\Classes.cshtml" />
+
 		<Content Remove="Views\HomeView\Contactus.cshtml" />
 
 		<Content Remove="Views\HomeView\ForgetPassword.cshtml" />
@@ -161,6 +163,8 @@
 		<None Include="Views\HomeView\AllGyms.cshtml" />
 
 		<None Include="Views\HomeView\ForgetPassword.cshtml" />
+
+		<None Include="Views\HomeView\Classes.cshtml" />
 
 		<None Include="Views\HomeView\Items.cshtml" />
 
