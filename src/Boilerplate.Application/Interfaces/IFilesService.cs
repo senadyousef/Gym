@@ -17,6 +17,7 @@ namespace Boilerplate.Application.Interfaces
         public Task<AllList<GetFilesDto>> GetAllFiles();
         Task<string> UploadJson(CreateFilesDto createFilesDto);
         Task<string> DeleteFile(string name);
+        Task<string> saveFile(CreateFilesDto createFilesDto);
     } 
     public class GetFilesDto
     {

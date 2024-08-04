@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,9 +37,11 @@ namespace Boilerplate.Application.Files
 
         public async Task<string> UploadJson(CreateFilesDto createFilesDto)
         {
+            bool isDone = true;
             string result = string.Empty;
             var filePath = string.Empty;
             string jsonString = string.Empty;
+            string messageSave = string.Empty;
             if (createFilesDto.Type == "Floor" || createFilesDto.Type == "File")
             {
                 try
@@ -55,6 +58,8 @@ namespace Boilerplate.Application.Files
                 }
                 catch (Exception ex)
                 {
+                    isDone = false;
+                    messageSave = "upload file failed";
                     return ex.InnerException.Message;
                 }
             }
@@ -76,11 +81,19 @@ namespace Boilerplate.Application.Files
                 }
                 catch (Exception ex)
                 {
+                    isDone = false;
+                    messageSave = "upload photo failed";
                     return ex.InnerException.Message;
                 }
             }
-
-            return await saveFile(createFilesDto);
+            if (!isDone)
+            {
+                return messageSave; 
+            }
+            else
+            {
+                return "Save Done";
+            }
         }
 
         public async Task<string> saveFile(CreateFilesDto createFilesDto)
@@ -88,45 +101,74 @@ namespace Boilerplate.Application.Files
             string url = createFilesDto.file;
             if (createFilesDto.Id == 0)
             {
-                IQueryable<Domain.Entities.Files> Files = null;
-                Files = _FilesRepository
-                   .GetAll()
-                   .Where(o => o.Name == createFilesDto.Name)
-                   .Where(o => o.IsDisabled == false);
-                if (Files.Count() > 0)
+                try
                 {
-                    url = "Name already exist !!";
-                }
-                else
-                {
-                    var newFiles = new Domain.Entities.Files
+                    IQueryable<Domain.Entities.Files> Files = null;
+                    Files = _FilesRepository
+                       .GetAll()
+                       .Where(o => o.Name == createFilesDto.Name)
+                       .Where(o => o.IsDisabled == false);
+                    if (Files.Count() > 0)
                     {
-                        Id = 0,
-                        Name = createFilesDto.Name,
-                        Url = createFilesDto.file,
-                        Type = createFilesDto.Type,
-                        CreatedOn = DateTime.Now,
-                        IsDisabled = false,
-                    };
-
-                    _FilesRepository.Create(newFiles);
+                        url = "Name already exist !!";
+                    }
+                    else
+                    {
+                        var newFiles = new Domain.Entities.Files
+                        {
+                            Id = 0,
+                            Name = createFilesDto.Name,
+                            Url = createFilesDto.file,
+                            Type = createFilesDto.Type,
+                            CreatedOn = DateTime.Now,
+                            IsDisabled = false,
+                        };
+                        _FilesRepository.Create(newFiles);
+                        await _FilesRepository.SaveChangesAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (createFilesDto.Type == "Floor" || createFilesDto.Type == "File")
+                    {
+                        url = "upload file failed";
+                    }
+                    if (createFilesDto.Type == "Image")
+                    {
+                        url = "upload photo failed";
+                    }
+                    return ex.InnerException.Message;
                 }
             }
             else
             {
-                var FilesById = await _FilesRepository.GetById(createFilesDto.Id);
-                if (FilesById != null)
+                try
                 {
-                    FilesById.Url = createFilesDto.file;
-                    FilesById.Name = createFilesDto.Name;
-                    FilesById.LastModifiedOn = DateTime.Now;
-                    FilesById.Type = createFilesDto.Type;
+                    var FilesById = await _FilesRepository.GetById(createFilesDto.Id);
+                    if (FilesById != null)
+                    {
+                        FilesById.Url = createFilesDto.file;
+                        FilesById.Name = createFilesDto.Name;
+                        FilesById.LastModifiedOn = DateTime.Now;
+                        FilesById.Type = createFilesDto.Type;
 
-                    _FilesRepository.Update(FilesById);
+                        _FilesRepository.Update(FilesById);
+                        await _FilesRepository.SaveChangesAsync();
+                    }
                 }
-            }
-
-            await _FilesRepository.SaveChangesAsync();
+                catch (Exception ex)
+                {
+                    if (createFilesDto.Type == "Floor" || createFilesDto.Type == "File")
+                    {
+                        url = "upload file failed";
+                    }
+                    if (createFilesDto.Type == "Image")
+                    {
+                        url = "upload photo failed";
+                    }
+                    return ex.InnerException.Message;
+                }
+            } 
             return url;
         }
 
@@ -161,13 +203,13 @@ namespace Boilerplate.Application.Files
 
                 _FilesRepository.Update(FilesByName);
 
-                string[] fileName = name.Split('.'); 
+                string[] fileName = name.Split('.');
                 string firstPart = fileName[0];
                 var other = _FilesRepository.GetAll()
                .Where(o => o.Name.Contains(firstPart))
                .Where(o => o.IsDisabled == false).FirstOrDefault();
 
-                if (other != null) 
+                if (other != null)
                 {
                     other.Url = other.Url;
                     other.Name = other.Name;
@@ -176,7 +218,7 @@ namespace Boilerplate.Application.Files
                     other.Type = other.Type;
                     _FilesRepository.Update(FilesByName);
                 }
-                Message = firstPart + " deleted successfully"; 
+                Message = firstPart + " deleted successfully";
             }
             await _FilesRepository.SaveChangesAsync();
             return Message;

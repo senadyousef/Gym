@@ -45,5 +45,14 @@ namespace Boilerplate.Api.Controllers
         { 
             return await _Fileservice.DeleteFile(name);
         } 
+        
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("saveFile")]
+        [ProducesResponseType(StatusCodes.Status201Created)] 
+        public async Task<string> saveFile(CreateFilesDto createFilesDto)
+        { 
+            return await _Fileservice.saveFile(createFilesDto);
+        } 
     }
 }
