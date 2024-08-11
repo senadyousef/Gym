@@ -88,7 +88,7 @@ namespace Boilerplate.Application.Files
             }
             if (!isDone)
             {
-                return messageSave; 
+                return messageSave;
             }
             else
             {
@@ -168,7 +168,7 @@ namespace Boilerplate.Application.Files
                     }
                     return ex.InnerException.Message;
                 }
-            } 
+            }
             return url;
         }
 
@@ -207,16 +207,23 @@ namespace Boilerplate.Application.Files
                 string firstPart = fileName[0];
                 var other = _FilesRepository.GetAll()
                .Where(o => o.Name.Contains(firstPart))
-               .Where(o => o.IsDisabled == false).FirstOrDefault();
+               .Where(o => o.IsDisabled == false);
 
-                if (other != null)
+
+                if (other.Count() > 0)
                 {
-                    other.Url = other.Url;
-                    other.Name = other.Name;
-                    other.DisabledOn = DateTime.Now;
-                    other.IsDisabled = true;
-                    other.Type = other.Type;
-                    _FilesRepository.Update(FilesByName);
+                    foreach (var otherFile in other) 
+                    {
+                        if (FilesByName.Id != otherFile.Id)
+                        {
+                            otherFile.Url = otherFile.Url;
+                            otherFile.Name = otherFile.Name;
+                            otherFile.DisabledOn = DateTime.Now;
+                            otherFile.IsDisabled = true;
+                            otherFile.Type = otherFile.Type;
+                            _FilesRepository.Update(otherFile);
+                        } 
+                    } 
                 }
                 Message = firstPart + " deleted successfully";
             }
