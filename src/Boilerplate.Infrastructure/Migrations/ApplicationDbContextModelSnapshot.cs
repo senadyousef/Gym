@@ -219,8 +219,6 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Gallery");
                 });
 
@@ -275,8 +273,6 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Items");
                 });
 
@@ -330,8 +326,6 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("News");
                 });
 
@@ -373,17 +367,7 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Property<int>("Trainee")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("PersonalTrainersClasses");
                 });
@@ -548,7 +532,7 @@ namespace Boilerplate.Infrastructure.Migrations
                             MembershipExpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MembershipStartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OTP = 0,
-                            Password = "$2a$11$FHMPO1.bS3Akk/K.JdwG.eSN2DaYkvFj/nvSmZcQek9hlzmw8Ykbe",
+                            Password = "$2a$11$Uu.YNWf3RrXTBHAQxU53ueFBIRhM/Rh3ZXmXthHQ0vVL6TzHO.KIG",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "SuperAdmin"
                         });
@@ -591,10 +575,6 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AllServicesId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("UserAllServices");
                 });
 
@@ -635,60 +615,18 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventsId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("UserEvents");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
                 {
                     b.HasOne("Boilerplate.Domain.Entities.User", "User")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Gallery", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("Gallery")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Items", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("Items")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.News", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("News")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.PersonalTrainersClasses", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("PersonalTrainerList")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("TraineeLsit")
-                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.PushToken", b =>
@@ -702,67 +640,9 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.UserAllServices", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.AllServices", null)
-                        .WithMany("UserAllServices")
-                        .HasForeignKey("AllServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("UserAllServices")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.UserEvents", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.Events", "Events")
-                        .WithMany("UserEvents")
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("UserEvents")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Events");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.AllServices", b =>
-                {
-                    b.Navigation("UserAllServices");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
-                {
-                    b.Navigation("UserEvents");
-                });
-
             modelBuilder.Entity("Boilerplate.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Events");
-
-                    b.Navigation("Gallery");
-
-                    b.Navigation("Items");
-
-                    b.Navigation("News");
-
-                    b.Navigation("PersonalTrainerList");
-
                     b.Navigation("PushToken");
-
-                    b.Navigation("TraineeLsit");
-
-                    b.Navigation("UserAllServices");
-
-                    b.Navigation("UserEvents");
                 });
 #pragma warning restore 612, 618
         }

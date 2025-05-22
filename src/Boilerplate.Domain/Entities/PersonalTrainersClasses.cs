@@ -12,12 +12,10 @@ namespace Boilerplate.Domain.Entities
     public class PersonalTrainersClasses : Entity
     {
         #region Parameters 
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
         public int PersonalTrainer { get; set; }
         
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
         public int Trainee { get; set; }
         
         [Required] 

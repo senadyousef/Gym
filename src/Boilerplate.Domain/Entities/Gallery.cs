@@ -12,8 +12,7 @@ namespace Boilerplate.Domain.Entities
     public class Gallery : Entity
     {
         #region Parameters   
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required]  
         public int UserId { get; set; }
 
         public string PhotoUrl { get; set; }

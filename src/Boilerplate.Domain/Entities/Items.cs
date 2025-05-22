@@ -12,8 +12,7 @@ namespace Boilerplate.Domain.Entities
     public class Items : Entity
     {
         #region Parameters    
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
         public int UserId { get; set; }
         [Required]
         public string NameEn { get; set; }

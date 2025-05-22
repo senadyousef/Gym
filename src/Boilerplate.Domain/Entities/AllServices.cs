@@ -18,8 +18,7 @@ namespace Boilerplate.Domain.Entities
         public string NameEn { get; set; }
         #endregion
 
-        #region Relations
-        public List<UserAllServices> UserAllServices { get; set; }
+        #region Relations 
         #endregion
     }
 }

@@ -18,8 +18,7 @@ namespace Boilerplate.Domain.Entities
         public DateTime NewsDate { get; set; }
         public string Highlight { get; set; } 
         public string PhotoUri { get; set; }
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
         public int UserId { get; set; }
         #endregion
 

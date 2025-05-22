@@ -12,12 +12,10 @@ namespace Boilerplate.Domain.Entities
     public class UserAllServices : Entity
     {
         #region Parameters   
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
         public int UserId { get; set; }
         
-        [Required]
-        [ForeignKey(nameof(AllServices))]
+        [Required] 
         public int AllServicesId { get; set; }
         #endregion
 

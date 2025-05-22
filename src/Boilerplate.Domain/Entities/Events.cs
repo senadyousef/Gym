@@ -12,8 +12,7 @@ namespace Boilerplate.Domain.Entities
     public class Events : Entity
     {
         #region Parameters   
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
         public int UserId { get; set; }
         public string NameAr { get; set; }
         public string NameEn { get; set; }
@@ -29,8 +28,7 @@ namespace Boilerplate.Domain.Entities
         public User User  { get; set; }
         #endregion
 
-        #region Relations
-        public List<UserEvents> UserEvents { get; set; }
+        #region Relations 
         #endregion
     }
 }

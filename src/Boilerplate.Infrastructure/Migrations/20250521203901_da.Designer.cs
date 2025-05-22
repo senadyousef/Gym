@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boilerplate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231219112022_add_branches3")]
-    partial class add_branches3
+    [Migration("20250521203901_da")]
+    partial class da
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Boilerplate.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Branches", b =>
+            modelBuilder.Entity("Boilerplate.Domain.Entities.AllServices", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,17 +55,15 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.Property<string>("NameAr")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Branches");
+                    b.ToTable("AllServices");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
@@ -77,9 +75,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Booked")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BranchesId")
                         .HasColumnType("int");
 
                     b.Property<int>("Capacity")
@@ -138,14 +133,12 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchesId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.ItemPhotos", b =>
+            modelBuilder.Entity("Boilerplate.Domain.Entities.Files", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,8 +161,51 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ItemsId")
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("Boilerplate.Domain.Entities.Gallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisabledBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DisabledOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -177,15 +213,15 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PhotoUri")
-                        .IsRequired()
+                    b.Property<string>("PhotoUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemsId");
-
-                    b.ToTable("ItemPhotos");
+                    b.ToTable("Gallery");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Items", b =>
@@ -202,7 +238,10 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("DescriptionAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DisabledBy")
@@ -222,20 +261,117 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.Property<string>("NameAr")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameEn")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Boilerplate.Domain.Entities.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DescriptionAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DisabledBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DisabledOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Highlight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NewsDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PhotoUri")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("Boilerplate.Domain.Entities.PersonalTrainersClasses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisabledBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DisabledOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PersonalTrainer")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Trainee")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PersonalTrainersClasses");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.PushToken", b =>
@@ -287,67 +423,6 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.ToTable("PushToken");
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.TopOfTop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DescriptionAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DescriptionEn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DisabledBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DisabledOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Highlight")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDisabled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ItemType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoUri")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TopOfTop");
-                });
-
             modelBuilder.Entity("Boilerplate.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -356,16 +431,16 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Age")
+                    b.Property<int?>("Age")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("BOD")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DisabledBy")
@@ -382,7 +457,16 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("GymCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GymId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDisabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInGym")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastModifiedBy")
@@ -392,6 +476,9 @@ namespace Boilerplate.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("MembershipExpDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("MembershipStartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MembershipStatus")
@@ -408,6 +495,9 @@ namespace Boilerplate.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("OTP")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -422,7 +512,6 @@ namespace Boilerplate.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -436,16 +525,59 @@ namespace Boilerplate.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Age = 0,
-                            BOD = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "superadmin@ss.com",
+                            GymCapacity = 0,
+                            GymId = 0,
                             IsDisabled = false,
+                            IsInGym = false,
                             MembershipExpDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Password = "$2a$11$8FefSnew3fy1Mxd7mnlQwuOQ7uzSzHXYywk4agbVGfO02qcYABD..",
+                            MembershipStartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OTP = 0,
+                            Password = "$2a$11$Uu.YNWf3RrXTBHAQxU53ueFBIRhM/Rh3ZXmXthHQ0vVL6TzHO.KIG",
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Role = "SuperAdmin"
                         });
+                });
+
+            modelBuilder.Entity("Boilerplate.Domain.Entities.UserAllServices", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AllServicesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisabledBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DisabledOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserAllServices");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.UserEvents", b =>
@@ -485,35 +617,18 @@ namespace Boilerplate.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventsId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("UserEvents");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
                 {
-                    b.HasOne("Boilerplate.Domain.Entities.Branches", null)
-                        .WithMany("Events")
-                        .HasForeignKey("BranchesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("Events")
+                    b.HasOne("Boilerplate.Domain.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.ItemPhotos", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.Items", null)
-                        .WithMany("ItemPhotos")
-                        .HasForeignKey("ItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Boilerplate.Domain.Entities.PushToken", b =>
@@ -527,43 +642,9 @@ namespace Boilerplate.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Boilerplate.Domain.Entities.UserEvents", b =>
-                {
-                    b.HasOne("Boilerplate.Domain.Entities.Events", null)
-                        .WithMany("UserEvents")
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Boilerplate.Domain.Entities.User", null)
-                        .WithMany("UserEvents")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Branches", b =>
-                {
-                    b.Navigation("Events");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Events", b =>
-                {
-                    b.Navigation("UserEvents");
-                });
-
-            modelBuilder.Entity("Boilerplate.Domain.Entities.Items", b =>
-                {
-                    b.Navigation("ItemPhotos");
-                });
-
             modelBuilder.Entity("Boilerplate.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Events");
-
                     b.Navigation("PushToken");
-
-                    b.Navigation("UserEvents");
                 });
 #pragma warning restore 612, 618
         }

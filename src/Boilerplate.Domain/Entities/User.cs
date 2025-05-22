@@ -36,14 +36,7 @@ namespace Boilerplate.Domain.Entities
         #endregion
 
         #region Relations 
-        public List<Gallery> Gallery { get; set; }
-        public List<Events> Events { get; set; }
-        public List<Items> Items { get; set; }
-        public List<News> News { get; set; }
-        public List<UserAllServices> UserAllServices { get; set; }
-        public List<UserEvents> UserEvents { get; set; }
-        public List<PersonalTrainersClasses> PersonalTrainerList { get; set; }
-        public List<PersonalTrainersClasses> TraineeLsit { get; set; } 
+
         #endregion
     }
 }
